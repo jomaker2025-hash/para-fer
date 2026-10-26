@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Verdad o Reto | Entre Fer y Johel 🤌🏿</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0c0a14;
+            --card-bg: #171424;
+            --truth-color: #38bdf8;
+            --dare-color: #f43f5e;
+            --accent-gold: #ffb703;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 15%, #251638 0%, #0c0a14 100%);
+            color: var(--text-light);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-x: hidden;
+        }
+
+        /* Barra de navegación superior */
+        .top-nav {
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+        }
+
+        .nav-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            background: rgba(255, 183, 3, 0.12);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 183, 3, 0.25);
+            transform: scale(1.02);
+        }
+
+        .game-card {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            padding: 24px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-tag {
+            display: inline-block;
+            background: rgba(255, 183, 3, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 18px;
+        }
+
+        /* Selector de Jugador / Turno */
+        .turn-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .turn-badge {
+            font-weight: 800;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-switch {
+            background: rgba(255, 183, 3, 0.2);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-switch:active {
+            transform: scale(0.95);
+        }
+
+        /* Botones de Selección: VERDAD o RETO */
+        .modes-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .btn-choice {
+            flex: 1;
+            padding: 15px 12px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1.15rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-truth {
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: var(--truth-color);
+        }
+
+        .btn-truth:hover, .btn-truth.active {
+            background: var(--truth-color);
+            color: #0c0a14;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-dare {
+            background: rgba(244, 63, 94, 0.12);
+            border-color: rgba(244, 63, 94, 0.4);
+            color: var(--dare-color);
+        }
+
+        .btn-dare:hover, .btn-dare.active {
+            background: var(--dare-color);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+        }
+
+        .choice-sub {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.85;
+        }
+
+        /* Contador de cartas restantes en el mazo */
+        .deck-counter {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8px;
+        }
+
+        .deck-pill {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Tarjeta de la Carta / Pregunta */
+        .card-display {
+            background: #201b33;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 22px;
+            padding: 24px 18px;
+            min-height: 195px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 18px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.25s ease;
+        }
+
+        .card-category {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+        }
+
+        .card-text {
+            font-size: 1.15rem;
+            line-height: 1.45;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .card-extra {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Botón Siguiente */
+        .btn-next {
+            background: linear-gradient(135deg, var(--dare-color), var(--accent-gold));
+            border: none;
+            color: #111;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 14px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.35);
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+
+        .btn-next:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
+        }
+
+        /* Marcador de puntos / castigos */
+        .score-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .score-item strong {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        /* Botón Ver Lista */
+        .btn-view-list {
+            margin-top: 15px;
+            background: transparent;
+            border: 1px dashed rgba(255, 183, 3, 0.4);
+            color: var(--accent-gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-view-list:hover {
+            background: rgba(255, 183, 3, 0.1);
+        }
+
+        /* Modal con todas las preguntas y retos */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #181528;
+            border: 1.5px solid rgba(255, 183, 3, 0.35);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 440px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .modal-close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tabs-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+
+        .modal-list-body {
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 4px;
+            scrollbar-width: thin;
+        }
+
+        .list-item-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 12px 14px;
+            text-align: left;
+        }
+
+        .list-item-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+
+        .list-item-badge.truth {
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--truth-color);
+        }
+
+        .list-item-badge.dare {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--dare-color);
+        }
+
+        .list-item-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            line-height: 1.35;
+        }
+
+        .list-item-extra {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Enlace a la Carta Especial -->
+    <div class="top-nav">
+        <span>🎲 Juego Activo</span>
+        <a href="index.html" class="nav-link">
+            <span>💌 Carta Especial</span>
+            <span>👉</span>
+        </a>
+    </div>
+
+    <div class="game-card">
+        <span class="header-tag">Edición Especial 🤌🏿</span>
+        <h1>Verdad o Reto</h1>
+        <p class="subtitle">Entre Fer y Johel 🤌🏿</p>
+
+        <!-- Turno Actual -->
+        <div class="turn-box">
+            <div class="turn-badge" id="playerBadge">
+                <span>💅</span>
+                <span id="playerName">Turno de Fer</span>
+            </div>
+            <button class="btn-switch" onclick="switchPlayer()">Cambiar Turno 🔁</button>
+        </div>
+
+        <!-- Botones Verdad o Reto -->
+        <div class="modes-container">
+            <button class="btn-choice btn-truth" onclick="selectType('truth')">
+                <span>VERDAD 🧠</span>
+                <span class="choice-sub">Cero mentiras</span>
+            </button>
+            <button class="btn-choice btn-dare" onclick="selectType('dare')">
+                <span>RETO 🔥</span>
+                <span class="choice-sub">Sin acobardarse</span>
+            </button>
+        </div>
+
+        <!-- Contador del mazo anti-repetición -->
+        <div class="deck-counter">
+            <div class="deck-pill" id="truthCountPill">Verdades restantes: <strong>30</strong></div>
+            <div class="deck-pill" id="dareCountPill">Retos restantes: <strong>26</strong></div>
+        </div>
+
+        <!-- Tarjeta de Contenido -->
+        <div class="card-display" id="cardBox">
+            <div class="card-category" id="cardCategory">¿Te atreves?</div>
+            <div class="card-text" id="cardPrompt">
+                Elige <strong>VERDAD</strong> o <strong>RETO</strong> para empezar a jugar... 🤌🏿
+            </div>
+            <div class="card-extra" id="cardExtra"></div>
+        </div>
+
+        <!-- Botón para otra -->
+        <button class="btn-next" id="btnNext" onclick="getRandomItem()" style="display: none;">
+            Siguiente Carta (Sin Repetir) 🎲
+        </button>
+
+        <!-- Puntuación rápida de risas -->
+        <div class="score-row">
+            <div class="score-item">
+                Cumplidos: <strong id="doneCount">0</strong>
+            </div>
+            <div class="score-item">
+                Acobardados: <strong id="chickenedCount">0</strong>
+            </div>
+            <div class="score-item" style="cursor: pointer; color: var(--accent-gold);" onclick="chickenOut()">
+                ¿Se rajó? 🐔
+            </div>
+        </div>
+
+        <!-- Botón para ver la lista completa -->
+        <div>
+            <button class="btn-view-list" onclick="openModal()">
+                📜 Ver lista completa de Verdades y Retos (<span id="totalItemsSummary">56</span>)
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal con la Lista Completa -->
+    <div class="modal-overlay" id="listModal" onclick="closeModalOnBg(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">📋 Lista Completa (Fer & Johel)</div>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+
+            <div class="tabs-row">
+                <button class="tab-btn active" id="tabTruths" onclick="switchTab('truths')">
+                    🧠 Verdades (<span id="totalTruthsCount">0</span>)
+                </button>
+                <button class="tab-btn" id="tabDares" onclick="switchTab('dares')">
+                    🔥 Retos (<span id="totalDaresCount">0</span>)
+                </button>
+            </div>
+
+            <div class="modal-list-body" id="modalListBody">
+                <!-- Se llena dinámicamente con JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPlayer = "Fer";
+        let currentType = null;
+        let done = 0;
+        let chickened = 0;
+
+        /* ==================== BANCO MASIVO DE VERDADES (30) ==================== */
+        const allTruths = [
+            {
+                for: "Fer",
+                category: "Sinceridad Total 🙈",
+                text: "¿Qué fue lo primero que pensaste cuando Johel te empezó a hablar? Sinceridad sin filtro.",
+                extra: "(Prohibido decir 'me caías mal', di la verdad real 😉)"
+            },
+            {
+                for: "Ambos",
+                category: "Complicidad 🤌🏿",
+                text: "Si tuvieras que describir lo que sientes cuando el otro te molesta con una sola palabra... ¿cuál sería?",
+                extra: "No vale pensarlo más de 5 segundos."
+            },
+            {
+                for: "Fer",
+                category: "Pillada en la noche 📱",
+                text: "¿Alguna vez te has quedado mirando los mensajes de Johel tarde en la noche sonriendo sola?",
+                extra: "Johel ya lo sabe... solo admítelo Fer 😂"
+            },
+            {
+                for: "Johel",
+                category: "Confesión ⚽",
+                text: "¿Qué es lo que más te desconcentra o te encanta de Fer cuando están hablando?",
+                extra: "Sin hacerse el duro, Johel."
+            },
+            {
+                for: "Ambos",
+                category: "Química 🔥",
+                text: "¿Cuál es tu gesto o carota favorita del otro que no puedes evitar que te dé risa?",
+                extra: "Imítala justo ahora."
+            },
+            {
+                for: "Fer",
+                category: "Curiosidad o Celitos 👀",
+                text: "Del 1 al 10... ¿qué tan curiosa o pendiente te pones cuando no sabes qué está haciendo Johel?",
+                extra: "Sé honesta Fer 💅"
+            },
+            {
+                for: "Ambos",
+                category: "La Salida Ideal ☕",
+                text: "Si tuvieras que planear una salida perfecta entre Fer y Johel sin límite de nada... ¿cómo sería?",
+                extra: "Detalla hasta lo que van a comer."
+            },
+            {
+                for: "Fer",
+                category: "I Love Youu 🫰🏿",
+                text: "Cuando Johel te dice 'I love youu'... en tu mente, ¿qué crees que significa: un te quiero o un te amo?",
+                extra: "A ver qué tan afinada tienes la intuición, Fer."
+            },
+            {
+                for: "Johel",
+                category: "Confesión de Johel 🤌🏿",
+                text: "¿Qué es lo más cursi que has pensado de Fer y que todavía te daba pena decirle?",
+                extra: "Momento sin filtro."
+            },
+            {
+                for: "Ambos",
+                category: "Conexión 💫",
+                text: "¿Qué canción escucharías pensando en la otra persona?",
+                extra: "Pónganla de fondo ya mismo."
+            },
+            {
+                for: "Fer",
+                category: "El Golpe Bajo 🥊",
+                text: "¿Qué hace Johel que de verdad te da rabia pero en el fondo te da ternura?",
+                extra: "Adelante, desahógate Fer."
+            },
+            {
+                for: "Johel",
+                category: "Mente Inquieta 🧠",
+                text: "¿Cuántas veces al día se te cruza Fer por la cabeza sin darte cuenta?",
+                extra: "Respuesta con número aproximado."
+            },
+            {
+                for: "Ambos",
+                category: "Primera Impresión ⚡",
+                text: "¿Qué detalle físico o de su personalidad fue lo que te hizo decir 'uy, esta persona tiene algo'?",
+                extra: "Cero respuestas genéricas."
+            },
+            {
+                for: "Fer",
+                category: "Hacerse la Difícil 💅",
+                text: "¿Cuánto tiempo aguantas enojada de verdad con Johel antes de que te gane la risa?",
+                extra: "Sabemos que no es mucho 😜"
+            },
+            {
+                for: "Johel",
+                category: "El Cae Mal en Acción 😈",
+                text: "¿Cuál es tu tema favorito para picarla y hacerla enojar sabiendo que se ve linda molesta?",
+                extra: "La táctica secreta al descubierto."
+            },
+            {
+                for: "Ambos",
+                category: "Misterio Nocturno 🌙",
+                text: "¿Alguna vez has soñado con la otra persona? Si es sí, ¿de qué trataba?",
+                extra: "Si es secreto, di al menos la vibra del sueño."
+            },
+            {
+                for: "Fer",
+                category: "La Gran Duda 🤔",
+                text: "¿Qué es lo que más te da intriga o curiosidad saber de la vida de Johel?",
+                extra: "Aprovecha que no puede mentir."
+            },
+            {
+                for: "Ambos",
+                category: "Nivel de Intensidad 🌡️",
+                text: "¿Qué prefieres: que te escriban todo el día o que te llamen en la noche para hablar horas?",
+                extra: "Definan cómo les gusta la dinámica."
+            },
+            {
+                for: "Johel",
+                category: "Goles y Pensamientos ⚽",
+                text: "¿En qué momento exacto piensas en Fer cuando estás jugando o entrenando?",
+                extra: "Cuéntale la verdad de tus goles."
+            },
+            {
+                for: "Fer",
+                category: "Detector de Mentiras 🕵️‍♀️",
+                text: "¿Alguna vez le has contado a una amiga sobre Johel diciendo 'este me cae mal' pero hablando horas de él?",
+                extra: "¡Atrapadísima si dices que no! 😂"
+            },
+            {
+                for: "Ambos",
+                category: "La Mirada ✨",
+                text: "¿Qué sientes cuando se quedan mirando fijamente a los ojos sin decir nada?",
+                extra: "Sin evadir la respuesta."
+            },
+            {
+                for: "Fer",
+                category: "El Abrazo 🤗",
+                text: "Si tuvieras a Johel al frente justo ahora... ¿qué es lo primero que le harías: un pellizco por molestar o un abrazo?",
+                extra: "No se valen las dos."
+            },
+            {
+                for: "Johel",
+                category: "El Café ☕",
+                text: "Dijiste que Fer es como tu café que te da energía... ¿Qué es lo que hace ella que te cambia el ánimo en 1 segundo?",
+                extra: "Sé específico."
+            },
+            {
+                for: "Ambos",
+                category: "Pacto Secreto 🤫",
+                text: "¿Qué es algo que solo ustedes dos entienden y que a cualquier otra persona le parecería raro?",
+                extra: "Su idioma patas negras."
+            },
+            {
+                for: "Fer",
+                category: "Celos Ocultos 💅",
+                text: "¿Te molestaría si Johel empezara a molestar y bromear así con otra chica?",
+                extra: "Dilo claro Fer."
+            },
+            {
+                for: "Johel",
+                category: "Protector 🛡️",
+                text: "¿Qué tan celoso eres si ves que alguien le tira la onda a Fer?",
+                extra: "Sin disimular."
+            },
+            {
+                for: "Ambos",
+                category: "Futuro Cercano 🔮",
+                text: "¿A qué lugar te gustaría ir juntos en su primera salida seria?",
+                extra: "Pónganse de acuerdo en este momento."
+            },
+            {
+                for: "Fer",
+                category: "El Apodo 🏷️",
+                text: "¿Cuál es el apodo más ridículo con el que te gustaría llamar a Johel en privado?",
+                extra: "Y tienes que empezar a usarlo."
+            },
+            {
+                for: "Johel",
+                category: "Sin Salida 🔒",
+                text: "¿Qué es lo que más te convence de que Fer es 'única y especial'?",
+                extra: "Lo dijiste en la carta, ahora dilo de frente."
+            },
+            {
+                for: "Ambos",
+                category: "La Pregunta de Oro 👑",
+                text: "¿Qué es lo que más te da miedo y a la vez lo que más te ilusiona de lo que está pasando entre ustedes?",
+                extra: "Momento de corazón abierto."
+            }
+        ];
+
+        /* ==================== BANCO MASIVO DE RETOS (26) ==================== */
+        const allDares = [
+            {
+                category: "Reto de Audio 🎙️",
+                text: "Mándale un audio de 15 segundos al otro imitándolo cuando se enoja o cuando se hace el difícil.",
+                extra: "Tiene que ser bien dramático."
+            },
+            {
+                category: "Miradas Fijas 👀",
+                text: "Mírense fijamente durante 30 segundos sin hablar y sin reírse. El primero que se ría pierde.",
+                extra: "El que se ría le debe un helado o café al otro."
+            },
+            {
+                category: "Foto Espontánea 📸",
+                text: "Tómate una foto justo ahora con la carota más chistosa que tengas y mándala sin filtros ni repetir.",
+                extra: "Nada de posar bonita/o, cara graciosa obligatoria."
+            },
+            {
+                category: "Apodo Oficial 🏷️",
+                text: "Tienes que inventarle un apodo nuevo y vergonzoso al otro y usarlo obligatoriamente las próximas 24 horas.",
+                extra: "Sin quejas ni reclamos."
+            },
+            {
+                category: "Pregunta Prohibida 😈",
+                text: "El otro tiene derecho a hacerte CUALQUIER pregunta sin filtro y tienes que responderla con 'Sí' o 'No' obligatoriamente.",
+                extra: "Sin derecho a réplica."
+            },
+            {
+                category: "Dedicatoria Musical 🎵",
+                text: "Cántale o tararéale un pedacito de una canción que te recuerde a él/ella por audio.",
+                extra: "Sin pena, aunque cantes feo."
+            },
+            {
+                category: "Declaración con Voz Rara 🤖",
+                text: "Dile un piropo o halago súper cursi al otro pero usando voz de ardilla o de telenovela dramática.",
+                extra: "Tiene que dar risa obligatoria."
+            },
+            {
+                category: "El Deudor 🍨",
+                text: "Firma un pagaré verbal: tienes que invitar la próxima comida o merienda que tengan juntos.",
+                extra: "Trato cerrado y sellado con 🤌🏿."
+            },
+            {
+                category: "Llamada Sorpresa 📞",
+                text: "Llama al otro por teléfono justo ahora y dile 'solo llamaba para decirte que me caes súper mal' y cuélgale.",
+                extra: "A ver cuánto tardan en reírse."
+            },
+            {
+                category: "Foto de Bloqueo 📱",
+                text: "Muestra o manda captura de tu pantalla de bloqueo y de tu última foto en la galería.",
+                extra: "Cero trampas ni borrar fotos."
+            },
+            {
+                category: "Poema Improvisado ✍️",
+                text: "Tienes 20 segundos para inventar una rima graciosa de 4 versos que rime con su nombre.",
+                extra: "Ejemplo: 'Fer / Johel...' y que dé risa."
+            },
+            {
+                category: "El Susurro 🤫",
+                text: "Manda un audio de 5 segundos susurrando lo primero que se te venga a la mente sobre la otra persona.",
+                extra: "Tono misterioso obligatorio."
+            },
+            {
+                category: "Estatua 🗿",
+                text: "Quédate completamente congelado/a en videollamada o frente a la cámara 20 segundos sin pestañear.",
+                extra: "El otro intentará hacerte reír."
+            },
+            {
+                category: "Confesión en Estado 💬",
+                text: "Pon en tu estado de WhatsApp una indirecta que solo la otra persona entienda por 30 minutos.",
+                extra: "Los demás quedarán intrigados."
+            },
+            {
+                category: "Pellizco Virtual 🤏🏿",
+                text: "Manda 10 stickers seguidos que describan perfectamente cómo te sientes cuando la otra persona te molesta.",
+                extra: "Guerra de stickers."
+            },
+            {
+                category: "Lectura de Ojos 👁️",
+                text: "Manda un video de 5 segundos solo haciendo un guiño o mirando fijamente a la cámara.",
+                extra: "Sin reírse."
+            },
+            {
+                category: "El Piropero Callejero 🚗",
+                text: "Tírale al otro el piropo más ridículo y exagerado que conozcas.",
+                extra: "De esos que dan vergüenza ajena."
+            },
+            {
+                category: "Intercambio de Roles 🎭",
+                text: "Por los próximos 3 turnos tienes que hablar y responder actuando exactamente como la otra persona.",
+                extra: "Copia sus frases y modismos."
+            },
+            {
+                category: "Tres Cosas Lindas ✨",
+                text: "Dile al otro 3 cosas que te gusten de su personalidad sin reírte y mirándolo fijamente.",
+                extra: "Momento tierno obligatorio."
+            },
+            {
+                category: "Bailarín Estrella 💃",
+                text: "Manda un video de 8 segundos bailando cualquier canción ridícula sin música.",
+                extra: "Prohibido tener pena."
+            },
+            {
+                category: "Captura Comprometida 🔍",
+                text: "Muestra el chat fijado #1 de tu WhatsApp o la última persona con la que hablaste en Instagram.",
+                extra: "Transparencia total."
+            },
+            {
+                category: "La Promesa 🤝",
+                text: "Haz una promesa seria sobre algo lindo que vas a hacer por la otra persona la próxima vez que se vean.",
+                extra: "Queda registrada ante la ley."
+            },
+            {
+                category: "Recreación de Gol ⚽",
+                text: "Johel tiene que narrar un gol épico dedicado a Fer, o Fer tiene que festejar como futbolista profesional.",
+                extra: "Con narración apasionada."
+            },
+            {
+                category: "El Mensaje al Azar 📬",
+                text: "Deja que el otro elija un emoji y tienes que mandar un audio explicando por qué ese emoji te recuerda a él/ella.",
+                extra: "Sin rodeos."
+            },
+            {
+                category: "Voz de Bebé 👶",
+                text: "Pídele perdón al otro por cualquier tontería que hayas hecho usando voz de bebé consentido.",
+                extra: "Tiene que sonar gracioso."
+            },
+            {
+                category: "El Beso al Aire 💋",
+                text: "Manda un video corto lanzando un beso con cara de complicidad y luego riéndote.",
+                extra: "El reto definitivo."
+            }
+        ];
+
+        /* ==================== SISTEMA ANTI-REPETICIÓN (MAZO DE BARAJA) ==================== */
+        let remainingTruths = [...allTruths];
+        let remainingDares = [...allDares];
+
+        function updateDeckCounters() {
+            document.getElementById('truthCountPill').innerHTML = `Verdades restantes: <strong>${remainingTruths.length}</strong>`;
+            document.getElementById('dareCountPill').innerHTML = `Retos restantes: <strong>${remainingDares.length}</strong>`;
+            document.getElementById('totalTruthsCount').innerText = allTruths.length;
+            document.getElementById('totalDaresCount').innerText = allDares.length;
+            document.getElementById('totalItemsSummary').innerText = allTruths.length + allDares.length;
+        }
+        updateDeckCounters();
+
+        function switchPlayer() {
+            currentPlayer = currentPlayer === "Fer" ? "Johel" : "Fer";
+            const badge = document.getElementById('playerBadge');
+
+            if (currentPlayer === "Fer") {
+                badge.innerHTML = `<span>💅</span><span>Turno de Fer</span>`;
+            } else {
+                badge.innerHTML = `<span>🤌🏿</span><span>Turno de Johel</span>`;
+            }
+
+            if (currentType) {
+                getRandomItem();
+            }
+        }
+
+        function selectType(type) {
+            currentType = type;
+            document.querySelectorAll('.btn-choice').forEach(b => b.classList.remove('active'));
+            if (type === 'truth') {
+                document.querySelector('.btn-truth').classList.add('active');
+            } else {
+                document.querySelector('.btn-dare').classList.add('active');
+            }
+            document.getElementById('btnNext').style.display = 'block';
+            getRandomItem();
+        }
+
+        function getRandomItem() {
+            if (!currentType) return;
+            
+            let pool = currentType === 'truth' ? remainingTruths : remainingDares;
+
+            // Si se acabaron las cartas del mazo, barajar de nuevo
+            if (pool.length === 0) {
+                if (currentType === 'truth') {
+                    remainingTruths = [...allTruths];
+                    pool = remainingTruths;
+                } else {
+                    remainingDares = [...allDares];
+                    pool = remainingDares;
+                }
+                alert(`🃏 ¡Se jugaron todas las ${currentType === 'truth' ? 'verdades' : 'retos'} sin repetir! Barajando el mazo de nuevo...`);
+            }
+
+            // Seleccionar al azar y EXTRAER del mazo para que NUNCA se repita
+            const randomIndex = Math.floor(Math.random() * pool.length);
+            const item = pool.splice(randomIndex, 1)[0];
+
+            updateDeckCounters();
+
+            const cardBox = document.getElementById('cardBox');
+            const cat = document.getElementById('cardCategory');
+            const prompt = document.getElementById('cardPrompt');
+            const extra = document.getElementById('cardExtra');
+
+            cardBox.style.transform = 'scale(0.95)';
+            cardBox.style.opacity = '0.5';
+
+            setTimeout(() => {
+                const forBadge = item.for ? ` • Para: ${item.for}` : '';
+                cat.innerText = `${currentType === 'truth' ? 'VERDAD 🧠' : 'RETO 🔥'} • ${item.category}${forBadge}`;
+                cat.style.color = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
+                prompt.innerText = item.text;
+                extra.innerText = item.extra || '';
+
+                cardBox.style.borderColor = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
+                cardBox.style.transform = 'scale(1)';
+                cardBox.style.opacity = '1';
+
+                done++;
+                document.getElementById('doneCount').innerText = done;
+            }, 180);
+        }
+
+        function chickenOut() {
+            chickened++;
+            document.getElementById('chickenedCount').innerText = chickened;
+            alert(`🐔 ¡Se acobardó ${currentPlayer}! Debe un castigo o responder una verdad extra.`);
+        }
+
+        /* ==================== MODAL DE LISTA COMPLETA ==================== */
+        let activeTab = 'truths';
+
+        function openModal() {
+            document.getElementById('listModal').classList.add('active');
+            renderModalList();
+        }
+
+        function closeModal() {
+            document.getElementById('listModal').classList.remove('active');
+        }
+
+        function closeModalOnBg(e) {
+            if (e.target.id === 'listModal') {
+                closeModal();
+            }
+        }
+
+        function switchTab(tab) {
+            activeTab = tab;
+            document.getElementById('tabTruths').classList.toggle('active', tab === 'truths');
+            document.getElementById('tabDares').classList.toggle('active', tab === 'dares');
+            renderModalList();
+        }
+
+        function renderModalList() {
+            const body = document.getElementById('modalListBody');
+            body.innerHTML = '';
+
+            const items = activeTab === 'truths' ? allTruths : allDares;
+            const isTruth = activeTab === 'truths';
+
+            items.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = 'list-item-card';
+
+                const forBadge = item.for ? ` • Para: ${item.for}` : '';
+                const badgeClass = isTruth ? 'truth' : 'dare';
+
+                card.innerHTML = `
+                    <div class="list-item-badge ${badgeClass}">
+                        #${idx + 1} ${item.category}${forBadge}
+                    </div>
+                    <div class="list-item-text">${item.text}</div>
+                    ${item.extra ? `<div class="list-item-extra">${item.extra}</div>` : ''}
+                `;
+                body.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
