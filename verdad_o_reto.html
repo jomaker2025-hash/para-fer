@@ -15,6 +15,8 @@
             --truth-color: #38bdf8;
             --dare-color: #f43f5e;
             --accent-gold: #ffb703;
+            --fer-pink: #ec4899;
+            --johel-gold: #f59e0b;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
         }
@@ -36,38 +38,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 14px 10px;
             overflow-x: hidden;
-        }
-
-        /* Barra de navegación superior */
-        .top-nav {
-            width: 100%;
-            max-width: 440px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            font-size: 0.85rem;
-        }
-
-        .nav-link {
-            color: var(--accent-gold);
-            text-decoration: none;
-            background: rgba(255, 183, 3, 0.12);
-            border: 1px solid rgba(255, 183, 3, 0.3);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 183, 3, 0.25);
-            transform: scale(1.02);
         }
 
         .game-card {
@@ -76,8 +48,8 @@
             background: var(--card-bg);
             border: 1.5px solid rgba(255, 255, 255, 0.1);
             border-radius: 28px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            padding: 24px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+            padding: 22px 18px;
             text-align: center;
             position: relative;
         }
@@ -89,15 +61,15 @@
             border: 1px solid rgba(255, 183, 3, 0.3);
             border-radius: 20px;
             padding: 4px 14px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         h1 {
-            font-size: 1.75rem;
+            font-size: 1.7rem;
             font-weight: 900;
             line-height: 1.2;
             margin-bottom: 4px;
@@ -105,57 +77,82 @@
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 0.92rem;
-            margin-bottom: 18px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
         }
 
-        /* Selector de Jugador / Turno */
-        .turn-box {
+        /* ==================== CONTROL DE TURNOS CLARÍSIMO ==================== */
+        .turn-section {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 10px 14px;
+            border-radius: 20px;
+            padding: 10px 12px;
             margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
-        .turn-badge {
-            font-weight: 800;
-            font-size: 1.05rem;
+        .turn-section-title {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .player-tabs {
             display: flex;
-            align-items: center;
             gap: 8px;
         }
 
-        .btn-switch {
-            background: rgba(255, 183, 3, 0.2);
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
+        .player-tab-btn {
+            flex: 1;
+            padding: 10px 8px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
             cursor: pointer;
-            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            transition: all 0.22s ease;
         }
 
-        .btn-switch:active {
-            transform: scale(0.95);
+        .player-tab-btn.active-fer {
+            background: rgba(236, 72, 153, 0.18);
+            border-color: var(--fer-pink);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .player-tab-btn.active-johel {
+            background: rgba(245, 158, 11, 0.18);
+            border-color: var(--johel-gold);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .tab-indicator {
+            font-size: 0.75rem;
+            padding: 2px 7px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         /* Botones de Selección: VERDAD o RETO */
         .modes-container {
             display: flex;
             gap: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
 
         .btn-choice {
             flex: 1;
-            padding: 15px 12px;
-            border-radius: 20px;
+            padding: 14px 10px;
+            border-radius: 18px;
             border: 2px solid transparent;
             cursor: pointer;
             font-weight: 900;
@@ -163,7 +160,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             transition: all 0.2s ease;
         }
 
@@ -194,24 +191,24 @@
         }
 
         .choice-sub {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             opacity: 0.85;
         }
 
-        /* Contador de cartas restantes en el mazo */
+        /* Contador del mazo */
         .deck-counter {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
-            padding: 0 8px;
+            padding: 0 6px;
         }
 
         .deck-pill {
             background: rgba(255, 255, 255, 0.05);
-            padding: 3px 10px;
+            padding: 3px 9px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -221,24 +218,48 @@
             background: #201b33;
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 22px;
-            padding: 24px 18px;
-            min-height: 195px;
+            padding: 22px 16px;
+            min-height: 205px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.25s ease;
+            transition: all 0.22s ease;
+        }
+
+        .card-turn-banner {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-turn-banner.fer {
+            background: rgba(236, 72, 153, 0.25);
+            color: #fbcfe8;
+            border: 1px solid var(--fer-pink);
+        }
+
+        .card-turn-banner.johel {
+            background: rgba(245, 158, 11, 0.25);
+            color: #fde68a;
+            border: 1px solid var(--johel-gold);
         }
 
         .card-category {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--accent-gold);
         }
 
@@ -250,7 +271,7 @@
         }
 
         .card-extra {
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             color: #cbd5e1;
             margin-top: 10px;
             font-style: italic;
@@ -262,17 +283,13 @@
             border: none;
             color: #111;
             font-weight: 800;
-            font-size: 1rem;
-            padding: 14px 30px;
+            font-size: 0.98rem;
+            padding: 14px 28px;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(244, 63, 94, 0.35);
-            transition: transform 0.2s ease;
+            transition: transform 0.18s ease;
             width: 100%;
-        }
-
-        .btn-next:hover {
-            transform: scale(1.02);
         }
 
         .btn-next:active {
@@ -283,27 +300,27 @@
         .score-row {
             display: flex;
             justify-content: space-around;
-            margin-top: 16px;
-            padding-top: 14px;
+            margin-top: 15px;
+            padding-top: 12px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
         }
 
         .score-item strong {
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
-        /* Botón Ver Lista */
+        /* Botón Ver Lista con candado */
         .btn-view-list {
-            margin-top: 15px;
+            margin-top: 14px;
             background: transparent;
             border: 1px dashed rgba(255, 183, 3, 0.4);
             color: var(--accent-gold);
-            padding: 8px 16px;
+            padding: 7px 15px;
             border-radius: 20px;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
@@ -316,11 +333,11 @@
             background: rgba(255, 183, 3, 0.1);
         }
 
-        /* Modal con todas las preguntas y retos */
+        /* Modal con PIN */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.82);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(6px);
             z-index: 100;
             display: none;
@@ -375,10 +392,51 @@
             justify-content: center;
         }
 
+        /* Formulario de PIN */
+        .pin-box {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .pin-input {
+            width: 160px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid var(--accent-gold);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 6px;
+            margin: 14px 0;
+            outline: none;
+        }
+
+        .pin-btn {
+            background: var(--accent-gold);
+            color: #111;
+            font-weight: 800;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .pin-error {
+            color: #f87171;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Tabs de contenido desbloqueado */
         .tabs-row {
             display: flex;
             gap: 10px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .tab-btn {
@@ -457,13 +515,19 @@
         <h1>Verdad o Reto</h1>
         <p class="subtitle">Entre Fer y Johel 🤌🏿</p>
 
-        <!-- Turno Actual -->
-        <div class="turn-box">
-            <div class="turn-badge" id="playerBadge">
-                <span>💅</span>
-                <span id="playerName">Turno de Fer</span>
+        <!-- ==================== SELECTOR DE TURNOS CLARÍSIMO ==================== -->
+        <div class="turn-section">
+            <div class="turn-section-title">¿A quién le toca responder o retar?</div>
+            <div class="player-tabs">
+                <button class="player-tab-btn active-fer" id="btnPlayerFer" onclick="selectPlayer('Fer')">
+                    <span>💅 Le toca a FER</span>
+                    <span class="tab-indicator" id="indicatorFer">ACTIVO</span>
+                </button>
+                <button class="player-tab-btn" id="btnPlayerJohel" onclick="selectPlayer('Johel')">
+                    <span>🤌🏿 Le toca a JOHEL</span>
+                    <span class="tab-indicator" id="indicatorJohel" style="display: none;">ACTIVO</span>
+                </button>
             </div>
-            <button class="btn-switch" onclick="switchPlayer()">Cambiar Turno 🔁</button>
         </div>
 
         <!-- Botones Verdad o Reto -->
@@ -480,12 +544,15 @@
 
         <!-- Contador del mazo anti-repetición -->
         <div class="deck-counter">
-            <div class="deck-pill" id="truthCountPill">Verdades restantes: <strong>30</strong></div>
-            <div class="deck-pill" id="dareCountPill">Retos restantes: <strong>26</strong></div>
+            <div class="deck-pill" id="truthCountPill">Verdades en mazo: <strong>48</strong></div>
+            <div class="deck-pill" id="dareCountPill">Retos en mazo: <strong>36</strong></div>
         </div>
 
         <!-- Tarjeta de Contenido -->
         <div class="card-display" id="cardBox">
+            <div class="card-turn-banner fer" id="cardTurnBanner">
+                💅 Turno de FER
+            </div>
             <div class="card-category" id="cardCategory">¿Te atreves?</div>
             <div class="card-text" id="cardPrompt">
                 Elige <strong>VERDAD</strong> o <strong>RETO</strong> para empezar a jugar... 🤌🏿
@@ -511,33 +578,46 @@
             </div>
         </div>
 
-        <!-- Botón para ver la lista completa -->
+        <!-- Botón para ver la lista con candado 4390 -->
         <div>
-            <button class="btn-view-list" onclick="openModal()">
-                📜 Ver lista completa de Verdades y Retos (<span id="totalItemsSummary">56</span>)
+            <button class="btn-view-list" onclick="openPinModal()">
+                🔒 Ver mazo completo (PIN secreto)
             </button>
         </div>
     </div>
 
-    <!-- Modal con la Lista Completa -->
+    <!-- Modal con PIN 4390 y Lista Completa -->
     <div class="modal-overlay" id="listModal" onclick="closeModalOnBg(event)">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">📋 Lista Completa (Fer & Johel)</div>
+                <div class="modal-title" id="modalTitle">🔐 Acceso Confidencial</div>
                 <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
 
-            <div class="tabs-row">
-                <button class="tab-btn active" id="tabTruths" onclick="switchTab('truths')">
-                    🧠 Verdades (<span id="totalTruthsCount">0</span>)
-                </button>
-                <button class="tab-btn" id="tabDares" onclick="switchTab('dares')">
-                    🔥 Retos (<span id="totalDaresCount">0</span>)
-                </button>
+            <!-- Paso 1: Pide PIN -->
+            <div class="pin-box" id="pinFormBox">
+                <p style="font-size: 0.92rem; color: #cbd5e1;">
+                    Ingresa el PIN de 4 dígitos para desbloquear todas las cartas:
+                </p>
+                <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" inputmode="numeric">
+                <br>
+                <button class="pin-btn" onclick="verifyPin()">Desbloquear 🔓</button>
+                <div class="pin-error" id="pinError">
+                    🚫 PIN incorrecto. ¡Ferchis no puede espiar las preguntas! 😜🤌🏿
+                </div>
             </div>
 
-            <div class="modal-list-body" id="modalListBody">
-                <!-- Se llena dinámicamente con JS -->
+            <!-- Paso 2: Contenido desbloqueado con código 4390 -->
+            <div id="unlockedContent" style="display: none; height: 100%; flex-direction: column;">
+                <div class="tabs-row">
+                    <button class="tab-btn active" id="tabTruths" onclick="switchTab('truths')">
+                        🧠 Verdades (<span id="totalTruthsCount">0</span>)
+                    </button>
+                    <button class="tab-btn" id="tabDares" onclick="switchTab('dares')">
+                        🔥 Retos (<span id="totalDaresCount">0</span>)
+                    </button>
+                </div>
+                <div class="modal-list-body" id="modalListBody"></div>
             </div>
         </div>
     </div>
@@ -547,8 +627,40 @@
         let currentType = null;
         let done = 0;
         let chickened = 0;
+        let isPinUnlocked = false;
+        const SECRET_PIN = "4390";
 
-        /* ==================== BANCO MASIVO DE VERDADES (30) ==================== */
+        /* ==================== CONTROL CLARO DE TURNOS ==================== */
+        function selectPlayer(player) {
+            currentPlayer = player;
+            const btnFer = document.getElementById('btnPlayerFer');
+            const btnJohel = document.getElementById('btnPlayerJohel');
+            const indFer = document.getElementById('indicatorFer');
+            const indJohel = document.getElementById('indicatorJohel');
+            const banner = document.getElementById('cardTurnBanner');
+
+            if (player === 'Fer') {
+                btnFer.className = 'player-tab-btn active-fer';
+                btnJohel.className = 'player-tab-btn';
+                indFer.style.display = 'inline-block';
+                indJohel.style.display = 'none';
+                banner.className = 'card-turn-banner fer';
+                banner.innerText = '💅 Turno de FER';
+            } else {
+                btnFer.className = 'player-tab-btn';
+                btnJohel.className = 'player-tab-btn active-johel';
+                indFer.style.display = 'none';
+                indJohel.style.display = 'inline-block';
+                banner.className = 'card-turn-banner johel';
+                banner.innerText = '🤌🏿 Turno de JOHEL';
+            }
+
+            if (currentType) {
+                getRandomItem();
+            }
+        }
+
+        /* ==================== BANCO MASIVO DE VERDADES (48) ==================== */
         const allTruths = [
             {
                 for: "Fer",
@@ -571,7 +683,7 @@
             {
                 for: "Johel",
                 category: "Confesión ⚽",
-                text: "¿Qué es lo que más te desconcentra o te encanta de Fer cuando están hablando?",
+                text: "¿Qué es lo que más te desconcentra o te da risa de Fer cuando están hablando?",
                 extra: "Sin hacerse el duro, Johel."
             },
             {
@@ -589,7 +701,7 @@
             {
                 for: "Ambos",
                 category: "La Salida Ideal ☕",
-                text: "Si tuvieras que planear una salida perfecta entre Fer y Johel sin límite de nada... ¿cómo sería?",
+                text: "Si tuvieras que planear una salida entre Fer y Johel sin límite de nada... ¿cómo sería?",
                 extra: "Detalla hasta lo que van a comer."
             },
             {
@@ -729,10 +841,118 @@
                 category: "Plan Loco 🚀",
                 text: "Si tuvieran que escaparse un día entero a hacer cualquier plan divertido o loco juntos... ¿a dónde irían?",
                 extra: "Armen el plan ya mismo."
+            },
+            {
+                for: "Fer",
+                category: "Frecuencia Mental 📡",
+                text: "¿Alguna vez abriste el chat de Johel justo cuando él te estaba escribiendo?",
+                extra: "La telepatía patas negras."
+            },
+            {
+                for: "Johel",
+                category: "El Fastidio Favorito 😈",
+                text: "Del 1 al 10... ¿cuánto te encanta que Fer te diga que le caes mal?",
+                extra: "Admite que te da risa."
+            },
+            {
+                for: "Ambos",
+                category: "Cero Filtro 🤐",
+                text: "¿Cuál es un secreto tuyo que casi nadie sabe pero que le confiarías a la otra persona?",
+                extra: "Momento de confianza."
+            },
+            {
+                for: "Fer",
+                category: "El Detalle 🔍",
+                text: "¿Qué prenda de vestir o color se le ve mejor a Johel según tú?",
+                extra: "Para que lo use más seguido."
+            },
+            {
+                for: "Johel",
+                category: "El Peinado 💇‍♀️",
+                text: "¿Prefieres a Fer con el pelo suelto o recogido? ¿Y por qué?",
+                extra: "Opinión de experto."
+            },
+            {
+                for: "Ambos",
+                category: "Guerra de Comida 🍕",
+                text: "Si solo pudieran comer una sola comida juntos por el resto de su vida... ¿cuál elegirían?",
+                extra: "Pónganse de acuerdo."
+            },
+            {
+                for: "Fer",
+                category: "La Sospecha 🧐",
+                text: "¿En qué momento exacto te diste cuenta de que Johel no solo te hablaba como 'amigo normal'?",
+                extra: "Cuéntale el momento exacto."
+            },
+            {
+                for: "Johel",
+                category: "El Delator 🚨",
+                text: "¿Qué fue lo que hizo Fer que te hizo decir 'a esta chica no la puedo soltar'?",
+                extra: "Sin pena."
+            },
+            {
+                for: "Ambos",
+                category: "Apuestas 🎰",
+                text: "¿Quién de los dos cree que caería primero si hacen un reto de no hablarse por 24 horas?",
+                extra: "Apuesten algo real."
+            },
+            {
+                for: "Fer",
+                category: "Reacción Tardía ⏱️",
+                text: "¿Alguna vez has escrito un mensaje largo para Johel y luego lo borraste por pena?",
+                extra: "Di qué decía aproximadamente."
+            },
+            {
+                for: "Johel",
+                category: "El Celular 📲",
+                text: "¿Tienes algún apodo especial puesto para Fer en tu WhatsApp?",
+                extra: "Muestra o dilo."
+            },
+            {
+                for: "Ambos",
+                category: "Modo Furia 😤",
+                text: "¿Quién da más miedo cuando se enoja de verdad: Fer o Johel?",
+                extra: "Voten al mismo tiempo."
+            },
+            {
+                for: "Fer",
+                category: "La Sonrisa 😁",
+                text: "¿Qué chiste o tontería que dijo Johel es la que más te ha hecho reír hasta que te dolió la panza?",
+                extra: "Recuérdala."
+            },
+            {
+                for: "Johel",
+                category: "La Debilidad 🎯",
+                text: "¿Cuál es la carota que pone Fer que hace que Johel no le pueda decir que no a nada?",
+                extra: "Imítala o descríbela."
+            },
+            {
+                for: "Ambos",
+                category: "La Conclusión 🤌🏿",
+                text: "¿Qué es lo que más te alegra de haber coincidido con la otra persona?",
+                extra: "Sin rodeos."
+            },
+            {
+                for: "Fer",
+                category: "La Paciencia 🧘‍♀️",
+                text: "Si tuvieras que calificar la paciencia que le tienes a Johel del 1 al 10... ¿cuánto le pones?",
+                extra: "Justifica tu nota."
+            },
+            {
+                for: "Johel",
+                category: "La Victoria 🏆",
+                text: "¿Qué es algo en lo que sabes que le ganas a Fer 10 de cada 10 veces?",
+                extra: "Que no sea fútbol."
+            },
+            {
+                for: "Ambos",
+                category: "El Pacto Final 🤝",
+                text: "¿Cuál es una regla que jamás deberían romper entre ustedes dos?",
+                extra: "Fírmenla verbalmente."
             }
         ];
 
-        /* ==================== BANCO MASIVO DE RETOS (26) ==================== */
+        /* ==================== BANCO MASIVO DE RETOS (36) ==================== */
         const allDares = [
             {
                 category: "Reto de Audio 🎙️",
@@ -766,7 +986,7 @@
             },
             {
                 category: "Declaración con Voz Rara 🤖",
-                text: "Dile un piropo o halago súper cursi al otro pero usando voz de ardilla o de telenovela dramática.",
+                text: "Dile un halago súper cursi al otro pero usando voz de ardilla o de telenovela dramática.",
                 extra: "Tiene que dar risa obligatoria."
             },
             {
@@ -786,8 +1006,8 @@
             },
             {
                 category: "Poema Improvisado ✍️",
-                text: "Tienes 20 segundos para inventar una rima graciosa de 4 versos que rime con su nombre.",
-                extra: "Ejemplo: 'Fer / Johel...' y que dé risa."
+                text: "Tienes 20 segundos para inventar una rima graciosa de 4 versos con el nombre del otro.",
+                extra: "Tiene que rimar y dar risa."
             },
             {
                 category: "El Susurro 🤫",
@@ -801,7 +1021,7 @@
             },
             {
                 category: "Confesión en Estado 💬",
-                text: "Pon en tu estado de WhatsApp una indirecta que solo la otra persona entienda por 30 minutos.",
+                text: "Pon en tu estado de WhatsApp una indirecta graciosa que solo la otra persona entienda por 30 minutos.",
                 extra: "Los demás quedarán intrigados."
             },
             {
@@ -811,7 +1031,7 @@
             },
             {
                 category: "Lectura de Ojos 👁️",
-                text: "Manda un video de 5 segundos solo haciendo un guiño o mirando fijamente a la cámara.",
+                text: "Manda un video de 5 segundos solo haciendo un guiño o mirando fijamente a la cámara con cara de sospecha.",
                 extra: "Sin reírse."
             },
             {
@@ -841,7 +1061,7 @@
             },
             {
                 category: "La Promesa 🤝",
-                text: "Haz una promesa seria sobre algo lindo que vas a hacer por la otra persona la próxima vez que se vean.",
+                text: "Haz una promesa seria sobre algo divertido que vas a hacer por la otra persona la próxima vez que se vean.",
                 extra: "Queda registrada ante la ley."
             },
             {
@@ -863,36 +1083,70 @@
                 category: "Rey/Reina del Drama 🎭",
                 text: "Haz una escena dramática de 10 segundos fingiendo reclamos como si el otro te hubiera dejado en visto 3 días.",
                 extra: "Con reclamos exagerados y actuación de novela."
+            },
+            {
+                category: "El Dibujante 🎨",
+                text: "Dibuja al otro en un papel o en el editor de fotos en 30 segundos y mándale el resultado.",
+                extra: "No importa si queda horrible."
+            },
+            {
+                category: "El Traductor en Vivo 🤌🏿",
+                text: "Manda un audio diciendo una frase normal pero usando modismos de 'patas negras' de forma exagerada.",
+                extra: "Con acento italiano dramático."
+            },
+            {
+                category: "Mayordomo Temporal 🛎️",
+                text: "Por los próximos 10 minutos, tienes que responder a todo lo que el otro diga con 'Sí, lo que usted mande'.",
+                extra: "Cero rebeldía."
+            },
+            {
+                category: "La Canción Rara 📻",
+                text: "Busca la canción más rara o graciosa en Spotify o YouTube y mándasela diciendo 'esta es nuestra canción'.",
+                extra: "A ver qué responde."
+            },
+            {
+                category: "El Interrogatorio 🔦",
+                text: "El otro tiene 15 segundos para hacerte 3 preguntas ultra rápidas y tienes que responderlas al instante.",
+                extra: "Sin titubear."
+            },
+            {
+                category: "El Silencio Incómodo 🤫",
+                text: "Manda un audio de 10 segundos donde solo se escuche tu respiración y al final un suspiro dramático.",
+                extra: "Misterio total."
+            },
+            {
+                category: "El Imitador de Emojis 🤪",
+                text: "Manda 3 fotos imitando exactamente 3 emojis que el otro te elija en el chat.",
+                extra: "Cara idéntica obligatoria."
+            },
+            {
+                category: "La Apuesta del Café ☕",
+                text: "El que pierda la próxima carta debe pagar las bebidas la próxima vez que salgan.",
+                extra: "Pagaré sellado."
+            },
+            {
+                category: "El Monólogo 🎤",
+                text: "Manda un audio de 20 segundos explicando por qué la otra persona tiene la culpa de todo en este juego.",
+                extra: "Argumentos sin sentido obligatorios."
+            },
+            {
+                category: "El Abrazo Virtual 🫂",
+                text: "Manda un video corto apretando la almohada o un peluche diciendo 'así de fuerte te voy a molestar cuando te vea'.",
+                extra: "Con cara de maldad divertida."
             }
         ];
 
-        /* ==================== SISTEMA ANTI-REPETICIÓN (MAZO DE BARAJA) ==================== */
+        /* ==================== MAZO ANTI-REPETICIÓN ==================== */
         let remainingTruths = [...allTruths];
         let remainingDares = [...allDares];
 
         function updateDeckCounters() {
-            document.getElementById('truthCountPill').innerHTML = `Verdades restantes: <strong>${remainingTruths.length}</strong>`;
-            document.getElementById('dareCountPill').innerHTML = `Retos restantes: <strong>${remainingDares.length}</strong>`;
+            document.getElementById('truthCountPill').innerHTML = `Verdades en mazo: <strong>${remainingTruths.length}</strong>`;
+            document.getElementById('dareCountPill').innerHTML = `Retos en mazo: <strong>${remainingDares.length}</strong>`;
             document.getElementById('totalTruthsCount').innerText = allTruths.length;
             document.getElementById('totalDaresCount').innerText = allDares.length;
-            document.getElementById('totalItemsSummary').innerText = allTruths.length + allDares.length;
         }
         updateDeckCounters();
-
-        function switchPlayer() {
-            currentPlayer = currentPlayer === "Fer" ? "Johel" : "Fer";
-            const badge = document.getElementById('playerBadge');
-
-            if (currentPlayer === "Fer") {
-                badge.innerHTML = `<span>💅</span><span>Turno de Fer</span>`;
-            } else {
-                badge.innerHTML = `<span>🤌🏿</span><span>Turno de Johel</span>`;
-            }
-
-            if (currentType) {
-                getRandomItem();
-            }
-        }
 
         function selectType(type) {
             currentType = type;
@@ -911,7 +1165,6 @@
             
             let pool = currentType === 'truth' ? remainingTruths : remainingDares;
 
-            // Si se acabaron las cartas del mazo, barajar de nuevo
             if (pool.length === 0) {
                 if (currentType === 'truth') {
                     remainingTruths = [...allTruths];
@@ -923,13 +1176,13 @@
                 alert(`🃏 ¡Se jugaron todas las ${currentType === 'truth' ? 'verdades' : 'retos'} sin repetir! Barajando el mazo de nuevo...`);
             }
 
-            // Seleccionar al azar y EXTRAER del mazo para que NUNCA se repita
             const randomIndex = Math.floor(Math.random() * pool.length);
             const item = pool.splice(randomIndex, 1)[0];
 
             updateDeckCounters();
 
             const cardBox = document.getElementById('cardBox');
+            const banner = document.getElementById('cardTurnBanner');
             const cat = document.getElementById('cardCategory');
             const prompt = document.getElementById('cardPrompt');
             const extra = document.getElementById('cardExtra');
@@ -938,6 +1191,14 @@
             cardBox.style.opacity = '0.5';
 
             setTimeout(() => {
+                if (currentPlayer === 'Fer') {
+                    banner.className = 'card-turn-banner fer';
+                    banner.innerText = '💅 Turno de FER: Responde tú';
+                } else {
+                    banner.className = 'card-turn-banner johel';
+                    banner.innerText = '🤌🏿 Turno de JOHEL: Te toca a ti';
+                }
+
                 const forBadge = item.for ? ` • Para: ${item.for}` : '';
                 cat.innerText = `${currentType === 'truth' ? 'VERDAD 🧠' : 'RETO 🔥'} • ${item.category}${forBadge}`;
                 cat.style.color = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
@@ -950,7 +1211,7 @@
 
                 done++;
                 document.getElementById('doneCount').innerText = done;
-            }, 180);
+            }, 160);
         }
 
         function chickenOut() {
@@ -959,13 +1220,55 @@
             alert(`🐔 ¡Se acobardó ${currentPlayer}! Debe un castigo o responder una verdad extra.`);
         }
 
-        /* ==================== MODAL DE LISTA COMPLETA ==================== */
+        /* ==================== MODAL CON PIN 4390 ==================== */
         let activeTab = 'truths';
 
-        function openModal() {
+        function openPinModal() {
             document.getElementById('listModal').classList.add('active');
-            renderModalList();
+            const pinBox = document.getElementById('pinFormBox');
+            const unlockedBox = document.getElementById('unlockedContent');
+            const pinErr = document.getElementById('pinError');
+            const pinInput = document.getElementById('pinInput');
+
+            pinErr.style.display = 'none';
+
+            if (isPinUnlocked) {
+                pinBox.style.display = 'none';
+                unlockedBox.style.display = 'flex';
+                document.getElementById('modalTitle').innerText = '📋 Mazo Completo Desbloqueado';
+                renderModalList();
+            } else {
+                pinBox.style.display = 'block';
+                unlockedBox.style.display = 'none';
+                document.getElementById('modalTitle').innerText = '🔐 Acceso Confidencial';
+                pinInput.value = '';
+                setTimeout(() => pinInput.focus(), 200);
+            }
         }
+
+        function verifyPin() {
+            const input = document.getElementById('pinInput').value.trim();
+            const pinErr = document.getElementById('pinError');
+
+            if (input === SECRET_PIN) {
+                isPinUnlocked = true;
+                pinErr.style.display = 'none';
+                document.getElementById('pinFormBox').style.display = 'none';
+                document.getElementById('unlockedContent').style.display = 'flex';
+                document.getElementById('modalTitle').innerText = '📋 Mazo Completo Desbloqueado';
+                renderModalList();
+            } else {
+                pinErr.style.display = 'block';
+                document.getElementById('pinInput').value = '';
+            }
+        }
+
+        // Permite presionar Enter para desbloquear
+        document.getElementById('pinInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                verifyPin();
+            }
+        });
 
         function closeModal() {
             document.getElementById('listModal').classList.remove('active');
