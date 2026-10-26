@@ -3,994 +3,1019 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Ferchis 🌻 | El Cae Mal</title>
+    <title>Verdad o Reto | Entre Fer y Johel 🤌🏿</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #0f0c18;
-            --card-bg: rgba(23, 20, 34, 0.96); /* Optimizado sin blur excesivo */
-            --sunflower: #ffb703;
-            --sunflower-glow: #fb8500;
-            --carnation: #ff0054;
-            --carnation-soft: #ff5470;
+            --bg-main: #0c0a14;
+            --card-bg: #171424;
+            --truth-color: #38bdf8;
+            --dare-color: #f43f5e;
+            --accent-gold: #ffb703;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
         }
 
         * {
             box-sizing: border-box;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
             margin: 0;
             padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at 50% 15%, #251636 0%, #0c0a14 100%);
+            background: radial-gradient(circle at 50% 15%, #251638 0%, #0c0a14 100%);
             color: var(--text-light);
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            padding: 16px;
             overflow-x: hidden;
-            position: relative;
-            padding: 12px;
-            /* Aceleración por hardware para fluidez total */
-            transform: translateZ(0);
         }
 
-        /* Lluvia optimizada y ligera de flores */
-        #flowerCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Barra de navegación superior */
+        .top-nav {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            will-change: transform;
+            max-width: 440px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
         }
 
-        /* Barra Superior de Progreso */
-        .progress-box {
-            position: fixed;
-            top: 12px;
-            z-index: 30;
-            width: 92%;
-            max-width: 390px;
-            background: rgba(22, 19, 32, 0.9);
+        .nav-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            background: rgba(255, 183, 3, 0.12);
             border: 1px solid rgba(255, 183, 3, 0.3);
-            border-radius: 30px;
-            padding: 7px 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 183, 3, 0.25);
+            transform: scale(1.02);
+        }
+
+        .game-card {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            padding: 24px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-tag {
+            display: inline-block;
+            background: rgba(255, 183, 3, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 18px;
+        }
+
+        /* Selector de Jugador / Turno */
+        .turn-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.4);
         }
 
-        .progress-label {
-            font-size: 0.82rem;
-            color: var(--sunflower);
-            font-weight: 700;
+        .turn-badge {
+            font-weight: 800;
+            font-size: 1.05rem;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
         }
 
-        .progress-track {
+        .btn-switch {
+            background: rgba(255, 183, 3, 0.2);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-switch:active {
+            transform: scale(0.95);
+        }
+
+        /* Botones de Selección: VERDAD o RETO */
+        .modes-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .btn-choice {
             flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
-            margin: 0 10px;
-            overflow: hidden;
+            padding: 15px 12px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1.15rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
         }
 
-        .progress-fill {
-            height: 100%;
-            width: 15%;
-            background: linear-gradient(90deg, var(--carnation), var(--sunflower));
-            border-radius: 10px;
-            transition: width 0.35s ease;
+        .btn-truth {
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: var(--truth-color);
         }
 
-        .progress-step-text {
+        .btn-truth:hover, .btn-truth.active {
+            background: var(--truth-color);
+            color: #0c0a14;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-dare {
+            background: rgba(244, 63, 94, 0.12);
+            border-color: rgba(244, 63, 94, 0.4);
+            color: var(--dare-color);
+        }
+
+        .btn-dare:hover, .btn-dare.active {
+            background: var(--dare-color);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+        }
+
+        .choice-sub {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.85;
+        }
+
+        /* Contador de cartas restantes en el mazo */
+        .deck-counter {
             font-size: 0.78rem;
             color: var(--text-muted);
-            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8px;
         }
 
-        /* Contenedor Principal */
-        .app-container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 420px;
-            min-height: 520px;
+        .deck-pill {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Tarjeta de la Carta / Pregunta */
+        .card-display {
+            background: #201b33;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 22px;
+            padding: 24px 18px;
+            min-height: 195px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 40px;
-        }
-
-        .stage {
-            position: absolute;
-            width: 100%;
-            background: var(--card-bg);
-            border: 1.5px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7);
-            padding: 26px 20px;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.95) translateY(18px);
-            pointer-events: none;
-            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
-            will-change: opacity, transform;
-        }
-
-        .stage.active {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: all;
-        }
-
-        .badge-tag {
-            display: inline-block;
-            background: rgba(255, 183, 3, 0.14);
-            color: var(--sunflower);
-            border: 1px solid rgba(255, 183, 3, 0.3);
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            color: #fff;
-            font-size: 1.55rem;
-            margin-bottom: 10px;
-            line-height: 1.25;
-        }
-
-        p.subtitle {
-            color: #cbd5e1;
-            font-size: 0.93rem;
+            position: relative;
             margin-bottom: 18px;
-            line-height: 1.45;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.25s ease;
         }
 
-        /* Botón de acción rápido y fluido */
-        .btn-action {
-            background: linear-gradient(135deg, var(--carnation-soft), var(--sunflower));
+        .card-category {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+        }
+
+        .card-text {
+            font-size: 1.15rem;
+            line-height: 1.45;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .card-extra {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Botón Siguiente */
+        .btn-next {
+            background: linear-gradient(135deg, var(--dare-color), var(--accent-gold));
             border: none;
             color: #111;
             font-weight: 800;
-            font-size: 0.98rem;
-            padding: 13px 26px;
+            font-size: 1rem;
+            padding: 14px 30px;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 0, 84, 0.3);
-            transition: transform 0.18s ease;
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.35);
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+
+        .btn-next:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
+        }
+
+        /* Marcador de puntos / castigos */
+        .score-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .score-item strong {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        /* Botón Ver Lista */
+        .btn-view-list {
+            margin-top: 15px;
+            background: transparent;
+            border: 1px dashed rgba(255, 183, 3, 0.4);
+            color: var(--accent-gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 14px;
+            gap: 6px;
         }
 
-        .btn-action:hover {
-            transform: scale(1.03);
+        .btn-view-list:hover {
+            background: rgba(255, 183, 3, 0.1);
         }
 
-        .btn-action:active {
-            transform: scale(0.97);
-        }
-
-        /* ==================== ETAPA 1: RASCAR ==================== */
-        .scratch-wrapper {
-            position: relative;
-            width: 260px;
-            height: 260px;
-            margin: 0 auto 14px auto;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            border: 2px solid rgba(255, 183, 3, 0.3);
-        }
-
-        .scratch-secret {
-            position: absolute;
+        /* Modal con todas las preguntas y retos */
+        .modal-overlay {
+            position: fixed;
             inset: 0;
-            background: linear-gradient(135deg, #271424, #141324);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 18px;
-            z-index: 1;
-        }
-
-        .scratch-secret h3 {
-            color: var(--sunflower);
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-        }
-
-        .scratch-secret p {
-            color: #f1f5f9;
-            font-size: 0.94rem;
-            line-height: 1.4;
-        }
-
-        #scratchCanvas {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            cursor: pointer;
-            touch-action: none;
-        }
-
-        .hint-scratch {
-            font-size: 0.85rem;
-            color: var(--sunflower);
-            font-weight: 600;
-        }
-
-        /* ==================== BOTONES MULTI-SELECT Y OPCIONES ==================== */
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 16px 0;
-        }
-
-        .opt-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid rgba(255, 255, 255, 0.12);
-            color: #f1f5f9;
-            padding: 13px 15px;
-            border-radius: 14px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 500;
-        }
-
-        .opt-btn.selected {
-            background: rgba(255, 183, 3, 0.18);
-            border-color: var(--sunflower);
-            color: #fff;
-            transform: translateX(4px);
-        }
-
-        .checkbox-pill {
-            width: 22px;
-            height: 22px;
-            border-radius: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            transition: all 0.2s ease;
-        }
-
-        .opt-btn.selected .checkbox-pill {
-            background: var(--sunflower);
-            border-color: var(--sunflower);
-            color: #000;
-            font-weight: 900;
-        }
-
-        /* Cuadro de Respuesta */
-        .feedback-box {
-            background: rgba(255, 183, 3, 0.12);
-            border: 1.5px solid var(--sunflower);
-            border-radius: 16px;
-            padding: 16px 14px;
-            margin-top: 14px;
-            font-size: 0.94rem;
-            line-height: 1.45;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(6px);
+            z-index: 100;
             display: none;
-            animation: fadeIn 0.3s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(6px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ==================== ETAPA: ¿TE GUSTO? (BOTÓN ESCAPISTA) ==================== */
-        .arena-question {
-            position: relative;
-            min-height: 190px;
-            display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 15px;
+            padding: 16px;
         }
 
-        .question-buttons {
+        .modal-overlay.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
+        }
+
+        .modal-content {
+            background: #181528;
+            border: 1.5px solid rgba(255, 183, 3, 0.35);
+            border-radius: 24px;
             width: 100%;
-        }
-
-        #btnYes {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
-            font-weight: 800;
-            font-size: 1.15rem;
-            padding: 14px 34px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 5;
-            white-space: nowrap;
-        }
-
-        #btnNo {
-            background: rgba(239, 68, 68, 0.18);
-            color: #fca5a5;
-            font-size: 0.98rem;
-            padding: 12px 22px;
-            border: 1.5px solid rgba(239, 68, 68, 0.4);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.18s ease;
-            position: relative;
-            z-index: 4;
-            white-space: nowrap;
-        }
-
-        /* ==================== ETAPA: LIBRO 3D ==================== */
-        .book-wrapper {
-            perspective: 1200px;
-            width: 100%;
-            max-width: 350px;
-            height: 450px;
-            margin: 0 auto;
-        }
-
-        .book {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .book.opened {
-            transform: rotateY(-180deg);
-        }
-
-        .book-face {
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            backface-visibility: hidden;
+            max-width: 440px;
+            max-height: 85vh;
             display: flex;
             flex-direction: column;
-            padding: 24px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
 
-        .book-front {
-            background: linear-gradient(135deg, #5b102b, #2a0b18);
-            border: 2px solid rgba(255, 183, 3, 0.4);
-            text-align: center;
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            z-index: 2;
-            cursor: pointer;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .book-front .seal {
-            width: 75px;
-            height: 75px;
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .modal-close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background: rgba(255, 183, 3, 0.15);
-            border: 2px dashed var(--sunflower);
+            cursor: pointer;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.1rem;
-            margin-bottom: 12px;
         }
 
-        .book-back {
-            background: #fffdf8;
-            color: #2b1f14;
-            transform: rotateY(180deg);
-            border: 2px solid #e5dcc7;
-            text-align: left;
-            overflow-y: auto;
-            display: block;
-            padding: 22px 18px 30px 18px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--sunflower) #f1ede2;
-            cursor: default;
-        }
-
-        .book-back::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .book-back::-webkit-scrollbar-thumb {
-            background: var(--sunflower);
-            border-radius: 10px;
-        }
-
-        .letter-content {
-            font-family: 'Caveat', cursive;
-            font-size: 1.35rem;
-            line-height: 1.4;
-            color: #26161f;
-        }
-
-        .letter-content p {
+        .tabs-row {
+            display: flex;
+            gap: 10px;
             margin-bottom: 14px;
         }
 
-        .letter-content h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin: 0 0 12px 0;
-            color: #8b0032;
-        }
-
-        /* Estilo Notificación Nocturna Paso 3 */
-        .night-notification {
-            background: rgba(30, 27, 46, 0.9);
-            border: 1px solid rgba(255, 183, 3, 0.35);
-            border-radius: 18px;
-            padding: 14px 16px;
-            margin-bottom: 18px;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .night-avatar {
-            font-size: 1.8rem;
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 183, 3, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .chat-reply-bubble {
-            background: #2a2438;
-            border-left: 3px solid var(--sunflower);
+        .tab-btn {
+            flex: 1;
+            padding: 8px 12px;
             border-radius: 12px;
-            padding: 14px 16px;
-            font-size: 0.98rem;
-            line-height: 1.45;
-            color: #fff;
-            margin-top: 15px;
-            text-align: left;
-            display: none;
-            animation: fadeIn 0.25s ease forwards;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
         }
 
-        .reset-link {
+        .tab-btn.active {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+
+        .modal-list-body {
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 4px;
+            scrollbar-width: thin;
+        }
+
+        .list-item-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 12px 14px;
+            text-align: left;
+        }
+
+        .list-item-badge {
             display: inline-block;
-            margin-top: 15px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-decoration: underline;
-            cursor: pointer;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+
+        .list-item-badge.truth {
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--truth-color);
+        }
+
+        .list-item-badge.dare {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--dare-color);
+        }
+
+        .list-item-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            line-height: 1.35;
+        }
+
+        .list-item-extra {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia de Flores Súper Ligera en Fondo -->
-    <canvas id="flowerCanvas"></canvas>
-
-    <!-- Barra Superior de Progreso -->
-    <div class="progress-box">
-        <div class="progress-label">
-            <span>🌻</span>
-            <span id="levelTag">Paso 1 de 5</span>
-        </div>
-        <div class="progress-track">
-            <div class="progress-fill" id="progressBar"></div>
-        </div>
-        <div class="progress-step-text" id="statusMood">Conectando...</div>
+    <!-- Enlace a la Carta Especial -->
+    <div class="top-nav">
+        <span>🎲 Juego Activo</span>
+        <a href="carta.html" class="nav-link">
+            <span>💌 Carta Especial</span>
+            <span>👉</span>
+        </a>
     </div>
 
-    <!-- Contenedor Principal -->
-    <div class="app-container">
+    <div class="game-card">
+        <span class="header-tag">Edición Especial 🤌🏿</span>
+        <h1>Verdad o Reto</h1>
+        <p class="subtitle">Entre Fer y Johel 🤌🏿</p>
 
-        <!-- ==================== ETAPA 1: CONECTANDO CON FERCHIS ==================== -->
-        <div class="stage active" id="stage1">
-            <span class="badge-tag">Conectando con Ferchis 🤌🏿</span>
-            <h2>Traductor Patas Negras</h2>
-            <p class="subtitle">
-                Yo sé que me dices que te caigo mal pero bien que te tengo de curiosa ¿verdad? 😉 <br>
-                <strong>Ahora vamos a ver si me descubres...</strong>
-            </p>
-            
-            <div class="scratch-wrapper">
-                <div class="scratch-secret">
-                    <h3>¡Señal Detectada! 📡</h3>
-                    <p style="margin-bottom: 8px;">Ya sé que te hacés la que te caigo mal...</p>
-                    <p style="color: var(--sunflower); font-size: 0.92rem; font-weight: 700;">
-                        Pero bien que estás aquí mirando qué te puso El Cae Mal. 🫰🏿🌻
-                    </p>
-                    <div style="font-size: 38px; margin-top: 8px;">✨🌻✨</div>
-                </div>
-                <canvas id="scratchCanvas" width="260" height="260"></canvas>
+        <!-- Turno Actual -->
+        <div class="turn-box">
+            <div class="turn-badge" id="playerBadge">
+                <span>💅</span>
+                <span id="playerName">Turno de Fer</span>
             </div>
+            <button class="btn-switch" onclick="switchPlayer()">Cambiar Turno 🔁</button>
+        </div>
 
-            <div class="hint-scratch" id="scratchHint">👉 Pasa el dedo o el mouse para raspar</div>
-
-            <button class="btn-action" id="btnToStage2" style="display: none;">
-                Vamos a ver si me descubres ➡️
+        <!-- Botones Verdad o Reto -->
+        <div class="modes-container">
+            <button class="btn-choice btn-truth" onclick="selectType('truth')">
+                <span>VERDAD 🧠</span>
+                <span class="choice-sub">Cero mentiras</span>
+            </button>
+            <button class="btn-choice btn-dare" onclick="selectType('dare')">
+                <span>RETO 🔥</span>
+                <span class="choice-sub">Sin acobardarse</span>
             </button>
         </div>
 
-        <!-- ==================== ETAPA 2: PREGUNTA 1 (MULTI-OPCIONES) ==================== -->
-        <div class="stage" id="stage2">
-            <span class="badge-tag">Pregunta #1 🎯</span>
-            <h2>Prueba de Fuego</h2>
-            <p class="subtitle">
-                A ver Ferchis, según tú... <br>
-                <strong>¿Qué es lo que más le gusta al Cae Mal de ti?</strong> <br>
-                <small style="color: var(--sunflower);">(Puedes elegir varias si quieres 😉)</small>
-            </p>
+        <!-- Contador del mazo anti-repetición -->
+        <div class="deck-counter">
+            <div class="deck-pill" id="truthCountPill">Verdades restantes: <strong>30</strong></div>
+            <div class="deck-pill" id="dareCountPill">Retos restantes: <strong>26</strong></div>
+        </div>
 
-            <div class="options-list">
-                <div class="opt-btn" onclick="toggleMultiOption(this, 'ojos')">
-                    <span>👀 Tus ojos</span>
-                    <div class="checkbox-pill"></div>
-                </div>
-                <div class="opt-btn" onclick="toggleMultiOption(this, 'pelo')">
-                    <span>💇‍♀️ Tu pelo</span>
-                    <div class="checkbox-pill"></div>
-                </div>
-                <div class="opt-btn" onclick="toggleMultiOption(this, 'sonrisa')">
-                    <span>😁 Tu sonrisa cuando te ríes de mí</span>
-                    <div class="checkbox-pill"></div>
-                </div>
-                <div class="opt-btn" onclick="toggleMultiOption(this, 'paciencia')">
-                    <span>🙃 Tu santa paciencia aguantándome</span>
-                    <div class="checkbox-pill"></div>
-                </div>
+        <!-- Tarjeta de Contenido -->
+        <div class="card-display" id="cardBox">
+            <div class="card-category" id="cardCategory">¿Te atreves?</div>
+            <div class="card-text" id="cardPrompt">
+                Elige <strong>VERDAD</strong> o <strong>RETO</strong> para empezar a jugar... 🤌🏿
             </div>
+            <div class="card-extra" id="cardExtra"></div>
+        </div>
 
-            <button class="btn-action" id="btnConfirmMulti" onclick="confirmMultiOptions()">
-                Confirmar respuestas ✨
-            </button>
+        <!-- Botón para otra -->
+        <button class="btn-next" id="btnNext" onclick="getRandomItem()" style="display: none;">
+            Siguiente Carta (Sin Repetir) 🎲
+        </button>
 
-            <div class="feedback-box" id="feedback1">
-                <div style="font-size: 1.25rem; font-weight: 800; color: var(--sunflower); margin-bottom: 5px;">🎯 ¡Biennn, adivinasteeee!</div>
-                <div id="feedback1-text" style="color: #f1f5f9;">
-                    Bueno... en verdad me gustan más cosas de ti, ¿como por ejemplo qué creías? 😏 <br>
-                    (Eso de <em>"por eso me gustas tanto"</em> lo dejamos guardado para después...)
-                </div>
-                <button class="btn-action" onclick="goToStage(3)">
-                    A ver la que sigue 😏
-                </button>
+        <!-- Puntuación rápida de risas -->
+        <div class="score-row">
+            <div class="score-item">
+                Cumplidos: <strong id="doneCount">0</strong>
+            </div>
+            <div class="score-item">
+                Acobardados: <strong id="chickenedCount">0</strong>
+            </div>
+            <div class="score-item" style="cursor: pointer; color: var(--accent-gold);" onclick="chickenOut()">
+                ¿Se rajó? 🐔
             </div>
         </div>
 
-        /* ==================== ETAPA 3: PREGUNTA MENSAJES TARDE ==================== */
-        <div class="stage" id="stage3">
-            <span class="badge-tag">Pregunta #2 📱</span>
-            <h2>Si te llega un mensaje mío tarde...</h2>
-            <p class="subtitle">
-                ¿Qué haces Ferchis? Sinceridad total:
-            </p>
-
-            <div class="options-list" id="nightOptionsList">
-                <button class="opt-btn" onclick="handleNightMessage('ignorar', this)">
-                    <span>⏱️ Ignorarlo para ignorarme</span>
-                    <span>👉</span>
-                </button>
-                <button class="opt-btn" onclick="handleNightMessage('abrir', this)">
-                    <span>👀 Abrirlo rápido para ver qué te puseee??</span>
-                    <span>👉</span>
-                </button>
-                <button class="opt-btn" onclick="handleNightMessage('sonreir', this)">
-                    <span>🤭 O sonreír viendo el celllll</span>
-                    <span>👉</span>
-                </button>
-            </div>
-
-            <!-- Globo de respuesta directo y limpio -->
-            <div class="chat-reply-bubble" id="nightChatBubble">
-                <div style="font-size: 0.8rem; color: var(--sunflower); font-weight: bold; margin-bottom: 5px;">
-                    El Cae Mal:
-                </div>
-                <div id="nightChatText"></div>
-            </div>
-
-            <button class="btn-action" id="btnNextToStage4" style="display: none; margin-top: 16px;" onclick="goToStage(4)">
-                Buenooo ya te molesté, ahora dime la verdad 🙈
+        <!-- Botón para ver la lista completa -->
+        <div>
+            <button class="btn-view-list" onclick="openModal()">
+                📜 Ver lista completa de Verdades y Retos (<span id="totalItemsSummary">56</span>)
             </button>
         </div>
+    </div>
 
-        <!-- ==================== ETAPA 4: LA PREGUNTA DEFINITIVA "¿TE GUSTO?" ==================== -->
-        <div class="stage" id="stage4">
-            <span class="badge-tag">Hora de la verdad 🤌🏿</span>
-            <h2>La Pregunta Del Millón</h2>
-            <p class="subtitle">Ya te molesté bastante con nuestro idioma... <br>Ahora respóndele al Cae Mal:</p>
-            
-            <h3 style="font-size: 1.65rem; color: var(--sunflower); margin: 22px 0;">¿Te gusta El Cae Mal?</h3>
-
-            <div class="arena-question">
-                <div class="question-buttons">
-                    <button id="btnYes" onclick="handleYesClick()">¡SÍÍÍ! 🥰</button>
-                    <button id="btnNo" onmouseover="dodgeNo()" onclick="dodgeNo()">No 🙄</button>
-                </div>
+    <!-- Modal con la Lista Completa -->
+    <div class="modal-overlay" id="listModal" onclick="closeModalOnBg(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">📋 Lista Completa (Fer & Johel)</div>
+                <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
 
-            <p id="noWarning" style="color: #f87171; font-size: 0.88rem; height: 22px; margin-top: 25px; font-weight: 600;"></p>
-        </div>
-
-        <!-- ==================== ETAPA 5: EL LIBRO / CARTA FINAL ==================== -->
-        <div class="stage" id="stage5">
-            <span class="badge-tag">Regalo Especial 🤌🏿</span>
-            <h2>Para Ti, Ferchis</h2>
-            <p class="subtitle">Toca la portada para abrir la carta</p>
-
-            <div class="book-wrapper">
-                <div class="book" id="specialBook">
-                    <!-- Portada con emoji negro (clic para abrir) -->
-                    <div class="book-face book-front" onclick="toggleBook()">
-                        <div class="seal">🤌🏿</div>
-                        <h3 style="font-family: 'Playfair Display', serif; color: var(--sunflower); font-size: 1.55rem; margin-bottom: 4px;">Para Ferchis</h3>
-                        <p style="color: #fecdd3; font-size: 0.95rem; margin-bottom: 8px;">De: El Cae Mal 🤌🏿</p>
-                        <div style="font-size: 0.82rem; color: #fde047; margin-top: 15px;">👆 Toca para abrir</div>
-                    </div>
-
-                    <!-- Interior / Carta Completa -->
-                    <div class="book-face book-back">
-                        <div class="scroll-indicator">📜 Desliza hacia abajo para leer completa 👇</div>
-                        <div class="letter-content" id="letterTextContainer">
-                            <h4>Holaaa Ferrrrr... 🤌🏿🖤</h4>
-                            
-                            <p>
-                                Bueno, te quería molestar y decir algo lindo como por ejemplo túuu.
-                            </p>
-                            
-                            <p>
-                                Volviendo al tema de por qué me gustas, no solo es físicamente, es cómo piensas tú, especialmente que te ríes por todo al igual que te enojas (aunque upssss eso te puede caer mal JAJAJAJAJ). Pero bueno, en fin... yo te voy a seguir diciendo <em>"i love youu"</em>, tú tienes que adivinar a cuál me refiero: si a un <em>te amo</em> o a un <em>te quiero</em>. 😉
-                            </p>
-                            
-                            <p>
-                                Además quiero que sepas que no te lo puedo negar: te paso pensando, y a vecessss cuando lo necesito pienso en ti y es como si el tiempo pasara y simplemente estuvieras ahíii.
-                            </p>
-                            
-                            <p>
-                                Otra cosa es que a mí me molestan muchoooooooooooooo y a veces no sé cómo reaccionar porqueeee en serio me gusta. Y aparte, cuando te miro es como si viera las estrellas en tus ojos... me encanta verteeee ✨, especialmente cuando hago un gol, pero que sepas que no te los dedico directamente sino indirectamente en mi cabezaaaaaa pensando en ti (de hecho casi nunca los celebro).
-                            </p>
-                            
-                            <p>
-                                Va a sonar un poco cursi pero cuando te veo es como si me tomara un café ☕, tú me das energía con solo verte.
-                            </p>
-                            
-                            <p>
-                                Yo tengo un pensamiento y es que nadie me importa, de que no necesito a nadie, y sí es cierto... pero si tú entras en esa conversación no aplica, porque yo si pudiera estaría contigo cada segundo y cada minuto. Cada día que pasa siento que no necesito nada más que a ti.
-                            </p>
-                            
-                            <p>
-                                Nunca dudes que eres única, especial, hermosa, noble y con carotas que le haces a la gente 😂, pero lo que no puedes disimular es tu bellezaaaa. ¡Ay es que cómo me gustassss de verdadddd, es que de verdad JAJAJA!
-                            </p>
-                            
-                            <p>
-                                Bueno, y te recuerdo que esto no es para presionarte sino para demostrarte amorrrrrr. Y también que si me das la oportunidad no pienso soltarte, porque yo quiero hacerte míaaa y solo mía y punto, no hay discusión. Antes me gustabas y ahora que tú también sientes algo me despierto como loco pensando en ti.
-                            </p>
-                            
-                            <p>
-                                También quiero decirte que siempre estaré si ocupas desahogarte, ahí estaré.
-                            </p>
-                            
-                            <p style="text-align: right; margin-top: 22px; font-weight: bold; color: #9d0208; font-size: 1.55rem; line-height: 1.3;">
-                                Con amor, yo...<br>
-                                Loveeee youuu 🫰🏿🤌🏿🖤
-                            </p>
-
-                            <div style="text-align: center; margin-top: 15px;">
-                                <button onclick="toggleBook()" style="background: rgba(255,183,3,0.15); border: 1px solid var(--sunflower); color: #6b21a8; font-weight: bold; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; cursor: pointer;">
-                                    Cerrar libro 📕
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="tabs-row">
+                <button class="tab-btn active" id="tabTruths" onclick="switchTab('truths')">
+                    🧠 Verdades (<span id="totalTruthsCount">0</span>)
+                </button>
+                <button class="tab-btn" id="tabDares" onclick="switchTab('dares')">
+                    🔥 Retos (<span id="totalDaresCount">0</span>)
+                </button>
             </div>
 
-            <span class="reset-link" onclick="goToStage(1)">Volver al principio</span>
+            <div class="modal-list-body" id="modalListBody">
+                <!-- Se llena dinámicamente con JS -->
+            </div>
         </div>
-
     </div>
 
     <script>
-        /* ==================== 1. MOTOR DE FLORES LIGERO (ALTO RENDIMIENTO) ==================== */
-        const fCanvas = document.getElementById('flowerCanvas');
-        const fCtx = fCanvas.getContext('2d', { alpha: true });
-        let width = fCanvas.width = window.innerWidth;
-        let height = fCanvas.height = window.innerHeight;
+        let currentPlayer = "Fer";
+        let currentType = null;
+        let done = 0;
+        let chickened = 0;
 
-        window.addEventListener('resize', () => {
-            width = fCanvas.width = window.innerWidth;
-            height = fCanvas.height = window.innerHeight;
-        });
-
-        // 14 partículas fijas para mantener 60 FPS estables en cualquier dispositivo
-        const symbols = ['🌻', '🌺', '🌸', '✨'];
-        const particles = Array.from({ length: 14 }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            size: Math.random() * 12 + 18,
-            speedY: Math.random() * 1.2 + 0.7,
-            symbol: symbols[Math.floor(Math.random() * symbols.length)]
-        }));
-
-        let animationFrameId;
-        function renderFlowers() {
-            fCtx.clearRect(0, 0, width, height);
-            fCtx.textAlign = 'center';
-            fCtx.textBaseline = 'middle';
-
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                p.y += p.speedY;
-                if (p.y > height + 30) {
-                    p.y = -30;
-                    p.x = Math.random() * width;
-                }
-                fCtx.font = `${p.size}px serif`;
-                fCtx.fillText(p.symbol, p.x, p.y);
+        /* ==================== BANCO MASIVO DE VERDADES (30) ==================== */
+        const allTruths = [
+            {
+                for: "Fer",
+                category: "Sinceridad Total 🙈",
+                text: "¿Qué fue lo primero que pensaste cuando Johel te empezó a hablar? Sinceridad sin filtro.",
+                extra: "(Prohibido decir 'me caías mal', di la verdad real 😉)"
+            },
+            {
+                for: "Ambos",
+                category: "Complicidad 🤌🏿",
+                text: "Si tuvieras que describir lo que sientes cuando el otro te molesta con una sola palabra... ¿cuál sería?",
+                extra: "No vale pensarlo más de 5 segundos."
+            },
+            {
+                for: "Fer",
+                category: "Pillada en la noche 📱",
+                text: "¿Alguna vez te has quedado mirando los mensajes de Johel tarde en la noche sonriendo sola?",
+                extra: "Johel ya lo sabe... solo admítelo Fer 😂"
+            },
+            {
+                for: "Johel",
+                category: "Confesión ⚽",
+                text: "¿Qué es lo que más te desconcentra o te encanta de Fer cuando están hablando?",
+                extra: "Sin hacerse el duro, Johel."
+            },
+            {
+                for: "Ambos",
+                category: "Química 🔥",
+                text: "¿Cuál es tu gesto o carota favorita del otro que no puedes evitar que te dé risa?",
+                extra: "Imítala justo ahora."
+            },
+            {
+                for: "Fer",
+                category: "Curiosidad o Celitos 👀",
+                text: "Del 1 al 10... ¿qué tan curiosa o pendiente te pones cuando no sabes qué está haciendo Johel?",
+                extra: "Sé honesta Fer 💅"
+            },
+            {
+                for: "Ambos",
+                category: "La Salida Ideal ☕",
+                text: "Si tuvieras que planear una salida perfecta entre Fer y Johel sin límite de nada... ¿cómo sería?",
+                extra: "Detalla hasta lo que van a comer."
+            },
+            {
+                for: "Fer",
+                category: "I Love Youu 🫰🏿",
+                text: "Cuando Johel te dice 'I love youu'... en tu mente, ¿qué crees que significa: un te quiero o un te amo?",
+                extra: "A ver qué tan afinada tienes la intuición, Fer."
+            },
+            {
+                for: "Johel",
+                category: "Confesión de Johel 🤌🏿",
+                text: "¿Qué es lo más cursi que has pensado de Fer y que todavía te daba pena decirle?",
+                extra: "Momento sin filtro."
+            },
+            {
+                for: "Ambos",
+                category: "Conexión 💫",
+                text: "¿Qué canción escucharías pensando en la otra persona?",
+                extra: "Pónganla de fondo ya mismo."
+            },
+            {
+                for: "Fer",
+                category: "El Golpe Bajo 🥊",
+                text: "¿Qué hace Johel que de verdad te da rabia pero en el fondo te da ternura?",
+                extra: "Adelante, desahógate Fer."
+            },
+            {
+                for: "Johel",
+                category: "Mente Inquieta 🧠",
+                text: "¿Cuántas veces al día se te cruza Fer por la cabeza sin darte cuenta?",
+                extra: "Respuesta con número aproximado."
+            },
+            {
+                for: "Ambos",
+                category: "Primera Impresión ⚡",
+                text: "¿Qué detalle físico o de su personalidad fue lo que te hizo decir 'uy, esta persona tiene algo'?",
+                extra: "Cero respuestas genéricas."
+            },
+            {
+                for: "Fer",
+                category: "Hacerse la Difícil 💅",
+                text: "¿Cuánto tiempo aguantas enojada de verdad con Johel antes de que te gane la risa?",
+                extra: "Sabemos que no es mucho 😜"
+            },
+            {
+                for: "Johel",
+                category: "El Cae Mal en Acción 😈",
+                text: "¿Cuál es tu tema favorito para picarla y hacerla enojar sabiendo que se ve linda molesta?",
+                extra: "La táctica secreta al descubierto."
+            },
+            {
+                for: "Ambos",
+                category: "Misterio Nocturno 🌙",
+                text: "¿Alguna vez has soñado con la otra persona? Si es sí, ¿de qué trataba?",
+                extra: "Si es secreto, di al menos la vibra del sueño."
+            },
+            {
+                for: "Fer",
+                category: "La Gran Duda 🤔",
+                text: "¿Qué es lo que más te da intriga o curiosidad saber de la vida de Johel?",
+                extra: "Aprovecha que no puede mentir."
+            },
+            {
+                for: "Ambos",
+                category: "Nivel de Intensidad 🌡️",
+                text: "¿Qué prefieres: que te escriban todo el día o que te llamen en la noche para hablar horas?",
+                extra: "Definan cómo les gusta la dinámica."
+            },
+            {
+                for: "Johel",
+                category: "Goles y Pensamientos ⚽",
+                text: "¿En qué momento exacto piensas en Fer cuando estás jugando o entrenando?",
+                extra: "Cuéntale la verdad de tus goles."
+            },
+            {
+                for: "Fer",
+                category: "Detector de Mentiras 🕵️‍♀️",
+                text: "¿Alguna vez le has contado a una amiga sobre Johel diciendo 'este me cae mal' pero hablando horas de él?",
+                extra: "¡Atrapadísima si dices que no! 😂"
+            },
+            {
+                for: "Ambos",
+                category: "La Mirada ✨",
+                text: "¿Qué sientes cuando se quedan mirando fijamente a los ojos sin decir nada?",
+                extra: "Sin evadir la respuesta."
+            },
+            {
+                for: "Fer",
+                category: "El Abrazo 🤗",
+                text: "Si tuvieras a Johel al frente justo ahora... ¿qué es lo primero que le harías: un pellizco por molestar o un abrazo?",
+                extra: "No se valen las dos."
+            },
+            {
+                for: "Johel",
+                category: "El Café ☕",
+                text: "Dijiste que Fer es como tu café que te da energía... ¿Qué es lo que hace ella que te cambia el ánimo en 1 segundo?",
+                extra: "Sé específico."
+            },
+            {
+                for: "Ambos",
+                category: "Pacto Secreto 🤫",
+                text: "¿Qué es algo que solo ustedes dos entienden y que a cualquier otra persona le parecería raro?",
+                extra: "Su idioma patas negras."
+            },
+            {
+                for: "Fer",
+                category: "Celos Ocultos 💅",
+                text: "¿Te molestaría si Johel empezara a molestar y bromear así con otra chica?",
+                extra: "Dilo claro Fer."
+            },
+            {
+                for: "Johel",
+                category: "Protector 🛡️",
+                text: "¿Qué tan celoso eres si ves que alguien le tira la onda a Fer?",
+                extra: "Sin disimular."
+            },
+            {
+                for: "Ambos",
+                category: "Futuro Cercano 🔮",
+                text: "¿A qué lugar te gustaría ir juntos en su primera salida seria?",
+                extra: "Pónganse de acuerdo en este momento."
+            },
+            {
+                for: "Fer",
+                category: "El Apodo 🏷️",
+                text: "¿Cuál es el apodo más ridículo con el que te gustaría llamar a Johel en privado?",
+                extra: "Y tienes que empezar a usarlo."
+            },
+            {
+                for: "Johel",
+                category: "Sin Salida 🔒",
+                text: "¿Qué es lo que más te convence de que Fer es 'única y especial'?",
+                extra: "Lo dijiste en la carta, ahora dilo de frente."
+            },
+            {
+                for: "Ambos",
+                category: "La Pregunta de Oro 👑",
+                text: "¿Qué es lo que más te da miedo y a la vez lo que más te ilusiona de lo que está pasando entre ustedes?",
+                extra: "Momento de corazón abierto."
             }
-            animationFrameId = requestAnimationFrame(renderFlowers);
-        }
-        renderFlowers();
-
-        /* ==================== 2. CONTROL DE FASES Y PROGRESO ==================== */
-        const totalStages = 5;
-        const stageDescriptions = [
-            "Conectando...",
-            "Descubriendo...",
-            "Sinceridad...",
-            "La Verdad...",
-            "Carta Especial 🤌🏿"
         ];
 
-        function goToStage(stageNum) {
-            document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
-            const nextStage = document.getElementById(`stage${stageNum}`);
-            if (nextStage) {
-                nextStage.classList.add('active');
+        /* ==================== BANCO MASIVO DE RETOS (26) ==================== */
+        const allDares = [
+            {
+                category: "Reto de Audio 🎙️",
+                text: "Mándale un audio de 15 segundos al otro imitándolo cuando se enoja o cuando se hace el difícil.",
+                extra: "Tiene que ser bien dramático."
+            },
+            {
+                category: "Miradas Fijas 👀",
+                text: "Mírense fijamente durante 30 segundos sin hablar y sin reírse. El primero que se ría pierde.",
+                extra: "El que se ría le debe un helado o café al otro."
+            },
+            {
+                category: "Foto Espontánea 📸",
+                text: "Tómate una foto justo ahora con la carota más chistosa que tengas y mándala sin filtros ni repetir.",
+                extra: "Nada de posar bonita/o, cara graciosa obligatoria."
+            },
+            {
+                category: "Apodo Oficial 🏷️",
+                text: "Tienes que inventarle un apodo nuevo y vergonzoso al otro y usarlo obligatoriamente las próximas 24 horas.",
+                extra: "Sin quejas ni reclamos."
+            },
+            {
+                category: "Pregunta Prohibida 😈",
+                text: "El otro tiene derecho a hacerte CUALQUIER pregunta sin filtro y tienes que responderla con 'Sí' o 'No' obligatoriamente.",
+                extra: "Sin derecho a réplica."
+            },
+            {
+                category: "Dedicatoria Musical 🎵",
+                text: "Cántale o tararéale un pedacito de una canción que te recuerde a él/ella por audio.",
+                extra: "Sin pena, aunque cantes feo."
+            },
+            {
+                category: "Declaración con Voz Rara 🤖",
+                text: "Dile un piropo o halago súper cursi al otro pero usando voz de ardilla o de telenovela dramática.",
+                extra: "Tiene que dar risa obligatoria."
+            },
+            {
+                category: "El Deudor 🍨",
+                text: "Firma un pagaré verbal: tienes que invitar la próxima comida o merienda que tengan juntos.",
+                extra: "Trato cerrado y sellado con 🤌🏿."
+            },
+            {
+                category: "Llamada Sorpresa 📞",
+                text: "Llama al otro por teléfono justo ahora y dile 'solo llamaba para decirte que me caes súper mal' y cuélgale.",
+                extra: "A ver cuánto tardan en reírse."
+            },
+            {
+                category: "Foto de Bloqueo 📱",
+                text: "Muestra o manda captura de tu pantalla de bloqueo y de tu última foto en la galería.",
+                extra: "Cero trampas ni borrar fotos."
+            },
+            {
+                category: "Poema Improvisado ✍️",
+                text: "Tienes 20 segundos para inventar una rima graciosa de 4 versos que rime con su nombre.",
+                extra: "Ejemplo: 'Fer / Johel...' y que dé risa."
+            },
+            {
+                category: "El Susurro 🤫",
+                text: "Manda un audio de 5 segundos susurrando lo primero que se te venga a la mente sobre la otra persona.",
+                extra: "Tono misterioso obligatorio."
+            },
+            {
+                category: "Estatua 🗿",
+                text: "Quédate completamente congelado/a en videollamada o frente a la cámara 20 segundos sin pestañear.",
+                extra: "El otro intentará hacerte reír."
+            },
+            {
+                category: "Confesión en Estado 💬",
+                text: "Pon en tu estado de WhatsApp una indirecta que solo la otra persona entienda por 30 minutos.",
+                extra: "Los demás quedarán intrigados."
+            },
+            {
+                category: "Pellizco Virtual 🤏🏿",
+                text: "Manda 10 stickers seguidos que describan perfectamente cómo te sientes cuando la otra persona te molesta.",
+                extra: "Guerra de stickers."
+            },
+            {
+                category: "Lectura de Ojos 👁️",
+                text: "Manda un video de 5 segundos solo haciendo un guiño o mirando fijamente a la cámara.",
+                extra: "Sin reírse."
+            },
+            {
+                category: "El Piropero Callejero 🚗",
+                text: "Tírale al otro el piropo más ridículo y exagerado que conozcas.",
+                extra: "De esos que dan vergüenza ajena."
+            },
+            {
+                category: "Intercambio de Roles 🎭",
+                text: "Por los próximos 3 turnos tienes que hablar y responder actuando exactamente como la otra persona.",
+                extra: "Copia sus frases y modismos."
+            },
+            {
+                category: "Tres Cosas Lindas ✨",
+                text: "Dile al otro 3 cosas que te gusten de su personalidad sin reírte y mirándolo fijamente.",
+                extra: "Momento tierno obligatorio."
+            },
+            {
+                category: "Bailarín Estrella 💃",
+                text: "Manda un video de 8 segundos bailando cualquier canción ridícula sin música.",
+                extra: "Prohibido tener pena."
+            },
+            {
+                category: "Captura Comprometida 🔍",
+                text: "Muestra el chat fijado #1 de tu WhatsApp o la última persona con la que hablaste en Instagram.",
+                extra: "Transparencia total."
+            },
+            {
+                category: "La Promesa 🤝",
+                text: "Haz una promesa seria sobre algo lindo que vas a hacer por la otra persona la próxima vez que se vean.",
+                extra: "Queda registrada ante la ley."
+            },
+            {
+                category: "Recreación de Gol ⚽",
+                text: "Johel tiene que narrar un gol épico dedicado a Fer, o Fer tiene que festejar como futbolista profesional.",
+                extra: "Con narración apasionada."
+            },
+            {
+                category: "El Mensaje al Azar 📬",
+                text: "Deja que el otro elija un emoji y tienes que mandar un audio explicando por qué ese emoji te recuerda a él/ella.",
+                extra: "Sin rodeos."
+            },
+            {
+                category: "Voz de Bebé 👶",
+                text: "Pídele perdón al otro por cualquier tontería que hayas hecho usando voz de bebé consentido.",
+                extra: "Tiene que sonar gracioso."
+            },
+            {
+                category: "El Beso al Aire 💋",
+                text: "Manda un video corto lanzando un beso con cara de complicidad y luego riéndote.",
+                extra: "El reto definitivo."
+            }
+        ];
+
+        /* ==================== SISTEMA ANTI-REPETICIÓN (MAZO DE BARAJA) ==================== */
+        let remainingTruths = [...allTruths];
+        let remainingDares = [...allDares];
+
+        function updateDeckCounters() {
+            document.getElementById('truthCountPill').innerHTML = `Verdades restantes: <strong>${remainingTruths.length}</strong>`;
+            document.getElementById('dareCountPill').innerHTML = `Retos restantes: <strong>${remainingDares.length}</strong>`;
+            document.getElementById('totalTruthsCount').innerText = allTruths.length;
+            document.getElementById('totalDaresCount').innerText = allDares.length;
+            document.getElementById('totalItemsSummary').innerText = allTruths.length + allDares.length;
+        }
+        updateDeckCounters();
+
+        function switchPlayer() {
+            currentPlayer = currentPlayer === "Fer" ? "Johel" : "Fer";
+            const badge = document.getElementById('playerBadge');
+
+            if (currentPlayer === "Fer") {
+                badge.innerHTML = `<span>💅</span><span>Turno de Fer</span>`;
+            } else {
+                badge.innerHTML = `<span>🤌🏿</span><span>Turno de Johel</span>`;
             }
 
-            const percent = Math.min(100, Math.round((stageNum / totalStages) * 100));
-            document.getElementById('progressBar').style.width = `${percent}%`;
-            document.getElementById('levelTag').innerText = `Paso ${stageNum} de ${totalStages}`;
-            document.getElementById('statusMood').innerText = stageDescriptions[stageNum - 1] || "Para Ti";
+            if (currentType) {
+                getRandomItem();
+            }
         }
 
-        /* ==================== 3. ETAPA 1: RASCAR (OPTIMIZADO) ==================== */
-        const sCanvas = document.getElementById('scratchCanvas');
-        const sCtx = sCanvas.getContext('2d');
-        const sHint = document.getElementById('scratchHint');
-        const sBtn = document.getElementById('btnToStage2');
+        function selectType(type) {
+            currentType = type;
+            document.querySelectorAll('.btn-choice').forEach(b => b.classList.remove('active'));
+            if (type === 'truth') {
+                document.querySelector('.btn-truth').classList.add('active');
+            } else {
+                document.querySelector('.btn-dare').classList.add('active');
+            }
+            document.getElementById('btnNext').style.display = 'block';
+            getRandomItem();
+        }
 
-        function initScratch() {
-            sCtx.fillStyle = '#2d2538';
-            sCtx.fillRect(0, 0, sCanvas.width, sCanvas.height);
-
-            sCtx.strokeStyle = '#ffb703';
-            sCtx.lineWidth = 3;
-            sCtx.strokeRect(8, 8, sCanvas.width - 16, sCanvas.height - 16);
-
-            sCtx.fillStyle = '#ffb703';
-            sCtx.font = 'bold 18px Outfit, sans-serif';
-            sCtx.textAlign = 'center';
-            sCtx.fillText('Raspa aquí con tu dedo 🤌🏿', sCanvas.width / 2, sCanvas.height / 2 - 8);
+        function getRandomItem() {
+            if (!currentType) return;
             
-            sCtx.fillStyle = '#cbd5e1';
-            sCtx.font = '13px Outfit, sans-serif';
-            sCtx.fillText('(Mensaje de El Cae Mal)', sCanvas.width / 2, sCanvas.height / 2 + 18);
-        }
+            let pool = currentType === 'truth' ? remainingTruths : remainingDares;
 
-        initScratch();
-
-        let isScratching = false;
-        let scratchCount = 0;
-        let scratchDone = false;
-
-        sCtx.lineJoin = 'round';
-        sCtx.lineCap = 'round';
-        sCtx.lineWidth = 42;
-
-        function getPos(evt) {
-            const rect = sCanvas.getBoundingClientRect();
-            const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-            const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        function startScratch(e) {
-            isScratching = true;
-            sCtx.globalCompositeOperation = 'destination-out';
-            const pos = getPos(e);
-            sCtx.beginPath();
-            sCtx.moveTo(pos.x, pos.y);
-            e.preventDefault();
-        }
-
-        function doScratch(e) {
-            if (!isScratching) return;
-            const pos = getPos(e);
-            sCtx.lineTo(pos.x, pos.y);
-            sCtx.stroke();
-            e.preventDefault();
-
-            scratchCount++;
-            // Detección ágil sin sobrecargar CPU
-            if (scratchCount > 28 && !scratchDone) {
-                checkScratch();
-            }
-        }
-
-        function stopScratch() {
-            isScratching = false;
-        }
-
-        function checkScratch() {
-            try {
-                const imgData = sCtx.getImageData(0, 0, sCanvas.width, sCanvas.height);
-                let cleared = 0;
-                // Muestreo espaciado de 32 píxeles para fluidez total
-                for (let i = 3; i < imgData.data.length; i += 32) {
-                    if (imgData.data[i] === 0) cleared++;
+            // Si se acabaron las cartas del mazo, barajar de nuevo
+            if (pool.length === 0) {
+                if (currentType === 'truth') {
+                    remainingTruths = [...allTruths];
+                    pool = remainingTruths;
+                } else {
+                    remainingDares = [...allDares];
+                    pool = remainingDares;
                 }
-                const ratio = cleared / (imgData.data.length / 32);
+                alert(`🃏 ¡Se jugaron todas las ${currentType === 'truth' ? 'verdades' : 'retos'} sin repetir! Barajando el mazo de nuevo...`);
+            }
 
-                if (ratio > 0.35 && !scratchDone) {
-                    scratchDone = true;
-                    sCanvas.style.transition = 'opacity 0.4s ease';
-                    sCanvas.style.opacity = '0';
-                    setTimeout(() => {
-                        sCanvas.style.display = 'none';
-                        sHint.style.display = 'none';
-                        sBtn.style.display = 'inline-flex';
-                    }, 400);
-                }
-            } catch (err) {}
+            // Seleccionar al azar y EXTRAER del mazo para que NUNCA se repita
+            const randomIndex = Math.floor(Math.random() * pool.length);
+            const item = pool.splice(randomIndex, 1)[0];
+
+            updateDeckCounters();
+
+            const cardBox = document.getElementById('cardBox');
+            const cat = document.getElementById('cardCategory');
+            const prompt = document.getElementById('cardPrompt');
+            const extra = document.getElementById('cardExtra');
+
+            cardBox.style.transform = 'scale(0.95)';
+            cardBox.style.opacity = '0.5';
+
+            setTimeout(() => {
+                const forBadge = item.for ? ` • Para: ${item.for}` : '';
+                cat.innerText = `${currentType === 'truth' ? 'VERDAD 🧠' : 'RETO 🔥'} • ${item.category}${forBadge}`;
+                cat.style.color = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
+                prompt.innerText = item.text;
+                extra.innerText = item.extra || '';
+
+                cardBox.style.borderColor = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
+                cardBox.style.transform = 'scale(1)';
+                cardBox.style.opacity = '1';
+
+                done++;
+                document.getElementById('doneCount').innerText = done;
+            }, 180);
         }
 
-        sCanvas.addEventListener('mousedown', startScratch);
-        sCanvas.addEventListener('mousemove', doScratch);
-        sCanvas.addEventListener('mouseup', stopScratch);
-        sCanvas.addEventListener('mouseleave', stopScratch);
+        function chickenOut() {
+            chickened++;
+            document.getElementById('chickenedCount').innerText = chickened;
+            alert(`🐔 ¡Se acobardó ${currentPlayer}! Debe un castigo o responder una verdad extra.`);
+        }
 
-        sCanvas.addEventListener('touchstart', startScratch, { passive: false });
-        sCanvas.addEventListener('touchmove', doScratch, { passive: false });
-        sCanvas.addEventListener('touchend', stopScratch);
+        /* ==================== MODAL DE LISTA COMPLETA ==================== */
+        let activeTab = 'truths';
 
-        sBtn.addEventListener('click', () => goToStage(2));
+        function openModal() {
+            document.getElementById('listModal').classList.add('active');
+            renderModalList();
+        }
 
-        /* ==================== 4. PREGUNTA 1: MULTI-OPCIONES ==================== */
-        const selectedOptions = new Set();
+        function closeModal() {
+            document.getElementById('listModal').classList.remove('active');
+        }
 
-        function toggleMultiOption(element, value) {
-            if (selectedOptions.has(value)) {
-                selectedOptions.delete(value);
-                element.classList.remove('selected');
-                element.querySelector('.checkbox-pill').innerText = '';
-            } else {
-                selectedOptions.add(value);
-                element.classList.add('selected');
-                element.querySelector('.checkbox-pill').innerText = '✓';
+        function closeModalOnBg(e) {
+            if (e.target.id === 'listModal') {
+                closeModal();
             }
         }
 
-        function confirmMultiOptions() {
-            if (selectedOptions.size === 0) {
-                alert('¡Elige al menos una opción Ferchis! 😉');
-                return;
-            }
-            document.getElementById('btnConfirmMulti').style.display = 'none';
-            document.getElementById('feedback1').style.display = 'block';
+        function switchTab(tab) {
+            activeTab = tab;
+            document.getElementById('tabTruths').classList.toggle('active', tab === 'truths');
+            document.getElementById('tabDares').classList.toggle('active', tab === 'dares');
+            renderModalList();
         }
 
-        /* ==================== 5. PREGUNTA 2: MENSAJES TARDE ==================== */
-        function handleNightMessage(type, btnElement) {
-            // Resaltar la opción seleccionada
-            document.querySelectorAll('#nightOptionsList .opt-btn').forEach(b => b.classList.remove('selected'));
-            if (btnElement) btnElement.classList.add('selected');
+        function renderModalList() {
+            const body = document.getElementById('modalListBody');
+            body.innerHTML = '';
 
-            const bubble = document.getElementById('nightChatBubble');
-            const chatText = document.getElementById('nightChatText');
-            const nextBtn = document.getElementById('btnNextToStage4');
+            const items = activeTab === 'truths' ? allTruths : allDares;
+            const isTruth = activeTab === 'truths';
 
-            if (type === 'ignorar') {
-                chatText.innerHTML = `Si te haces la misteriosa no me puedes negar que aun así quieres contestar y estás lista... La tengo medida, ¿verdad? 😏`;
-            } else if (type === 'abrir') {
-                chatText.innerHTML = `¡JAJAJAJAJAJA esa ni tú te la crees! 😂`;
-            } else {
-                chatText.innerHTML = `Ajaaaa, ¿conque así vamos, verdad? Lástima que a mí me gusta verte enojada. 😈🤌🏿`;
-            }
+            items.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = 'list-item-card';
 
-            bubble.style.display = 'block';
-            nextBtn.style.display = 'inline-flex';
-        }
+                const forBadge = item.for ? ` • Para: ${item.for}` : '';
+                const badgeClass = isTruth ? 'truth' : 'dare';
 
-        /* ==================== 6. ETAPA 4: BOTÓN "¿TE GUSTO?" ==================== */
-        let noTries = 0;
-        const funnyWarnings = [
-            "¿Segura? Piénsalo bien... 🤔",
-            "¡Ese botón está roto, dale al otro!",
-            "Uy, casi lo tocas 😜",
-            "Opción denegada por El Cae Mal 🚫",
-            "Ya no te hagas la difícil Ferchis 😂",
-            "Dale al Sí que no muerde 👇"
-        ];
-
-        function dodgeNo() {
-            noTries++;
-            const btnNo = document.getElementById('btnNo');
-            const btnYes = document.getElementById('btnYes');
-            const warning = document.getElementById('noWarning');
-
-            const phrase = funnyWarnings[Math.min(noTries - 1, funnyWarnings.length - 1)];
-            warning.innerText = phrase;
-
-            const x = (Math.random() - 0.5) * 160;
-            const y = (Math.random() - 0.5) * 80;
-
-            const scaleNo = Math.max(0.35, 1 - (noTries * 0.12));
-            const scaleYes = 1 + (noTries * 0.2);
-
-            btnNo.style.transform = `translate(${x}px, ${y}px) scale(${scaleNo})`;
-            btnYes.style.transform = `scale(${scaleYes})`;
-
-            if (noTries >= 5) {
-                btnNo.innerText = 'Imposible 🤭';
-                btnNo.style.opacity = '0.3';
-            }
-        }
-
-        function handleYesClick() {
-            goToStage(5);
-        }
-
-        /* ==================== 7. ETAPA 5: LIBRO INTERACTIVO ==================== */
-        function toggleBook() {
-            const book = document.getElementById('specialBook');
-            book.classList.toggle('opened');
+                card.innerHTML = `
+                    <div class="list-item-badge ${badgeClass}">
+                        #${idx + 1} ${item.category}${forBadge}
+                    </div>
+                    <div class="list-item-text">${item.text}</div>
+                    ${item.extra ? `<div class="list-item-extra">${item.extra}</div>` : ''}
+                `;
+                body.appendChild(card);
+            });
         }
     </script>
 </body>
