@@ -803,8 +803,8 @@
         /* ==================== MENÚ DE JUEGOS (MULTI-MODO) ==================== */
         .game-tabs {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
             margin: 4px 0 16px;
             padding: 5px;
             background: rgba(0, 0, 0, 0.3);
@@ -818,9 +818,9 @@
             color: var(--text-sub);
             font-family: inherit;
             font-weight: 800;
-            font-size: 0.68rem;
+            font-size: 0.62rem;
             line-height: 1.15;
-            padding: 8px 2px;
+            padding: 8px 1px;
             border-radius: 13px;
             cursor: pointer;
             display: flex;
@@ -1117,6 +1117,40 @@
             80% { transform: translateX(4px); }
         }
 
+        /* Del 1 al 10 */
+        .sc-block { margin-bottom: 10px; }
+        .sc-block .xm-who { display: inline-block; padding: 5px 14px; margin-bottom: 6px; font-size: 0.78rem; }
+        .sc-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+        .sc-btn {
+            font-family: inherit;
+            font-weight: 900;
+            font-size: 0.85rem;
+            padding: 9px 0;
+            border-radius: 10px;
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .sc-btn:active { transform: scale(0.9); }
+        .sc-btn.sel-fer { background: var(--fer-gradient); color: #111; border-color: #f472b6; transform: scale(1.1); }
+        .sc-btn.sel-johel { background: var(--johel-gradient); color: #111; border-color: #fbbf24; transform: scale(1.1); }
+        .sc-btn.locked { pointer-events: none; opacity: 0.4; }
+        .sc-btn.locked[class*="sel-"] { opacity: 1; }
+        .sc-target {
+            display: inline-block;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(192, 132, 252, 0.15);
+            color: var(--offline-purple);
+            border: 1px solid rgba(192, 132, 252, 0.4);
+            align-self: center;
+        }
+        .sc-big { font-size: 2rem; font-weight: 900; letter-spacing: 1px; }
+
         /* Cuenta regresiva "1, 2, 3... ¡Señalen!" */
         .xm-countdown {
             position: fixed;
@@ -1166,9 +1200,10 @@
             <!-- ==================== MENÚ DE JUEGOS ==================== -->
             <div class="game-tabs">
                 <button class="game-tab active" id="tab-vor" onclick="switchGame('vor')"><span class="tab-emoji">🃏</span>Verdad o Reto</button>
-                <button class="game-tab" id="tab-pf" onclick="switchGame('pf')"><span class="tab-emoji">⚖️</span>¿Qué Prefieres?</button>
-                <button class="game-tab" id="tab-qd" onclick="switchGame('qd')"><span class="tab-emoji">👥</span>¿Quién de los Dos?</button>
-                <button class="game-tab" id="tab-yn" onclick="switchGame('yn')"><span class="tab-emoji">🍷</span>Yo Nunca Nunca</button>
+                <button class="game-tab" id="tab-pf" onclick="switchGame('pf')"><span class="tab-emoji">⚖️</span>Qué Prefieres</button>
+                <button class="game-tab" id="tab-qd" onclick="switchGame('qd')"><span class="tab-emoji">👥</span>Quién de los Dos</button>
+                <button class="game-tab" id="tab-yn" onclick="switchGame('yn')"><span class="tab-emoji">🍷</span>Yo Nunca</button>
+                <button class="game-tab" id="tab-sc" onclick="switchGame('sc')"><span class="tab-emoji">🔢</span>Del 1 al 10</button>
             </div>
 
             <div class="game-panel active" id="panel-vor">
@@ -1402,6 +1437,37 @@
                 </div>
                 <button class="xm-reset" onclick="ynResetLives()">❤️ Rellenar vidas</button>
                 <button class="xm-reset" onclick="xmReset('yn')">💾 Reiniciar memoria de frases</button>
+            </div>
+
+            <!-- ==================== MODO: DEL 1 AL 10 ==================== -->
+            <div class="game-panel" id="panel-sc">
+                <div class="xm-meta">
+                    <span class="xm-lvl l1" id="scLvl">🧊 NIVEL 1</span>
+                    <span class="xm-round" id="scRound">Pregunta #0 · Quedan 0</span>
+                </div>
+                <div class="xm-card" id="scCard">
+                    <div class="xm-kicker">🔢 Del 1 al 10...</div>
+                    <div class="xm-text" id="scText">Toca "Siguiente" para la primera pregunta 🔢</div>
+                    <span class="sc-target" id="scTarget">Cada uno pone su número</span>
+                </div>
+                <div class="xm-hint">Elijan su número sin verse... y luego comparen 👀</div>
+                <div class="sc-block">
+                    <span class="xm-who fer">💅 FER</span>
+                    <div class="sc-grid" id="scGridFer"></div>
+                </div>
+                <div class="sc-block">
+                    <span class="xm-who johel">🤌🏿 JOHEL</span>
+                    <div class="sc-grid" id="scGridJohel"></div>
+                </div>
+                <div class="xm-result" id="scResult"></div>
+                <button class="xm-btn-main" onclick="scNext()">Siguiente pregunta 🔢</button>
+                <button class="xm-btn-ghost" onclick="xmShare('sc')">💬 Mandar pregunta por WhatsApp</button>
+                <div class="xm-foot">
+                    <span>🎯 Atinadas: <strong id="scHits">0</strong></span>
+                    <span>📊 Promedio Fer: <strong id="scAvgFer">-</strong></span>
+                    <span>📊 Promedio Johel: <strong id="scAvgJohel">-</strong></span>
+                </div>
+                <button class="xm-reset" onclick="xmReset('sc')">💾 Reiniciar memoria de preguntas</button>
             </div>
         </div>
     </div>
@@ -3237,6 +3303,65 @@
             [3, "he imaginado qué pasaría si estuviéramos solos"]
         ];
 
+        /* ---------- DEL 1 AL 10 [nivel, tipo, texto] ----------
+           Tipos:  's' = cada uno se califica a sí mismo
+                   'o' = cada uno califica al otro
+                   'F' = Fer pone su número real y Johel intenta adivinarlo
+                   'J' = Johel pone su número real y Fer intenta adivinarlo  */
+        const DEL1AL10_RAW = [
+            // Nivel 1: Chill
+            [1, 's', "¿Qué tan dramático/a eres?"],
+            [1, 's', "¿Qué tan chismoso/a eres?"],
+            [1, 's', "¿Qué tan terco/a eres?"],
+            [1, 's', "¿Qué tan buen cocinero/a eres?"],
+            [1, 's', "¿Qué tan bien bailas?"],
+            [1, 's', "¿Qué tan impuntual eres?"],
+            [1, 's', "¿Qué tan mal perdedor/a eres?"],
+            [1, 'o', "¿Qué tan gracioso/a es el otro?"],
+            [1, 'o', "¿Qué tan insoportable es el otro cuando quiere molestar?"],
+            [1, 'o', "¿Qué tan buenos son los stickers que manda el otro?"],
+            [1, 'o', "¿Qué tan bien se viste el otro?"],
+            [1, 'F', "¿Qué tanto le cae mal Johel a Fer HOY?"],
+            [1, 'J', "¿Qué tanta paciencia le tiene Johel a Fer?"],
+            [1, 'F', "¿Qué tan enojona es Fer cuando tiene hambre?"],
+            [1, 'J', "¿Qué tan presumido es Johel?"],
+            [1, 'F', "¿Qué tan exigente es Fer con la comida?"],
+            // Nivel 2: Pique
+            [2, 's', "¿Qué tan celoso/a eres en secreto?"],
+            [2, 's', "¿Qué tan cursi eres aunque no lo admitas?"],
+            [2, 's', "¿Qué tan seguido revisas si el otro está en línea?"],
+            [2, 's', "¿Qué tanto stalkeas las redes del otro?"],
+            [2, 's', "¿Qué tan difícil te haces?"],
+            [2, 'o', "¿Qué tan guapo/a es el otro?"],
+            [2, 'o', "¿Qué tan bonita es la sonrisa del otro?"],
+            [2, 'o', "¿Qué tan bien huele el otro? (o te imaginas que huele)"],
+            [2, 'o', "¿Qué tan buena es la voz del otro en los audios?"],
+            [2, 'o', "¿Qué tan coqueto/a es el otro?"],
+            [2, 'F', "¿Qué tanto extraña Fer a Johel cuando no hablan?"],
+            [2, 'J', "¿Qué tanto extraña Johel a Fer cuando no hablan?"],
+            [2, 'F', "¿Qué tanto sonríe Fer cuando le llega un mensaje de Johel?"],
+            [2, 'J', "¿Qué tan nervioso se pone Johel antes de una llamada con Fer?"],
+            [2, 'F', "¿Qué tan celosa se pondría Fer si Johel le habla mucho a otra?"],
+            [2, 'J', "¿Qué tan celoso se pondría Johel si Fer le habla mucho a otro?"],
+            // Nivel 3: Candela
+            [3, 's', "¿Qué tan atrevido/a eres en privado?"],
+            [3, 's', "¿Qué tan fácil te pones nervioso/a con una mirada fija?"],
+            [3, 's', "¿Qué tanto piensas en el otro antes de dormir?"],
+            [3, 's', "¿Qué tantas ganas tienes de ver al otro en persona ahorita?"],
+            [3, 'o', "¿Qué tan atractivo/a te parece el otro?"],
+            [3, 'o', "¿Qué tan buena es la química entre ustedes?"],
+            [3, 'o', "¿Qué tanto te pone nervioso/a el otro?"],
+            [3, 'o', "¿Qué tan bien abraza el otro? (o crees que abraza)"],
+            [3, 'o', "¿Qué tanto te gustan los ojos del otro?"],
+            [3, 'F', "¿Qué tantas ganas tiene Fer de abrazar a Johel ahorita?"],
+            [3, 'J', "¿Qué tantas ganas tiene Johel de abrazar a Fer ahorita?"],
+            [3, 'F', "¿Qué tanto le gusta a Fer que Johel la moleste?"],
+            [3, 'J', "¿Qué tanto le gusta a Johel que Fer le diga que le cae mal?"],
+            [3, 'F', "¿Qué tanto se sonroja Fer cuando Johel le echa un cumplido?"],
+            [3, 'J', "¿Qué tanto le pone nervioso a Johel que Fer lo mire fijo?"],
+            [3, 'o', "¿Qué tanto confías en el otro?"]
+        ];
+
         const YN_PENALTIES = [
             "Manda la foto más fea que tengas en tu galería 📸",
             "Le debes un helado o café al otro en la próxima salida 🍦",
@@ -3266,7 +3391,9 @@
             qd: { key: 'fer_johel_played_quien_v1', round: 1, current: null,
                   items: xmBuild(QUIEN_RAW, 'qd', r => ({ text: r[1] })) },
             yn: { key: 'fer_johel_played_yonunca_v1', round: 1, current: null,
-                  items: xmBuild(YONUNCA_RAW, 'yn', r => ({ text: r[1] })) }
+                  items: xmBuild(YONUNCA_RAW, 'yn', r => ({ text: r[1] })) },
+            sc: { key: 'fer_johel_played_del1al10_v1', round: 1, current: null,
+                  items: xmBuild(DEL1AL10_RAW, 'sc', r => ({ type: r[1], text: r[2] })) }
         };
 
         /* ---------- Memoria y nivel progresivo ---------- */
@@ -3330,6 +3457,7 @@
             if (mode === 'pf') pfNext();
             if (mode === 'qd') qdNext();
             if (mode === 'yn') ynNext();
+            if (mode === 'sc') scNext();
         }
 
         function xmShare(mode) {
@@ -3340,6 +3468,8 @@
                 msg = `⚖️ *¿QUÉ PREFIERES?* (Fer vs Johel 🤌🏿)\n\n🅰️ ${st.current.a}\n\n— o —\n\n🅱️ ${st.current.b}\n\n👉 Responde *A* o *B* y explica por qué 👀\n_(yo ya elegí la mía 😏)_`;
             } else if (mode === 'qd') {
                 msg = `👥 *¿QUIÉN DE LOS DOS...?* 🫵\n\n${st.current.text}\n\n👉 Responde: *Fer* o *Johel*\n_(yo ya tengo mi respuesta 😏)_`;
+            } else if (mode === 'sc') {
+                msg = `🔢 *DEL 1 AL 10...* (Fer & Johel 🤌🏿)\n\n${st.current.text}\n\n📌 ${scTargetLabel(st.current.type)}\n\n👉 Mándame tu número del 1 al 10 y yo te mando el mío 😏`;
             } else {
                 msg = `🍷 *YO NUNCA NUNCA...*\n\n"Yo nunca nunca ${st.current.text}"\n\n👉 ¿*Yo sí* 🙈 o *Yo nunca* 😇? Sin mentir 🤌🏿`;
             }
@@ -3544,12 +3674,107 @@
             xmVibrate(dead.length ? [80, 60, 200] : [30, 40, 30]);
         }
 
+        /* ==================== DEL 1 AL 10 ==================== */
+        let scVotes = { Fer: null, Johel: null };
+        let scHits = 0;
+        let scTotals = { Fer: 0, Johel: 0, n: 0 };
+
+        function scTargetLabel(type) {
+            if (type === 's') return '🪞 Cada uno se califica a sí mismo';
+            if (type === 'o') return '👀 Cada uno califica al otro';
+            if (type === 'F') return '🎯 Fer pone su número real · Johel adivina';
+            return '🎯 Johel pone su número real · Fer adivina';
+        }
+
+        function scBuildGrids() {
+            ['Fer', 'Johel'].forEach(p => {
+                let html = '';
+                for (let n = 1; n <= 10; n++) {
+                    html += `<button class="sc-btn" id="sc-${p}-${n}" onclick="scVote('${p}',${n})">${n}</button>`;
+                }
+                document.getElementById('scGrid' + p).innerHTML = html;
+            });
+        }
+
+        function scSetUI(player, chosen, locked) {
+            for (let n = 1; n <= 10; n++) {
+                const b = document.getElementById(`sc-${player}-${n}`);
+                if (!b) continue;
+                b.className = 'sc-btn' + (n === chosen ? (player === 'Fer' ? ' sel-fer' : ' sel-johel') : '') + (locked ? ' locked' : '');
+            }
+        }
+
+        function scNext() {
+            const item = xmDraw('sc');
+            document.getElementById('scText').innerText = item.text;
+            document.getElementById('scTarget').innerText = scTargetLabel(item.type);
+            scVotes = { Fer: null, Johel: null };
+            scSetUI('Fer', null, false);
+            scSetUI('Johel', null, false);
+            xmHideResult('scResult');
+            xmUpdateMeta('sc', 'Pregunta');
+            xmPop('scCard');
+        }
+
+        function scComment(n) {
+            if (n >= 10) return '😳 ¡UN 10!';
+            if (n >= 8) return '🔥 Altísimo';
+            if (n >= 5) return '🤔 Ni tanto';
+            if (n >= 3) return '🧊 Bajito';
+            return '💀 ¿Un ' + n + '? Grosero/a';
+        }
+
+        function scVote(player, n) {
+            if (!XM.sc.current) { scNext(); return; }
+            scVotes[player] = n;
+            scSetUI(player, n, false);
+            xmVibrate(20);
+            if (!(scVotes.Fer && scVotes.Johel)) return;
+
+            scSetUI('Fer', scVotes.Fer, true);
+            scSetUI('Johel', scVotes.Johel, true);
+            const f = scVotes.Fer, j = scVotes.Johel, diff = Math.abs(f - j);
+            const type = XM.sc.current.type;
+            let cls = 'gold', html = '';
+
+            if (type === 's') {
+                html = `<div class="sc-big">💅 ${f} · ${j} 🤌🏿</div>Fer se dio un <strong>${f}</strong> y Johel un <strong>${j}</strong>.<br>`;
+                if (diff === 0) { cls = 'good'; html += '💞 ¡Empate exacto! Están igualitos.'; }
+                else {
+                    const higher = f > j ? 'FER' : 'JOHEL';
+                    html += `🏆 <strong>${higher}</strong> gana en esto. ${diff >= 4 ? '¿El otro está de acuerdo? ¡Debatan! 🎤' : 'Pruébalo con un ejemplo 👀'}`;
+                }
+            } else if (type === 'o') {
+                html = `<div class="sc-big">💅→🤌🏿 ${f} · ${j} ←💅</div>Fer le dio a Johel un <strong>${f}</strong> (${scComment(f)})<br>Johel le dio a Fer un <strong>${j}</strong> (${scComment(j)})<br>`;
+                if (diff === 0) { cls = 'good'; html += '💞 ¡Se calificaron igual! Química total.'; }
+                else if (diff >= 4) { cls = 'clash'; html += `⚡ Diferencia de ${diff} puntos... el que dio menos tiene que explicar por qué 😤`; }
+                else html += '👀 Expliquen su número con una sola frase.';
+            } else {
+                const realPlayer = type === 'F' ? 'Fer' : 'Johel';
+                const guesser = type === 'F' ? 'Johel' : 'Fer';
+                const real = scVotes[realPlayer], guess = scVotes[guesser];
+                html = `<div class="sc-big">🎯 ${real} vs ${guess}</div>Número real de <strong>${realPlayer.toUpperCase()}</strong>: <strong>${real}</strong><br>${guesser} adivinó: <strong>${guess}</strong><br>`;
+                if (diff === 0) { cls = 'good'; scHits++; html += `🎯 <strong>¡EXACTO!</strong> ${guesser} te conoce demasiado bien 😳`; }
+                else if (diff === 1) { cls = 'good'; scHits++; html += `👏 ¡Casi! Por un punto. Cuenta como atinada.`; }
+                else if (diff >= 4) { cls = 'clash'; html += `❌ ¡Ni cerca! ${guesser} cumple un mini reto que elija ${realPlayer} 😈`; }
+                else { html += `🤏 Fallaste por ${diff}. ${realPlayer} explica su número.`; }
+            }
+
+            scTotals.Fer += f; scTotals.Johel += j; scTotals.n++;
+            document.getElementById('scHits').innerText = scHits;
+            document.getElementById('scAvgFer').innerText = (scTotals.Fer / scTotals.n).toFixed(1);
+            document.getElementById('scAvgJohel').innerText = (scTotals.Johel / scTotals.n).toFixed(1);
+            xmShowResult('scResult', cls, html);
+            xmVibrate([30, 40, 30]);
+        }
+
         /* ==================== MENÚ DE JUEGOS ==================== */
         const GAME_META = {
             vor: { title: 'Verdad o Reto', sub: 'Entre Fer y Johel 🤌🏿' },
             pf:  { title: '¿Qué Prefieres?', sub: 'Dilemas imposibles · Fer vs Johel ⚖️' },
             qd:  { title: '¿Quién de los Dos?', sub: '1, 2, 3... ¡señalen al culpable! 🫵' },
-            yn:  { title: 'Yo Nunca Nunca', sub: 'Confesiones con 5 vidas ❤️' }
+            yn:  { title: 'Yo Nunca Nunca', sub: 'Confesiones con 5 vidas ❤️' },
+            sc:  { title: 'Del 1 al 10', sub: 'Califíquense sin piedad · ¿se conocen? 🔢' }
         };
 
         function switchGame(game) {
@@ -3564,11 +3789,13 @@
                 if (game === 'pf') pfNext();
                 if (game === 'qd') qdNext();
                 if (game === 'yn') ynNext();
+                if (game === 'sc') scNext();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         ynRenderHearts();
+        scBuildGrids();
         try {
             const last = localStorage.getItem('fer_johel_last_game');
             if (last && GAME_META[last] && last !== 'vor') switchGame(last);
