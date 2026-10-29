@@ -872,8 +872,8 @@
 
             <!-- Contador de cartas en mazo -->
             <div class="stats-counter-row">
-                <div class="stat-pill" id="truthCountPill">Verdades disponibles: <strong>83</strong></div>
-                <div class="stat-pill" id="dareCountPill">Retos disponibles: <strong>61</strong></div>
+                <div class="stat-pill" id="truthCountPill">Verdades disponibles: <strong>134</strong></div>
+                <div class="stat-pill" id="dareCountPill">Retos disponibles: <strong>102</strong></div>
             </div>
 
             <!-- ==================== CARTA INTERACTIVA AESTHETIC ==================== -->
@@ -1063,7 +1063,7 @@
         }
 
         function resetMemoryHistory() {
-            if (confirm("¿Seguros que quieren reiniciar el historial de memoria para volver a jugar todas las 144 cartas desde cero?")) {
+            if (confirm("¿Seguros que quieren reiniciar el historial de memoria para volver a jugar todas las " + (allTruths.length + allDares.length) + " cartas desde cero?")) {
                 localStorage.removeItem(STORAGE_KEY_TRUTHS);
                 localStorage.removeItem(STORAGE_KEY_DARES);
                 roundNumber = 1;
@@ -1124,7 +1124,7 @@
             }
         }
 
-        /* ==================== BANCO MASIVO CLASIFICADO POR NIVEL (83 VERDADES) ==================== */
+        /* ==================== BANCO MASIVO CLASIFICADO POR NIVEL (134 VERDADES) ==================== */
         const allTruths = [
             // NIVEL 1: CALENTAMIENTO (Risas, anécdotas, comida, mañas)
             {
@@ -1251,6 +1251,81 @@
                 id: "t25", level: 1, for: "Johel", category: "El Fastidio Favorito 😈",
                 text: "Del 1 al 10... ¿cuánto te encanta que Fer te diga que le caes mal?",
                 extra: "Admite que te da risa.", offlineProof: "💬 Tu número"
+            },
+            {
+                id: "t84", level: 1, for: "Ambos", category: "El Peor Hábito 🤦‍♂️",
+                text: "¿Cuál es la peor maña que tienes cuando estás solo en tu cuarto que nadie sabe?",
+                extra: "Sé completamente honesto/a.", offlineProof: "💬 Tu peor maña"
+            },
+            {
+                id: "t85", level: 1, for: "Fer", category: "Doble Moral 💅",
+                text: "¿Qué cosa te da coraje que haga la gente pero tú también la haces en secreto?",
+                extra: "Cero hipocresía Fer.", offlineProof: "💬 Tu confesión"
+            },
+            {
+                id: "t86", level: 1, for: "Johel", category: "El Ego de Johel 🕶️",
+                text: "¿Qué tan guapo te sientes del 1 al 10 en un día normal vs cuando sales arreglado?",
+                extra: "Sin inflar el número Johel.", offlineProof: "💬 Tu calificación honesta"
+            },
+            {
+                id: "t87", level: 1, for: "Ambos", category: "Momento Trágame Tierra 🙈",
+                text: "¿Cuál ha sido el momento más vergonzoso que has vivido en público o en la escuela?",
+                extra: "Detalles que den risa.", offlineProof: "💬 Tu oso épico"
+            },
+            {
+                id: "t88", level: 1, for: "Fer", category: "El Falso 'Ya voy' ⏱️",
+                text: "Cuando dices 'ya casi estoy lista' o 'ya voy saliendo', ¿cuánto tiempo falta en realidad?",
+                extra: "La verdad absoluta Ferchis.", offlineProof: "💬 Tiempo real"
+            },
+            {
+                id: "t89", level: 1, for: "Johel", category: "Habilidad Inútil 🤹",
+                text: "¿Qué habilidad extraña o completamente inútil tienes que casi nadie conoce?",
+                extra: "Demuéstrala si puedes.", offlineProof: "📹 Video o audio explicándolo"
+            },
+            {
+                id: "t90", level: 1, for: "Ambos", category: "Gusto Culposo Musical 🎧",
+                text: "¿Qué canción o artista escuchas a escondidas porque te da pena que sepan tus amigos?",
+                extra: "Canta o di el nombre.", offlineProof: "🎵 Nombre de la canción"
+            },
+            {
+                id: "t91", level: 1, for: "Fer", category: "La Obsesión Rara 🛍️",
+                text: "¿De qué cosa tienes demasiadas cosas o qué es lo que más compras sin necesitarlo?",
+                extra: "¿Ropa, labiales, comida o qué?", offlineProof: "💬 Tu vicio de compras"
+            },
+            {
+                id: "t92", level: 1, for: "Johel", category: "El Chisme Favorito 🍿",
+                text: "¿Qué tan chismoso eres en una escala del 1 al 10 cuando hay drama ajeno?",
+                extra: "Johel al descubierto.", offlineProof: "💬 Nivel de chisme"
+            },
+            {
+                id: "t93", level: 1, for: "Ambos", category: "La Mentira Piadosa 🤥",
+                text: "¿Cuál es la mentira más tonta que has dicho para zafarte de un plan que te daba flojera?",
+                extra: "Se vale reírse.", offlineProof: "💬 Tu mentira piadosa"
+            },
+            {
+                id: "t94", level: 1, for: "Fer", category: "La Foto que Borraste 📸",
+                text: "¿Cuántas fotos te tomas antes de elegir una sola para subir a tus historias o perfil?",
+                extra: "Di la cifra exacta sin pena.", offlineProof: "💬 Cantidad de fotos"
+            },
+            {
+                id: "t95", level: 1, for: "Johel", category: "El Mal Perdedor 🎮",
+                text: "¿Te enojas o te picas de verdad cuando pierdes en un juego o apuesta contra Fer?",
+                extra: "¿Sí o no?", offlineProof: "💬 Tu respuesta sincera"
+            },
+            {
+                id: "t96", level: 1, for: "Ambos", category: "Comida Rara 🍕",
+                text: "¿Cuál es la combinación de comida más rara que a ti te encanta comer?",
+                extra: "Ej: papitas con helado.", offlineProof: "💬 Tu invento culinario"
+            },
+            {
+                id: "t97", level: 1, for: "Fer", category: "El Sticker Delator 🤪",
+                text: "¿Cuál es el sticker de WhatsApp que más risa te da mandar cuando quieres fastidiar a Johel?",
+                extra: "Mándalo ahorita.", offlineProof: "🎭 El sticker al chat"
+            },
+            {
+                id: "t98", level: 1, for: "Johel", category: "El Apodo Ridículo 👶",
+                text: "¿Cuál fue el apodo más ridículo o chistoso que te decían de chiquito?",
+                extra: "Sin cambiarlo.", offlineProof: "💬 Tu apodo de la infancia"
             },
 
             // NIVEL 2: COMPLICIDAD (Curiosidad, celitos chistosos, llamadas, mañas nocturnas)
@@ -1404,6 +1479,96 @@
                 text: "¿Has stalkeado las redes de Johel hasta fotos de hace años? Sé sincera Fer.",
                 extra: "No te hagas la santa 😜", offlineProof: "💬 Hasta qué año llegaste"
             },
+            {
+                id: "t99", level: 2, for: "Ambos", category: "La Primera Impresión Real 👀",
+                text: "¿Hubo algo físico o de actitud que te llamara la atención del otro la primerísima vez que lo viste?",
+                extra: "Sin rodeos.", offlineProof: "💬 Lo que captó tu atención"
+            },
+            {
+                id: "t100", level: 2, for: "Fer", category: "El Mensaje No Enviado 📱",
+                text: "¿Alguna vez has escrito un mensaje para Johel, te arrepentiste y lo borraste antes de mandarlo?",
+                extra: "¿De qué trataba?", offlineProof: "💬 Confesión del mensaje borrado"
+            },
+            {
+                id: "t101", level: 2, for: "Johel", category: "El Toque de Celos 😏",
+                text: "¿Qué actitud o comentario de Fer te ha hecho dar un mini ataque de celos o curiosidad?",
+                extra: "Johel confiesa.", offlineProof: "💬 El momento exacto"
+            },
+            {
+                id: "t102", level: 2, for: "Ambos", category: "La Foto Favorita 🖼️",
+                text: "¿Cuál es la foto del otro que más te gusta y que guardas con aprecio?",
+                extra: "Descríbela o búscala.", offlineProof: "📸 Descríbela o compártela"
+            },
+            {
+                id: "t103", level: 2, for: "Fer", category: "La Ropa que le Queda Bien 👔",
+                text: "¿Qué prenda, color o estilo sientes que le queda mejor a Johel?",
+                extra: "Tu opinión experta de estilo.", offlineProof: "💬 El estilo o prenda"
+            },
+            {
+                id: "t104", level: 2, for: "Johel", category: "La Sonrisa de Fer ✨",
+                text: "¿Qué tipo de risa de Fer es la que más te gusta: la discreta, la burlona o cuando se ríe a carcajadas?",
+                extra: "Elige una y di por qué.", offlineProof: "💬 Tu risa favorita de Fer"
+            },
+            {
+                id: "t105", level: 2, for: "Ambos", category: "Cita Soñada Cero Tradicional 🌃",
+                text: "Si tuvieran que planear una salida juntos que NO sea cine ni comida típica... ¿qué plan loco inventarías?",
+                extra: "Se vale lo más creativo.", offlineProof: "💬 Tu plan improvisado"
+            },
+            {
+                id: "t106", level: 2, for: "Fer", category: "El Momento que te Sacó una Sonrisa 💭",
+                text: "¿Cuál ha sido un mensaje de Johel que leíste y te hizo sonreír como tonta en tu pantalla?",
+                extra: "¿Te acuerdas qué decía?", offlineProof: "💬 De qué era el mensaje"
+            },
+            {
+                id: "t107", level: 2, for: "Johel", category: "El Berrinche de Fer 🧸",
+                text: "¿Qué hace Fer cuando se hace la ofendida o la difícil que a ti te parece tierno?",
+                extra: "Describe su drama.", offlineProof: "💬 El drama de Fer"
+            },
+            {
+                id: "t108", level: 2, for: "Ambos", category: "La Canción que te Recuerda al Otro 🎶",
+                text: "¿Qué tema musical escuchas y automáticamente te viene a la mente el otro?",
+                extra: "Pon el título o manda audio tarareando.", offlineProof: "🎵 Título o audio"
+            },
+            {
+                id: "t109", level: 2, for: "Fer", category: "Nivel de Paciencia 🧘",
+                text: "¿Cuánto te cuesta tenerle paciencia a Johel cuando se pone en modo insoportable?",
+                extra: "Del 1 al 10.", offlineProof: "💬 Tu nivel de paciencia"
+            },
+            {
+                id: "t110", level: 2, for: "Johel", category: "Punto Débil 🎯",
+                text: "¿Cuál crees que es el punto débil de Fer para hacerla reír cuando está seria?",
+                extra: "¿Tu técnica secreta?", offlineProof: "💬 Tu técnica infalible"
+            },
+            {
+                id: "t111", level: 2, for: "Ambos", category: "La Mirada Clave 👁️",
+                text: "¿Qué sientes cuando el otro te mira fijamente sin decir una sola palabra por más de 5 segundos?",
+                extra: "¿Nervios, risa o reto?", offlineProof: "💬 Qué sientes en realidad"
+            },
+            {
+                id: "t112", level: 2, for: "Fer", category: "El Detalle Sorpresa 🎁",
+                text: "Si Johel te cayera de sorpresa con un regalo o detalle inesperado, ¿qué cosa te dejaría sin palabras?",
+                extra: "Puede ser algo tonto o significativo.", offlineProof: "💬 El detalle perfecto"
+            },
+            {
+                id: "t113", level: 2, for: "Johel", category: "La Foto que Más le Favorece 🌟",
+                text: "¿Cuál es la pose o expresión de Fer que te parece que la hace ver más bonita?",
+                extra: "Sinceridad.", offlineProof: "💬 La pose o expresión"
+            },
+            {
+                id: "t114", level: 2, for: "Ambos", category: "El Apodo Privado 🤫",
+                text: "¿Qué apodo secreto o tierno le pondrías al otro pero no te has atrevido a decírselo de frente?",
+                extra: "Sácalo a la luz ahora.", offlineProof: "💬 El apodo secreto"
+            },
+            {
+                id: "t115", level: 2, for: "Fer", category: "Dormir en Llamada 🌙",
+                text: "¿Te da paz o te gusta cuando se quedan en llamada hasta que alguno se queda dormido?",
+                extra: "Sin pena Ferchis.", offlineProof: "💬 Tu opinión real"
+            },
+            {
+                id: "t116", level: 2, for: "Johel", category: "La Notificación 🔔",
+                text: "Cuando ves que te llega un mensaje de Fer en medio de un día ocupado, ¿lo abres de inmediato o te haces el interesante?",
+                extra: "La verdad Johel.", offlineProof: "💬 ¿De inmediato o tardas?"
+            },
 
             // NIVEL 3: CANDELA PURA / SIN FILTRO (Celos reales, miradas, confesiones intensas)
             {
@@ -1545,10 +1710,100 @@
                 id: "t83", level: 3, for: "Johel", category: "Sin Filtro Final 🔥",
                 text: "¿Qué es lo que más te pone nervioso cuando estás a punto de ver o hablar con Fer?",
                 extra: "Confesión definitiva de Johel.", offlineProof: "💬 Tu debilidad"
+            },
+            {
+                id: "t117", level: 3, for: "Ambos", category: "Tensión Innegable ⚡",
+                text: "¿Ha habido algún momento específico donde la tensión entre ustedes haya estado tan fuerte que se sentía en el aire?",
+                extra: "Describe el momento exacto.", offlineProof: "💬 El momento de tensión"
+            },
+            {
+                id: "t118", level: 3, for: "Fer", category: "La Debilidad Física 🔥",
+                text: "¿Cuál es la parte física de Johel que más atractiva te parece? (Ojos, brazos, sonrisa, espalda, manos...)?",
+                extra: "Elige la número 1 sin dudar.", offlineProof: "💬 Tu debilidad física"
+            },
+            {
+                id: "t119", level: 3, for: "Johel", category: "El Atractivo Máximo 💣",
+                text: "¿Qué outfit o estilo que le has visto a Fer te ha parecido el más atractivo de todos?",
+                extra: "Describe cómo iba vestida.", offlineProof: "💬 El outfit ganador"
+            },
+            {
+                id: "t120", level: 3, for: "Ambos", category: "El Pensamiento Inconfesable 😈",
+                text: "¿Alguna vez has tenido un pensamiento atrevido o curioso sobre el otro que jamás le has dicho?",
+                extra: "Di al menos de qué trataba.", offlineProof: "💬 De qué iba el pensamiento"
+            },
+            {
+                id: "t121", level: 3, for: "Fer", category: "El Toque Atrevido 🫦",
+                text: "Si estuvieran a solas en un cuarto con las luces tenues y música suave... ¿qué sería lo primero que harías?",
+                extra: "Sinceridad total.", offlineProof: "💬 Lo que harías"
+            },
+            {
+                id: "t122", level: 3, for: "Johel", category: "La Mirada Provocadora 😏",
+                text: "¿Qué harías si Fer te mira a los labios fijamente y luego te sonríe sin decir nada?",
+                extra: "¿Te congelas o qué haces?", offlineProof: "💬 Tu reacción inmediata"
+            },
+            {
+                id: "t123", level: 3, for: "Ambos", category: "El Abrazo Prolongado 🫂",
+                text: "¿Qué pasa por tu mente cuando se dan un abrazo apretado de más de 10 segundos?",
+                extra: "Siente o confiesa.", offlineProof: "💬 Lo que sientes"
+            },
+            {
+                id: "t124", level: 3, for: "Fer", category: "La Voz que Derrite 🎙️",
+                text: "¿Qué tono de voz de Johel te gusta más: cuando habla serio, cuando susurra o cuando bromea?",
+                extra: "Dilo claro.", offlineProof: "💬 Tu tono de voz favorito"
+            },
+            {
+                id: "t125", level: 3, for: "Johel", category: "La Tentación Inevitable 🍫",
+                text: "Si te dieran 30 segundos para hacer lo que quieras con Fer sin consecuencias... ¿qué harías?",
+                extra: "Johel sin censura.", offlineProof: "💬 Tu respuesta directa"
+            },
+            {
+                id: "t126", level: 3, for: "Ambos", category: "Celos Ocultos 🔍",
+                text: "¿Alguna vez te has puesto celoso/a por alguien que le comentó una foto o le habló al otro y no dijiste nada?",
+                extra: "Adelante, cuéntalo.", offlineProof: "💬 La anécdota de celos"
+            },
+            {
+                id: "t127", level: 3, for: "Fer", category: "El Lado Rebelde 🐆",
+                text: "¿Qué tan atrevida te consideras en privado comparado con la imagen inocente que muestras afuera?",
+                extra: "Del 1 al 10.", offlineProof: "💬 Tu número de atrevimiento"
+            },
+            {
+                id: "t128", level: 3, for: "Johel", category: "La Mordida de Labio 👄",
+                text: "¿Qué tan débil te pone cuando una mujer (especialmente Fer) te mira y se muerde el labio?",
+                extra: "Confiesa tu debilidad.", offlineProof: "💬 Qué tanto te afecta"
+            },
+            {
+                id: "t129", level: 3, for: "Ambos", category: "El Beso Imaginado 💋",
+                text: "Si tuvieran que darse un beso ahora mismo, ¿cómo te gustaría que fuera: rápido e inesperado, tierno y lento, o apasionado?",
+                extra: "Elige uno solo.", offlineProof: "💬 Tu tipo de beso ideal"
+            },
+            {
+                id: "t130", level: 3, for: "Fer", category: "El Secreto Mejor Guardado 🗝️",
+                text: "¿Cuál es esa pregunta que siempre has querido hacerle a Johel sobre lo que siente o piensa pero nunca te has atrevido?",
+                extra: "Hazla ahorita mismo.", offlineProof: "💬 La pregunta directa"
+            },
+            {
+                id: "t131", level: 3, for: "Johel", category: "El Juego Mental ♟️",
+                text: "¿Alguna vez has fingido desinterés en una conversación con Fer a propósito solo para ver cómo reaccionaba?",
+                extra: "Sé sincero Johel.", offlineProof: "💬 ¿Sí o no y por qué?"
+            },
+            {
+                id: "t132", level: 3, for: "Ambos", category: "Quedarse a Solas 🚪",
+                text: "Si se quedaran encerrados en un elevador por 2 horas completamente a oscuras... ¿qué pasaría?",
+                extra: "Sean honestos.", offlineProof: "💬 Qué pasaría en esas 2 horas"
+            },
+            {
+                id: "t133", level: 3, for: "Fer", category: "El Cumplido Candente 🔥",
+                text: "¿Qué cumplido te ha dicho Johel que te hizo poner roja como tomate?",
+                extra: "Aunque te dé pena recordarlo.", offlineProof: "💬 El cumplido"
+            },
+            {
+                id: "t134", level: 3, for: "Johel", category: "La Conexión Inevitable 🌌",
+                text: "¿Hay algo en Fer que sientes que te hipnotiza o que no puedes dejar de mirar?",
+                extra: "Sin filtros.", offlineProof: "💬 Lo que te hipnotiza"
             }
         ];
 
-        /* ==================== BANCO MASIVO CLASIFICADO POR NIVEL (61 RETOS) ==================== */
+        /* ==================== BANCO MASIVO CLASIFICADO POR NIVEL (102 RETOS) ==================== */
         const allDares = [
             // NIVEL 1: CALENTAMIENTO (Risas, fotos de caras, poemas, audios tontos)
             {
@@ -1650,6 +1905,66 @@
                 id: "d20", level: 1, category: "La Canción Rara 📻",
                 text: "Busca la canción más rara o graciosa en Spotify o YouTube y mándasela diciendo 'esta es nuestra canción'.",
                 extra: "A ver qué responde.", offlineProof: "🎵 Link de la canción", isOfflineReady: true
+            },
+            {
+                id: "d62", level: 1, category: "Filtro Horrible 🤡",
+                text: "Tómate una selfie con el filtro más feo o ridículo que tengas en Instagram/Snapchat y mándala ya.",
+                extra: "Prohibido filtro bonito.", offlineProof: "📸 Foto con filtro ridículo", isOfflineReady: true
+            },
+            {
+                id: "d63", level: 1, category: "El Susurro Misterioso 👻",
+                text: "Manda una nota de voz de 5 segundos susurrando una frase sin sentido como si fuera el secreto de Estado más oscuro.",
+                extra: "Muy dramático.", offlineProof: "🎙️ Audio susurrado", isOfflineReady: true
+            },
+            {
+                id: "d64", level: 1, category: "La Foto Papada 🤳",
+                text: "Tómate una foto desde el ángulo más bajo posible sacando la máxima papada que puedas y mándala.",
+                extra: "Sin pena.", offlineProof: "📸 Foto papada", isOfflineReady: true
+            },
+            {
+                id: "d65", level: 1, category: "Imitación de Telenovela 🎭",
+                text: "Manda un audio llorando dramáticamente diciendo: '¡¿Por qué me haces esto Johel?! ¡Yo confiaba en ti!'.",
+                extra: "Ganas de premio Oscar.", offlineProof: "🎙️ Audio telenovela", isOfflineReady: true
+            },
+            {
+                id: "d66", level: 1, category: "Voz de Robot 🤖",
+                text: "Manda un audio de 10 segundos hablando exactamente como un robot con batería baja saludando a Fer.",
+                extra: "Efecto robot.", offlineProof: "🎙️ Audio voz de robot", isOfflineReady: true
+            },
+            {
+                id: "d67", level: 1, category: "Duelo de Refranes 📜",
+                text: "Invéntate un refrán que suene muy sabio pero que sea una total estupidez y dilo con tono de abuelito sabio.",
+                extra: "Por audio.", offlineProof: "🎙️ Audio refrán sabio", isOfflineReady: true
+            },
+            {
+                id: "d68", level: 1, category: "El Peinado Loco 💇",
+                text: "Despéinate todo el cabello hacia arriba o hacia la cara, tómate una foto y mándala al chat.",
+                extra: "Estilo león.", offlineProof: "📸 Foto despeinada", isOfflineReady: true
+            },
+            {
+                id: "d69", level: 1, category: "Risa de Villano 😈",
+                text: "Manda una nota de voz con tu risa más malvada y diabólica de villano de caricatura.",
+                extra: "Al menos 7 segundos de risa.", offlineProof: "🎙️ Audio risa de villano", isOfflineReady: true
+            },
+            {
+                id: "d70", level: 1, category: "Foto de Ojos Desorbitados 👁️",
+                text: "Manda una selfie abriendo los ojos lo más grande que puedas como si hubieras visto un fantasma.",
+                extra: "Expresión exagerada.", offlineProof: "📸 Selfie ojos abiertos", isOfflineReady: true
+            },
+            {
+                id: "d71", level: 1, category: "Voz de Bebé Enojada 👶",
+                text: "Manda un audio con voz de niña chiquita reclamando por qué no te han comprado un helado de chocolate.",
+                extra: "Haciendo puchero en audio.", offlineProof: "🎙️ Audio bebé consentida", isOfflineReady: true
+            },
+            {
+                id: "d72", level: 1, category: "Declaración a un Objeto 🥄",
+                text: "Toma un objeto que tengas cerca (un vaso, cargador, almohada) y declárale tu amor eterno en un audio de 10 segundos.",
+                extra: "Con pasión.", offlineProof: "🎙️ Audio romántico al objeto", isOfflineReady: true
+            },
+            {
+                id: "d73", level: 1, category: "Adivina el Sonido 🔊",
+                text: "Manda un audio haciendo un sonido misterioso con algo de tu cuarto y el otro tiene 2 intentos para adivinar qué es.",
+                extra: "Si no adivina, cumple reto.", offlineProof: "🎙️ Audio del sonido", isOfflineReady: true
             },
 
             // NIVEL 2: COMPLICIDAD (Apodos, audios actuados, estados, llamadas, imitaciones)
@@ -1778,6 +2093,81 @@
                 text: "Manda un video corto diciéndole a tu teléfono por qué lo quieres tanto mirando fijamente a la cámara.",
                 extra: "Agradece que no se traba.", offlineProof: "📸 Video al celular", isOfflineReady: true
             },
+            {
+                id: "d74", level: 2, category: "Mirada Asesina vs Seductora 😏",
+                text: "Manda dos fotos seguidas: una con tu cara más enojada o amenazante y otra con tu mejor cara coqueta.",
+                extra: "A ver cuál te sale más natural.", offlineProof: "📸 2 fotos de expresiones", isOfflineReady: true
+            },
+            {
+                id: "d75", level: 2, category: "Audio de Coqueteo Fingido 💅",
+                text: "Manda una nota de voz diciendo una frase coqueta pero con tono exagerado de diva inalcanzable.",
+                extra: "Hazte la diva Ferchis.", offlineProof: "🎙️ Audio de diva", isOfflineReady: true
+            },
+            {
+                id: "d76", level: 2, category: "Apodo en WhatsApp por 24 Horas 🏷️",
+                text: "Johel tiene que cambiar el apodo de Fer en WhatsApp a 'Mi Jefa Suprema 👑' y mandar captura.",
+                extra: "Debe quedarse por 24 horas.", offlineProof: "📸 Captura del apodo", isOfflineReady: true
+            },
+            {
+                id: "d77", level: 2, category: "Apodo en WhatsApp por 24 Horas 🏷️",
+                text: "Fer tiene que cambiar el apodo de Johel en WhatsApp a 'El Más Pesado Pero Lindo 🫠' y mandar captura.",
+                extra: "Captura obligatoria al chat.", offlineProof: "📸 Captura del apodo", isOfflineReady: true
+            },
+            {
+                id: "d78", level: 2, category: "Cumplido al Oído 🎧",
+                text: "Manda un audio susurrando un cumplido sincero para el otro pero que no dure más de 6 segundos.",
+                extra: "Debe sonar cerquita del micrófono.", offlineProof: "🎙️ Audio susurrado íntimo", isOfflineReady: true
+            },
+            {
+                id: "d79", level: 2, category: "Dedicatoria de Canción 🎵",
+                text: "Manda un pedazo de canción que sientas que describe el pique o la química entre ustedes dos.",
+                extra: "Link o audio cantando.", offlineProof: "🎵 Canción dedicada", isOfflineReady: true
+            },
+            {
+                id: "d80", level: 2, category: "El Top 3 de Cualidades 🌟",
+                text: "Dile al otro por nota de voz 3 cosas que genuinamente te gustan de su forma de ser (sin meter burlas por 30s).",
+                extra: "Momento sincero.", offlineProof: "🎙️ Audio 3 cualidades", isOfflineReady: true
+            },
+            {
+                id: "d81", level: 2, category: "El Poema Improvisado 🖋️",
+                text: "Improvisa una rima graciosa de 4 versos en audio mencionando algo chistoso entre los dos.",
+                extra: "Tiene que rimar.", offlineProof: "🎙️ Audio rima improvisada", isOfflineReady: true
+            },
+            {
+                id: "d82", level: 2, category: "Captura de Fondo de Pantalla 📱",
+                text: "Manda captura de pantalla de tu fondo de bloqueo actual sin cambiarlo ni esconder nada.",
+                extra: "Sin filtros.", offlineProof: "📸 Captura fondo de bloqueo", isOfflineReady: true
+            },
+            {
+                id: "d83", level: 2, category: "Ponerse en Pausa ⏸️",
+                text: "Durante los próximos 3 turnos, tienes que responder a todo lo que diga el otro diciendo primero 'Sí, su alteza'.",
+                extra: "Si se te olvida, cumples castigo.", offlineProof: "💬 Decir 'Sí su alteza'", isOfflineReady: true
+            },
+            {
+                id: "d84", level: 2, category: "Obediencia Temporal 🫡",
+                text: "Durante las próximas 2 preguntas tienes prohibido llevarle la contraria al otro en absolutamente nada.",
+                extra: "Acepta todo con sonrisa.", offlineProof: "💬 Obediencia total", isOfflineReady: true
+            },
+            {
+                id: "d85", level: 2, category: "Foto de Ojos en Primer Plano 👁️✨",
+                text: "Tómate una foto muy de cerca de tus ojos con buena luz y compártela al chat.",
+                extra: "Para ver el brillo.", offlineProof: "📸 Foto primer plano ojos", isOfflineReady: true
+            },
+            {
+                id: "d86", level: 2, category: "Audio de Berrinche Tierno 🥺",
+                text: "Manda un audio quejándote de algo tonto pero haciéndote el/la consentido/a tierno/a.",
+                extra: "Haciendo puchero con voz.", offlineProof: "🎙️ Audio berrinche tierno", isOfflineReady: true
+            },
+            {
+                id: "d87", level: 2, category: "Voz Seductora de Locutor 📻",
+                text: "Manda un audio diciendo 'Buenas noches, espero que hoy no sueñes conmigo... o tal vez sí' con voz de locutor de medianoche.",
+                extra: "Tono bajo y sensual.", offlineProof: "🎙️ Audio voz de locutor", isOfflineReady: true
+            },
+            {
+                id: "d88", level: 2, category: "Sticker de Pareja 🧸",
+                text: "Elige el sticker de ositos o monitos más cursi que tengas en tus guardados y mándalo al chat.",
+                extra: "Sin decir nada más.", offlineProof: "🎭 Sticker cursi al chat", isOfflineReady: true
+            },
 
             // NIVEL 3: CANDELA PURA (Preguntas prohibidas, capturas comprometidas, obediencia, secretos)
             {
@@ -1859,6 +2249,76 @@
                 id: "d61", level: 3, category: "El Reto Libre 👑",
                 text: "El otro tiene el poder absoluto de ponerte CUALQUIER reto libre por el chat justo en este instante.",
                 extra: "Sin derecho a rechazar.", offlineProof: "💬 Reto libre", isOfflineReady: true
+            },
+            {
+                id: "d89", level: 3, category: "Mirada Fija Coqueta 🎥",
+                text: "Graba un video corto de 8-10 segundos en silencio mirando directo a la cámara con tu mirada más atrevida y al final una media sonrisa.",
+                extra: "Sin hablar, solo mirada.", offlineProof: "📹 Video mirada atrevida", isOfflineReady: true
+            },
+            {
+                id: "d90", level: 3, category: "Mordisco de Labio en Foto 🫦",
+                text: "Fer tiene que mandarle a Johel una foto mordiéndose ligeramente el labio con expresión pícara (o Johel a Fer).",
+                extra: "Solo para sus ojos.", offlineProof: "📸 Foto mordiendo el labio", isOfflineReady: true
+            },
+            {
+                id: "d91", level: 3, category: "Audio en Tono Grave y Cercano 🔥",
+                text: "Graba un audio susurrando muy cerca del micrófono algo atrevido que te gustaría decirle al oído a la otra persona.",
+                extra: "Tono grave y pausado.", offlineProof: "🎙️ Audio susurrado al oído", isOfflineReady: true
+            },
+            {
+                id: "d92", level: 3, category: "Foto Estética de Perfil 📸✨",
+                text: "Tómate una foto artística de tu cuello o perfil con luz tenue y compártela al chat.",
+                extra: "Modo estético y misterioso.", offlineProof: "📸 Foto estética de perfil", isOfflineReady: true
+            },
+            {
+                id: "d93", level: 3, category: "Pregunta Sin Filtro ni Escape 💣",
+                text: "Hazle una pregunta atrevida al otro que nunca le harías en público, y tiene 20 segundos para responder con un audio.",
+                extra: "Sin censura.", offlineProof: "💬 Tu pregunta sin filtro", isOfflineReady: true
+            },
+            {
+                id: "d94", level: 3, category: "La Confesión Más Caliente 🌡️",
+                text: "Manda un audio diciendo exactamente qué pensamiento cruzó por tu cabeza la última vez que viste una foto del otro que te encantó.",
+                extra: "Sinceridad total.", offlineProof: "🎙️ Audio confesión sincera", isOfflineReady: true
+            },
+            {
+                id: "d95", level: 3, category: "Video con Guiño de Ojo 😜✨",
+                text: "Manda un video de 3 segundos guiñándole el ojo a la cámara con cara de complicidad y sonrisa pícara.",
+                extra: "Un guiño bien hecho.", offlineProof: "📹 Video con guiño", isOfflineReady: true
+            },
+            {
+                id: "d96", level: 3, category: "Audio Rompe Hielos 🔥",
+                text: "Manda un audio diciendo con voz pausada y segura: 'Admítelo... no puedes dejar de pensar en mí'.",
+                extra: "Tono de seguridad total.", offlineProof: "🎙️ Audio de seguridad", isOfflineReady: true
+            },
+            {
+                id: "d97", level: 3, category: "La Promesa de la Próxima Vez 🤝",
+                text: "Dile al otro en un audio una cosa especial o atrevida que prometes hacer la próxima vez que se vean solos.",
+                extra: "Queda grabado como promesa.", offlineProof: "🎙️ Audio de la promesa", isOfflineReady: true
+            },
+            {
+                id: "d98", level: 3, category: "El Beso a la Cámara 💋",
+                text: "Manda un video de 4 segundos mandando un beso a la cámara con sonido.",
+                extra: "Sin cortar.", offlineProof: "📹 Video beso a la cámara", isOfflineReady: true
+            },
+            {
+                id: "d99", level: 3, category: "La Orden Secreta 👑",
+                text: "Tienes el poder de darle una orden al otro que deba cumplir en los próximos 5 minutos (ej: tomarse una foto en una pose específica o mandar audio).",
+                extra: "Aprovéchalo bien.", offlineProof: "💬 Tu orden directa", isOfflineReady: true
+            },
+            {
+                id: "d100", level: 3, category: "Foto con Pose de Modelo 📸",
+                text: "Tómate una foto casual pero que te haga ver lo más atractivo/a posible y mándala sin excusas.",
+                extra: "Saca tu mejor ángulo.", offlineProof: "📸 Foto modo galán/modelo", isOfflineReady: true
+            },
+            {
+                id: "d101", level: 3, category: "El Secreto Prohibido 🔒",
+                text: "Revela en un audio algo que hiciste en el pasado que te daría pena o vergüenza que tu familia supiera.",
+                extra: "Pacto de silencio entre ustedes.", offlineProof: "🎙️ Audio secreto prohibido", isOfflineReady: true
+            },
+            {
+                id: "d102", level: 3, category: "Pregunta Inversa Obligatoria 🔄",
+                text: "El otro tiene derecho a hacerte CUALQUIER pregunta íntima o incómoda y tienes que contestarla con la mano en el pecho sin mentir.",
+                extra: "Prohibido evadir.", offlineProof: "💬 Respuesta sincera", isOfflineReady: true
             }
         ];
 
