@@ -11,7 +11,7 @@
     <style>
         :root {
             --bg-deep: #090712;
-            --card-glass: rgba(26, 21, 41, 0.85);
+            --card-glass: rgba(26, 21, 41, 0.88);
             --truth-cyan: #38bdf8;
             --truth-glow: rgba(56, 189, 248, 0.35);
             --dare-pink: #f43f5e;
@@ -19,6 +19,9 @@
             --offline-purple: #c084fc;
             --gold-accent: #facc15;
             --whatsapp-green: #22c55e;
+            --lvl-1-color: #38bdf8;
+            --lvl-2-color: #f59e0b;
+            --lvl-3-color: #ef4444;
             --fer-gradient: linear-gradient(135deg, #f472b6, #db2777);
             --johel-gradient: linear-gradient(135deg, #fbbf24, #d97706);
             --text-main: #f8fafc;
@@ -47,7 +50,7 @@
             position: relative;
         }
 
-        /* Esferas de luz flotantes aesthetic en el fondo */
+        /* Esferas de luz aesthetic de fondo */
         .ambient-orb {
             position: fixed;
             border-radius: 50%;
@@ -90,7 +93,7 @@
             100% { transform: translateY(30px) scale(1.12); }
         }
 
-        /* Contenedor Principal Glassmorphism */
+        /* Contenedor Principal */
         .app-wrapper {
             position: relative;
             z-index: 10;
@@ -105,12 +108,11 @@
             border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 32px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(124, 58, 237, 0.12);
-            padding: 24px 20px;
+            padding: 22px 18px;
             text-align: center;
             position: relative;
         }
 
-        /* Badge Superior */
         .top-badge {
             display: inline-flex;
             align-items: center;
@@ -119,20 +121,20 @@
             border: 1px solid rgba(250, 204, 21, 0.35);
             color: var(--gold-accent);
             border-radius: 50px;
-            padding: 5px 14px;
-            font-size: 0.75rem;
+            padding: 4px 14px;
+            font-size: 0.74rem;
             font-weight: 800;
             letter-spacing: 0.6px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         h1.game-title {
-            font-size: 1.85rem;
+            font-size: 1.8rem;
             font-weight: 900;
             letter-spacing: -0.5px;
             line-height: 1.15;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             background: linear-gradient(135deg, #fff 40%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -140,9 +142,110 @@
 
         .game-subtitle {
             color: var(--text-sub);
-            font-size: 0.88rem;
-            margin-bottom: 16px;
+            font-size: 0.86rem;
+            margin-bottom: 12px;
             font-weight: 500;
+        }
+
+        /* ==================== MEDIDOR DE INTENSIDAD PROGRESIVO ==================== */
+        .level-meter-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .level-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .level-badge-tag {
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-transform: uppercase;
+        }
+
+        .level-badge-tag.lvl-1 { color: var(--lvl-1-color); }
+        .level-badge-tag.lvl-2 { color: var(--lvl-2-color); }
+        .level-badge-tag.lvl-3 { color: var(--lvl-3-color); }
+
+        .round-counter-pill {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .level-bar-track {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .level-bar-fill {
+            height: 100%;
+            width: 33%;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+        }
+
+        .level-bar-fill.lvl-1 {
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            box-shadow: 0 0 10px var(--lvl-1-color);
+        }
+
+        .level-bar-fill.lvl-2 {
+            background: linear-gradient(90deg, #d97706, #f59e0b);
+            box-shadow: 0 0 10px var(--lvl-2-color);
+        }
+
+        .level-bar-fill.lvl-3 {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            box-shadow: 0 0 12px var(--lvl-3-color);
+        }
+
+        .level-selector-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .level-chip-btn {
+            flex: 1;
+            padding: 5px 6px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-sub);
+            font-size: 0.7rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .level-chip-btn.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .level-chip-btn.auto-active {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            background: rgba(250, 204, 21, 0.12);
         }
 
         /* ==================== SWITCH DE MODO (LLAMADA VS OFFLINE) ==================== */
@@ -150,27 +253,27 @@
             display: flex;
             background: rgba(0, 0, 0, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 4px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             gap: 6px;
         }
 
         .segment-btn {
             flex: 1;
-            padding: 9px 10px;
-            border-radius: 14px;
+            padding: 8px 10px;
+            border-radius: 12px;
             border: none;
             background: transparent;
             color: var(--text-sub);
             font-weight: 800;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .segment-btn.active {
@@ -192,40 +295,39 @@
             color: #f3e8ff;
             border-radius: 14px;
             padding: 8px 12px;
-            font-size: 0.78rem;
-            margin-bottom: 14px;
+            font-size: 0.76rem;
+            margin-bottom: 12px;
             display: none;
-            line-height: 1.4;
-            animation: fadeIn 0.3s ease;
+            line-height: 1.35;
         }
 
-        /* ==================== SELECTOR DE TURNOS AESTHETIC ==================== */
+        /* ==================== SELECTOR DE TURNOS ==================== */
         .turn-box-aesthetic {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 22px;
-            padding: 12px;
-            margin-bottom: 16px;
+            border-radius: 20px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
         }
 
         .turn-caption {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: var(--text-sub);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .turn-pills-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .turn-pill-btn {
             flex: 1;
-            padding: 11px 12px;
-            border-radius: 16px;
+            padding: 10px 12px;
+            border-radius: 14px;
             border: 1.5px solid rgba(255, 255, 255, 0.08);
             background: rgba(255, 255, 255, 0.02);
             color: var(--text-sub);
@@ -235,12 +337,8 @@
             justify-content: center;
             gap: 8px;
             font-weight: 800;
-            font-size: 0.95rem;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .turn-pill-btn:active {
-            transform: scale(0.97);
+            font-size: 0.92rem;
+            transition: all 0.22s ease;
         }
 
         .turn-pill-btn.active-fer {
@@ -263,28 +361,22 @@
         .choices-row {
             display: flex;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .btn-game-choice {
             flex: 1;
-            padding: 16px 12px;
-            border-radius: 20px;
+            padding: 15px 12px;
+            border-radius: 18px;
             border: 1.5px solid transparent;
             cursor: pointer;
             font-weight: 900;
-            font-size: 1.18rem;
+            font-size: 1.15rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 3px;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-game-choice:active {
-            transform: scale(0.96);
+            transition: all 0.22s ease;
         }
 
         .btn-game-choice.truth-style {
@@ -296,7 +388,7 @@
         .btn-game-choice.truth-style:hover, .btn-game-choice.truth-style.active {
             background: linear-gradient(135deg, #0284c7, #38bdf8);
             color: #041017;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 10px 30px var(--truth-glow);
             border-color: transparent;
         }
@@ -310,7 +402,7 @@
         .btn-game-choice.dare-style:hover, .btn-game-choice.dare-style.active {
             background: linear-gradient(135deg, #e11d48, #f43f5e);
             color: #fff;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 10px 30px var(--dare-glow);
             border-color: transparent;
         }
@@ -319,16 +411,15 @@
             font-size: 0.72rem;
             font-weight: 700;
             opacity: 0.85;
-            letter-spacing: 0.4px;
         }
 
-        /* Contadores en Píldoras */
+        /* Contadores con Persistencia */
         .stats-counter-row {
             display: flex;
             justify-content: space-between;
-            font-size: 0.76rem;
+            font-size: 0.74rem;
             color: var(--text-sub);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             padding: 0 4px;
         }
 
@@ -336,21 +427,21 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
-            padding: 3px 10px;
+            padding: 3px 9px;
         }
 
         /* ==================== TARJETA DE CARTA 3D / AESTHETIC ==================== */
         .card-stage-container {
             perspective: 1000px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .card-inner-box {
             background: linear-gradient(145deg, rgba(35, 29, 54, 0.95), rgba(20, 16, 32, 0.95));
             border: 1.5px solid rgba(255, 255, 255, 0.12);
             border-radius: 26px;
-            padding: 24px 18px;
-            min-height: 220px;
+            padding: 22px 16px;
+            min-height: 215px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -363,7 +454,7 @@
         .turn-flag {
             padding: 4px 12px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 800;
             margin-bottom: 8px;
             display: inline-flex;
@@ -383,20 +474,29 @@
             border: 1px solid rgba(245, 158, 11, 0.5);
         }
 
+        .card-level-tag {
+            font-size: 0.7rem;
+            font-weight: 800;
+            border-radius: 10px;
+            padding: 2px 8px;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+
         .proof-tag-pill {
             background: rgba(168, 85, 247, 0.2);
             color: #e9d5ff;
             border: 1px solid rgba(168, 85, 247, 0.45);
             padding: 3px 11px;
             border-radius: 20px;
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             font-weight: 800;
             margin-bottom: 8px;
             display: none;
         }
 
         .category-label {
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -405,14 +505,14 @@
         }
 
         .prompt-text {
-            font-size: 1.18rem;
+            font-size: 1.16rem;
             line-height: 1.45;
             font-weight: 700;
             color: #fff;
         }
 
         .extra-hint {
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             color: #cbd5e1;
             margin-top: 10px;
             font-style: italic;
@@ -431,8 +531,8 @@
             border: none;
             color: #111;
             font-weight: 900;
-            font-size: 1rem;
-            padding: 15px 28px;
+            font-size: 0.98rem;
+            padding: 14px 28px;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(244, 63, 94, 0.4);
@@ -441,22 +541,16 @@
             display: none;
         }
 
-        .btn-next-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
-        }
-
         .btn-next-action:active {
             transform: scale(0.98);
         }
 
-        /* Botón WhatsApp Aesthetic */
         .btn-whatsapp-action {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(21, 128, 61, 0.28));
             border: 1.5px solid var(--whatsapp-green);
             color: #86efac;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             padding: 13px 22px;
             border-radius: 50px;
             cursor: pointer;
@@ -475,31 +569,51 @@
             box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
         }
 
-        /* Marcador de Risas y Puntos */
+        /* Marcador de Risas y Memoria */
         .game-footer-stats {
             display: flex;
             justify-content: space-around;
-            margin-top: 16px;
-            padding-top: 14px;
+            margin-top: 14px;
+            padding-top: 12px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-sub);
         }
 
         .footer-stat strong {
             color: #fff;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
+        }
+
+        .memory-info-pill {
+            margin-top: 8px;
+            font-size: 0.74rem;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-reset-memory {
+            background: transparent;
+            border: none;
+            color: #f87171;
+            font-size: 0.74rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 6px;
         }
 
         /* Botón de Candado PIN */
         .btn-pin-toggle {
-            margin-top: 14px;
+            margin-top: 12px;
             background: transparent;
             border: 1px dashed rgba(250, 204, 21, 0.4);
             color: var(--gold-accent);
-            padding: 7px 16px;
+            padding: 6px 14px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
@@ -512,7 +626,7 @@
             background: rgba(250, 204, 21, 0.12);
         }
 
-        /* ==================== MODAL CON PIN AESTHETIC ==================== */
+        /* ==================== MODAL PIN AESTHETIC ==================== */
         .modal-screen {
             position: fixed;
             inset: 0;
@@ -685,11 +799,6 @@
             margin-top: 4px;
             font-style: italic;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
@@ -704,6 +813,23 @@
             <span class="top-badge">✨ Edición Especial 🤌🏿</span>
             <h1 class="game-title">Verdad o Reto</h1>
             <p class="game-subtitle">Entre Fer y Johel 🤌🏿</p>
+
+            <!-- ==================== MEDIDOR PROGRESIVO DE INTENSIDAD ==================== -->
+            <div class="level-meter-box">
+                <div class="level-meta-row">
+                    <span class="level-badge-tag lvl-1" id="currentLevelTag">🧊 NIVEL 1: CALENTAMIENTO</span>
+                    <span class="round-counter-pill" id="roundCounterPill">Carta #1</span>
+                </div>
+                <div class="level-bar-track">
+                    <div class="level-bar-fill lvl-1" id="levelProgressFill"></div>
+                </div>
+                <div class="level-selector-row">
+                    <button class="level-chip-btn active" id="chipLvl1" onclick="setUserLevel(1)">🧊 Chill (1)</button>
+                    <button class="level-chip-btn" id="chipLvl2" onclick="setUserLevel(2)">🌶️ Pique (2)</button>
+                    <button class="level-chip-btn" id="chipLvl3" onclick="setUserLevel(3)">🔥 Candela (3)</button>
+                    <button class="level-chip-btn auto-active" id="chipAuto" onclick="toggleAutoProgression()">⚡ Auto</button>
+                </div>
+            </div>
 
             <!-- ==================== SELECTOR DE MODO ==================== -->
             <div class="mode-segmented">
@@ -746,8 +872,8 @@
 
             <!-- Contador de cartas en mazo -->
             <div class="stats-counter-row">
-                <div class="stat-pill" id="truthCountPill">Verdades: <strong>83</strong></div>
-                <div class="stat-pill" id="dareCountPill">Retos: <strong>61</strong></div>
+                <div class="stat-pill" id="truthCountPill">Verdades disponibles: <strong>83</strong></div>
+                <div class="stat-pill" id="dareCountPill">Retos disponibles: <strong>61</strong></div>
             </div>
 
             <!-- ==================== CARTA INTERACTIVA AESTHETIC ==================== -->
@@ -756,6 +882,7 @@
                     <div class="turn-flag fer" id="cardTurnBanner">
                         💅 Turno de FER
                     </div>
+                    <div class="card-level-tag" id="cardLevelTag" style="display: none;"></div>
                     <div class="proof-tag-pill" id="offlineProofPill">
                         📸 Prueba Requerida
                     </div>
@@ -779,7 +906,7 @@
                 </button>
             </div>
 
-            <!-- Marcador de Risas -->
+            <!-- Marcador de Risas y Memoria entre Sesiones -->
             <div class="game-footer-stats">
                 <div class="footer-stat">
                     Cumplidos: <strong id="doneCount">0</strong>
@@ -790,6 +917,11 @@
                 <div class="footer-stat" style="cursor: pointer; color: var(--gold-accent);" onclick="chickenOut()">
                     ¿Se rajó? 🐔
                 </div>
+            </div>
+
+            <div class="memory-info-pill">
+                <span>💾 Memoria activa entre sesiones</span>
+                <button class="btn-reset-memory" onclick="resetMemoryHistory()">Restablecer historial</button>
             </div>
 
             <!-- Botón PIN Secreto -->
@@ -845,6 +977,106 @@
         let isPinUnlocked = false;
         const SECRET_PIN = "4390";
 
+        /* ==================== SISTEMA DE NIVELES PROGRESIVOS ==================== */
+        let currentLevel = 1;
+        let isAutoProgress = true;
+        let roundNumber = 1;
+
+        function updateLevelUI() {
+            const tag = document.getElementById('currentLevelTag');
+            const fill = document.getElementById('levelProgressFill');
+            const roundPill = document.getElementById('roundCounterPill');
+
+            roundPill.innerText = `Carta #${roundNumber}`;
+
+            if (currentLevel === 1) {
+                tag.className = 'level-badge-tag lvl-1';
+                tag.innerText = '🧊 NIVEL 1: CALENTAMIENTO';
+                fill.className = 'level-bar-fill lvl-1';
+                fill.style.width = '33%';
+            } else if (currentLevel === 2) {
+                tag.className = 'level-badge-tag lvl-2';
+                tag.innerText = '🌶️ NIVEL 2: COMPLICIDAD';
+                fill.className = 'level-bar-fill lvl-2';
+                fill.style.width = '66%';
+            } else {
+                tag.className = 'level-badge-tag lvl-3';
+                tag.innerText = '🔥 NIVEL 3: CANDELA PURA';
+                fill.className = 'level-bar-fill lvl-3';
+                fill.style.width = '100%';
+            }
+
+            document.getElementById('chipLvl1').classList.toggle('active', currentLevel === 1 && !isAutoProgress);
+            document.getElementById('chipLvl2').classList.toggle('active', currentLevel === 2 && !isAutoProgress);
+            document.getElementById('chipLvl3').classList.toggle('active', currentLevel === 3 && !isAutoProgress);
+            document.getElementById('chipAuto').classList.toggle('auto-active', isAutoProgress);
+        }
+
+        function setUserLevel(lvl) {
+            isAutoProgress = false;
+            currentLevel = lvl;
+            updateLevelUI();
+            resetDecks();
+        }
+
+        function toggleAutoProgression() {
+            isAutoProgress = !isAutoProgress;
+            if (isAutoProgress) {
+                calcAutoLevel();
+            }
+            updateLevelUI();
+            resetDecks();
+        }
+
+        function calcAutoLevel() {
+            if (!isAutoProgress) return;
+            // Rondas 1-5: Nivel 1. Rondas 6-12: Nivel 2. Rondas 13+: Nivel 3.
+            if (roundNumber <= 5) {
+                currentLevel = 1;
+            } else if (roundNumber <= 12) {
+                currentLevel = 2;
+            } else {
+                currentLevel = 3;
+            }
+            updateLevelUI();
+        }
+
+        /* ==================== MEMORIA ENTRE SESIONES (LOCALSTORAGE) ==================== */
+        const STORAGE_KEY_TRUTHS = 'fer_johel_played_truths_v2';
+        const STORAGE_KEY_DARES = 'fer_johel_played_dares_v2';
+
+        function getPlayedSet(key) {
+            try {
+                const stored = localStorage.getItem(key);
+                return stored ? new Set(JSON.parse(stored)) : new Set();
+            } catch (e) {
+                return new Set();
+            }
+        }
+
+        function savePlayedId(key, id) {
+            try {
+                const set = getPlayedSet(key);
+                set.add(id);
+                localStorage.setItem(key, JSON.stringify(Array.from(set)));
+            } catch (e) {}
+        }
+
+        function resetMemoryHistory() {
+            if (confirm("¿Seguros que quieren reiniciar el historial de memoria para volver a jugar todas las 144 cartas desde cero?")) {
+                localStorage.removeItem(STORAGE_KEY_TRUTHS);
+                localStorage.removeItem(STORAGE_KEY_DARES);
+                roundNumber = 1;
+                done = 0;
+                chickened = 0;
+                document.getElementById('doneCount').innerText = '0';
+                document.getElementById('chickenedCount').innerText = '0';
+                calcAutoLevel();
+                resetDecks();
+                alert("✨ ¡Memoria reiniciada con éxito! Todas las cartas están disponibles de nuevo.");
+            }
+        }
+
         /* ==================== CONTROL DE MODO ==================== */
         function setGameMode(mode) {
             currentMode = mode;
@@ -892,1034 +1124,792 @@
             }
         }
 
-        /* ==================== BANCO MASIVO DE VERDADES (83) ==================== */
+        /* ==================== BANCO MASIVO CLASIFICADO POR NIVEL (83 VERDADES) ==================== */
         const allTruths = [
+            // NIVEL 1: CALENTAMIENTO (Risas, anécdotas, comida, mañas)
             {
-                for: "Fer",
-                category: "Sinceridad Total 🙈",
+                id: "t1", level: 1, for: "Fer", category: "Sinceridad Total 🙈",
                 text: "¿Qué fue lo primero que pensaste cuando Johel te empezó a hablar? Sinceridad sin filtro.",
-                extra: "(Prohibido decir 'me caías mal', di la verdad real 😉)",
-                offlineProof: "💬 Respuesta sincera en texto"
+                extra: "(Prohibido decir 'me caías mal', di la verdad real 😉)", offlineProof: "💬 Respuesta sincera en texto"
             },
             {
-                for: "Ambos",
-                category: "Complicidad 🤌🏿",
+                id: "t2", level: 1, for: "Ambos", category: "Complicidad 🤌🏿",
                 text: "Si tuvieras que describir lo que sientes cuando el otro te molesta con una sola palabra... ¿cuál sería?",
-                extra: "No vale pensarlo más de 5 segundos.",
-                offlineProof: "💬 1 sola palabra"
+                extra: "No vale pensarlo más de 5 segundos.", offlineProof: "💬 1 sola palabra"
             },
             {
-                for: "Fer",
-                category: "Pillada en la noche 📱",
-                text: "¿Alguna vez te has quedado mirando los mensajes de Johel tarde en la noche sonriendo sola?",
-                extra: "Johel ya lo sabe... solo admítelo Fer 😂",
-                offlineProof: "🎙️ Confesión por audio"
-            },
-            {
-                for: "Johel",
-                category: "Confesión ⚽",
-                text: "¿Qué es lo que más te desconcentra o te da risa de Fer cuando están hablando?",
-                extra: "Sin hacerse el duro, Johel.",
-                offlineProof: "💬 Texto detallado"
-            },
-            {
-                for: "Ambos",
-                category: "Química 🔥",
+                id: "t3", level: 1, for: "Ambos", category: "Química 🔥",
                 text: "¿Cuál es tu gesto o carota favorita del otro que no puedes evitar que te dé risa?",
-                extra: "Imítala en una foto o audio.",
-                offlineProof: "📸 Foto imitando el gesto"
+                extra: "Imítala en una foto o audio.", offlineProof: "📸 Foto imitando el gesto"
             },
             {
-                for: "Fer",
-                category: "Curiosidad o Celitos 👀",
-                text: "Del 1 al 10... ¿qué tan curiosa o pendiente te pones cuando no sabes qué está haciendo Johel?",
-                extra: "Sé honesta Fer 💅",
-                offlineProof: "💬 Número con justificación"
-            },
-            {
-                for: "Ambos",
-                category: "La Salida Ideal ☕",
-                text: "Si tuvieras que planear una salida entre Fer y Johel sin límite de nada... ¿cómo sería?",
-                extra: "Detalla hasta lo que van a comer.",
-                offlineProof: "🎙️ Audio explicando el plan"
-            },
-            {
-                for: "Fer",
-                category: "Mañas y Frases 🤌🏿",
+                id: "t4", level: 1, for: "Fer", category: "Mañas y Frases 🤌🏿",
                 text: "¿Cuál es la maña, frase o sticker de Johel que más se te ha pegado sin darte cuenta?",
-                extra: "Adelante, admítelo Fer 💅",
-                offlineProof: "🎭 Manda el sticker o la frase"
+                extra: "Adelante, admítelo Fer 💅", offlineProof: "🎭 Manda el sticker o la frase"
             },
             {
-                for: "Johel",
-                category: "Primeros Días 🕵️‍♂️",
+                id: "t5", level: 1, for: "Johel", category: "Primeros Días 🕵️‍♂️",
                 text: "¿Qué fue lo más curioso o divertido que pensó Johel de Fer cuando recién empezaron a hablar?",
-                extra: "Sinceridad total de Johel.",
-                offlineProof: "💬 Texto sincero"
+                extra: "Sinceridad total de Johel.", offlineProof: "💬 Texto sincero"
             },
             {
-                for: "Ambos",
-                category: "Conexión 💫",
+                id: "t6", level: 1, for: "Ambos", category: "Conexión 💫",
                 text: "¿Qué canción escucharías pensando en la otra persona?",
-                extra: "Manda el link de YouTube o Spotify.",
-                offlineProof: "🎵 Link de la canción"
+                extra: "Manda el link de YouTube o Spotify.", offlineProof: "🎵 Link de la canción"
             },
             {
-                for: "Fer",
-                category: "El Golpe Bajo 🥊",
-                text: "¿Qué hace Johel que de verdad te da rabia pero en el fondo te da ternura?",
-                extra: "Adelante, desahógate Fer.",
-                offlineProof: "🎙️ Audio de desahogo"
-            },
-            {
-                for: "Johel",
-                category: "Mente Inquieta 🧠",
-                text: "¿Cuántas veces al día se te cruza Fer por la cabeza sin darte cuenta?",
-                extra: "Respuesta con número aproximado.",
-                offlineProof: "💬 Número aproximado"
-            },
-            {
-                for: "Ambos",
-                category: "Primera Impresión ⚡",
-                text: "¿Qué detalle físico o de su personalidad fue lo que te hizo decir 'uy, esta persona tiene algo'?",
-                extra: "Cero respuestas genéricas.",
-                offlineProof: "💬 Respuesta detallada"
-            },
-            {
-                for: "Fer",
-                category: "Hacerse la Difícil 💅",
+                id: "t7", level: 1, for: "Fer", category: "Hacerse la Difícil 💅",
                 text: "¿Cuánto tiempo aguantas enojada de verdad con Johel antes de que te gane la risa?",
-                extra: "Sabemos que no es mucho 😜",
-                offlineProof: "💬 Tiempo exacto"
+                extra: "Sabemos que no es mucho 😜", offlineProof: "💬 Tiempo exacto"
             },
             {
-                for: "Johel",
-                category: "El Cae Mal en Acción 😈",
-                text: "¿Cuál es tu tema favorito para picarla y hacerla enojar sabiendo que se ve linda molesta?",
-                extra: "La táctica secreta al descubierto.",
-                offlineProof: "💬 Tu secreto"
-            },
-            {
-                for: "Ambos",
-                category: "Misterio Nocturno 🌙",
-                text: "¿Alguna vez has soñado con la otra persona? Si es sí, ¿de qué trataba?",
-                extra: "Si es secreto, di al menos la vibra del sueño.",
-                offlineProof: "🎙️ Audio corto"
-            },
-            {
-                for: "Fer",
-                category: "La Gran Duda 🤔",
-                text: "¿Qué es lo que más te da intriga o curiosidad saber de la vida de Johel?",
-                extra: "Aprovecha que no puede mentir.",
-                offlineProof: "💬 Tu pregunta directa"
-            },
-            {
-                for: "Ambos",
-                category: "Nivel de Intensidad 🌡️",
-                text: "¿Qué prefieres: que te escriban todo el día o que te llamen en la noche para hablar horas?",
-                extra: "Definan cómo les gusta la dinámica.",
-                offlineProof: "💬 Tu preferencia"
-            },
-            {
-                for: "Johel",
-                category: "Goles y Pensamientos ⚽",
-                text: "¿En qué momento exacto piensas en Fer cuando estás jugando o entrenando?",
-                extra: "Cuéntale la verdad de tus goles.",
-                offlineProof: "💬 Confesión futbolera"
-            },
-            {
-                for: "Fer",
-                category: "Detector de Mentiras 🕵️‍♀️",
-                text: "¿Alguna vez le has contado a una amiga sobre Johel diciendo 'este me cae mal' pero hablando horas de él?",
-                extra: "¡Atrapadísima si dices que no! 😂",
-                offlineProof: "💬 ¿Sí o no?"
-            },
-            {
-                for: "Ambos",
-                category: "La Mirada ✨",
-                text: "¿Qué sientes cuando se quedan mirando fijamente a los ojos sin decir nada?",
-                extra: "Sin evadir la respuesta.",
-                offlineProof: "💬 Explicación sincera"
-            },
-            {
-                for: "Fer",
-                category: "El Abrazo 🤗",
-                text: "Si tuvieras a Johel al frente justo ahora... ¿qué es lo primero que le harías: un pellizco por molestar o un abrazo?",
-                extra: "No se valen las dos.",
-                offlineProof: "💬 Pellizco o abrazo"
-            },
-            {
-                for: "Johel",
-                category: "Buen Humor ✨",
-                text: "¿Qué es lo que hace Fer que le saca una risa instantánea a Johel incluso cuando está serio o cansado?",
-                extra: "Sé específico.",
-                offlineProof: "💬 Tu respuesta"
-            },
-            {
-                for: "Ambos",
-                category: "Pacto Secreto 🤫",
-                text: "¿Qué es algo que solo ustedes dos entienden y que a cualquier otra persona le parecería raro?",
-                extra: "Su idioma patas negras.",
-                offlineProof: "💬 La frase o chiste"
-            },
-            {
-                for: "Fer",
-                category: "Celos Ocultos 💅",
-                text: "¿Te molestaría si Johel empezara a molestar y bromear así con otra chica?",
-                extra: "Dilo claro Fer.",
-                offlineProof: "🎙️ Audio con tu respuesta"
-            },
-            {
-                for: "Johel",
-                category: "Protector 🛡️",
-                text: "¿Qué tan celoso eres si ves que alguien le tira la onda a Fer?",
-                extra: "Sin disimular.",
-                offlineProof: "💬 Del 1 al 10"
-            },
-            {
-                for: "Ambos",
-                category: "Futuro Cercano 🔮",
-                text: "¿A qué lugar te gustaría ir juntos en su primera salida seria?",
-                extra: "Pónganse de acuerdo en este momento.",
-                offlineProof: "💬 Nombre del lugar"
-            },
-            {
-                for: "Fer",
-                category: "El Apodo 🏷️",
-                text: "¿Cuál es el apodo más ridículo con el que te gustaría llamar a Johel en privado?",
-                extra: "Y tienes que empezar a usarlo.",
-                offlineProof: "💬 El apodo"
-            },
-            {
-                for: "Johel",
-                category: "Paciencia Legendaria 🙃",
-                text: "¿Qué es lo más terco pero chistoso que tiene Fer que a Johel le divierte molestar?",
-                extra: "Sin filtros Johel.",
-                offlineProof: "💬 Tu respuesta"
-            },
-            {
-                for: "Ambos",
-                category: "Plan Loco 🚀",
-                text: "Si tuvieran que escaparse un día entero a hacer cualquier plan divertido o loco juntos... ¿a dónde irían?",
-                extra: "Armen el plan ya mismo.",
-                offlineProof: "💬 El destino"
-            },
-            {
-                for: "Fer",
-                category: "Frecuencia Mental 📡",
-                text: "¿Alguna vez abriste el chat de Johel justo cuando él te estaba escribiendo?",
-                extra: "La telepatía patas negras.",
-                offlineProof: "💬 ¿Sí o no?"
-            },
-            {
-                for: "Johel",
-                category: "El Fastidio Favorito 😈",
-                text: "Del 1 al 10... ¿cuánto te encanta que Fer te diga que le caes mal?",
-                extra: "Admite que te da risa.",
-                offlineProof: "💬 Tu número"
-            },
-            {
-                for: "Ambos",
-                category: "Cero Filtro 🤐",
-                text: "¿Cuál es un secreto tuyo que casi nadie sabe pero que le confiarías a la otra persona?",
-                extra: "Momento de confianza.",
-                offlineProof: "💬 El secreto"
-            },
-            {
-                for: "Fer",
-                category: "El Detalle 🔍",
-                text: "¿Qué prenda de vestir o color se le ve mejor a Johel según tú?",
-                extra: "Para que lo use más seguido.",
-                offlineProof: "💬 El color o prenda"
-            },
-            {
-                for: "Johel",
-                category: "El Peinado 💇‍♀️",
-                text: "¿Prefieres a Fer con el pelo suelto o recogido? ¿Y por qué?",
-                extra: "Opinión de experto.",
-                offlineProof: "💬 Suelto o recogido"
-            },
-            {
-                for: "Ambos",
-                category: "Guerra de Comida 🍕",
+                id: "t8", level: 1, for: "Ambos", category: "Guerra de Comida 🍕",
                 text: "Si solo pudieran comer una sola comida juntos por el resto de su vida... ¿cuál elegirían?",
-                extra: "Pónganse de acuerdo.",
-                offlineProof: "💬 El platillo"
+                extra: "Pónganse de acuerdo.", offlineProof: "💬 El platillo"
             },
             {
-                for: "Fer",
-                category: "La Sospecha 🧐",
-                text: "¿En qué momento exacto te diste cuenta de que Johel no solo te hablaba como 'amigo normal'?",
-                extra: "Cuéntale el momento exacto.",
-                offlineProof: "🎙️ Audio de anécdota"
-            },
-            {
-                for: "Johel",
-                category: "El Delator 🚨",
-                text: "¿Qué fue lo que hizo Fer que te hizo decir 'a esta chica no la puedo soltar'?",
-                extra: "Sin pena.",
-                offlineProof: "💬 Momento exacto"
-            },
-            {
-                for: "Ambos",
-                category: "Apuestas 🎰",
-                text: "¿Quién de los dos cree que caería primero si hacen un reto de no hablarse por 24 horas?",
-                extra: "Apuesten algo real.",
-                offlineProof: "💬 ¿Quién cae primero?"
-            },
-            {
-                for: "Fer",
-                category: "Reacción Tardía ⏱️",
-                text: "¿Alguna vez has escrito un mensaje largo para Johel y luego lo borraste por pena?",
-                extra: "Di qué decía aproximadamente.",
-                offlineProof: "💬 Resumen del mensaje"
-            },
-            {
-                for: "Johel",
-                category: "El Celular 📲",
-                text: "¿Tienes algún apodo especial puesto para Fer en tu WhatsApp?",
-                extra: "Muestra o dilo.",
-                offlineProof: "📱 Captura del contacto"
-            },
-            {
-                for: "Ambos",
-                category: "Modo Furia 😤",
-                text: "¿Quién da más miedo cuando se enoja de verdad: Fer o Johel?",
-                extra: "Voten al mismo tiempo.",
-                offlineProof: "💬 Voto simultáneo"
-            },
-            {
-                for: "Fer",
-                category: "La Sonrisa 😁",
+                id: "t9", level: 1, for: "Fer", category: "La Sonrisa 😁",
                 text: "¿Qué chiste o tontería que dijo Johel es la que más te ha hecho reír hasta que te dolió la panza?",
-                extra: "Recuérdala.",
-                offlineProof: "🎙️ Audio recordándolo"
+                extra: "Recuérdala.", offlineProof: "🎙️ Audio recordándolo"
             },
             {
-                for: "Johel",
-                category: "La Debilidad 🎯",
-                text: "¿Cuál es la carota que pone Fer que hace que Johel no le pueda decir que no a nada?",
-                extra: "Imítala o descríbela.",
-                offlineProof: "💬 Descripción exacta"
-            },
-            {
-                for: "Ambos",
-                category: "La Conclusión 🤌🏿",
-                text: "¿Qué es lo que más te alegra de haber coincidido con la otra persona?",
-                extra: "Sin rodeos.",
-                offlineProof: "💬 Tu respuesta"
-            },
-            {
-                for: "Fer",
-                category: "La Paciencia 🧘‍♀️",
-                text: "Si tuvieras que calificar la paciencia que le tienes a Johel del 1 al 10... ¿cuánto le pones?",
-                extra: "Justifica tu nota.",
-                offlineProof: "💬 Nota y queja"
-            },
-            {
-                for: "Johel",
-                category: "La Victoria 🏆",
+                id: "t10", level: 1, for: "Johel", category: "La Victoria 🏆",
                 text: "¿Qué es algo en lo que sabes que le ganas a Fer 10 de cada 10 veces?",
-                extra: "Que no sea fútbol.",
-                offlineProof: "💬 En qué le ganas"
+                extra: "Que no sea fútbol.", offlineProof: "💬 En qué le ganas"
             },
             {
-                for: "Ambos",
-                category: "El Pacto Final 🤝",
-                text: "¿Cuál es una regla que jamás deberían romper entre ustedes dos?",
-                extra: "Fírmenla verbalmente.",
-                offlineProof: "💬 La regla sagrada"
-            },
-            {
-                for: "Fer",
-                category: "El Cuarto Secreto 🙈",
-                text: "¿Qué es lo que más te daría pena que Johel viera en tu cuarto desordenado?",
-                extra: "Sinceridad Fer.",
-                offlineProof: "💬 El objeto o desorden"
-            },
-            {
-                for: "Johel",
-                category: "Mentira Piadosa 😇",
-                text: "¿Cuál es la mentira más ridícula que le has dicho a Fer para hacerte el importante o zafar de algo?",
-                extra: "Hora de confesar Johel.",
-                offlineProof: "💬 Tu mentira"
-            },
-            {
-                for: "Ambos",
-                category: "Sticker Revelador 📲",
+                id: "t11", level: 1, for: "Ambos", category: "Sticker Revelador 📲",
                 text: "¿Qué sticker de WhatsApp tuyo te describe a la perfección cuando estás de mal humor?",
-                extra: "Mándalo al chat ya mismo.",
-                offlineProof: "🎭 Manda el sticker al chat"
+                extra: "Mándalo al chat ya mismo.", offlineProof: "🎭 Manda el sticker al chat"
             },
             {
-                for: "Ambos",
-                category: "Desastre en la Cocina 🍳",
+                id: "t12", level: 1, for: "Ambos", category: "Desastre en la Cocina 🍳",
                 text: "¿Quién de los dos cree que cocinaría peor si les toca preparar una cena juntos?",
-                extra: "Voten al mismo tiempo.",
-                offlineProof: "💬 ¿Quién quema el agua?"
+                extra: "Voten al mismo tiempo.", offlineProof: "💬 ¿Quién quema el agua?"
             },
             {
-                for: "Fer",
-                category: "El Outfit Especial 👗",
-                text: "¿Alguna vez te has arreglado o peinado de cierta forma solo porque sabías que ibas a hablar con Johel?",
-                extra: "Adelante, admítelo Fer 💅",
-                offlineProof: "💬 La verdad Fer"
-            },
-            {
-                for: "Johel",
-                category: "Foto Favorita 📸",
-                text: "¿Qué foto de Fer en sus redes o WhatsApp es tu favorita secreta?",
-                extra: "Describe cuál es.",
-                offlineProof: "💬 Descripción de la foto"
-            },
-            {
-                for: "Ambos",
-                category: "Guerra de Orgullo 😤",
-                text: "¿Quién de los dos es más orgulloso cuando tienen un desacuerdo tonto?",
-                extra: "El que pierda paga el helado.",
-                offlineProof: "💬 ¿Quién es más terco?"
-            },
-            {
-                for: "Ambos",
-                category: "Apodo de Infancia 👶",
+                id: "t13", level: 1, for: "Ambos", category: "Apodo de Infancia 👶",
                 text: "¿Qué apodo vergonzoso o gracioso te tenían de niño/a en tu familia?",
-                extra: "Prohibido negarse.",
-                offlineProof: "💬 El apodo penoso"
+                extra: "Prohibido negarse.", offlineProof: "💬 El apodo penoso"
             },
             {
-                for: "Ambos",
-                category: "Gusto Culposo 🎧",
+                id: "t14", level: 1, for: "Ambos", category: "Gusto Culposo 🎧",
                 text: "¿Cuál es tu placer culposo en series, películas o canciones que te daría pena admitir en público?",
-                extra: "Sin juzgar.",
-                offlineProof: "💬 Tu gusto culposo"
+                extra: "Sin juzgar.", offlineProof: "💬 Tu gusto culposo"
             },
             {
-                for: "Fer",
-                category: "Visita Sorpresa 🚪",
-                text: "¿Qué harías si Johel te cae de sorpresa justo ahora en la puerta de tu casa?",
-                extra: "¿Lo dejas pasar o le cierras la puerta? 😂",
-                offlineProof: "💬 Tu reacción exacta"
-            },
-            {
-                for: "Johel",
-                category: "Táctica de Ataque 🎯",
-                text: "¿Cuál es tu táctica infalible para llamar la atención de Fer cuando te está ignorando o haciéndose la difícil?",
-                extra: "La estrategia al descubierto.",
-                offlineProof: "💬 Tu mejor truco"
-            },
-            {
-                for: "Ambos",
-                category: "Comida Chatarra 🍔",
+                id: "t15", level: 1, for: "Ambos", category: "Comida Chatarra 🍔",
                 text: "¿Qué comida callejera o chatarra no cambiarías por nada del mundo?",
-                extra: "Para la próxima salida.",
-                offlineProof: "💬 El antojo supremo"
+                extra: "Para la próxima salida.", offlineProof: "💬 El antojo supremo"
             },
             {
-                for: "Ambos",
-                category: "El Fastidio Digital 📵",
-                text: "¿Qué es lo que más te desespera de cómo escribe o manda audios la otra persona?",
-                extra: "Díganse las verdades.",
-                offlineProof: "🎙️ Audio de reclamo"
-            },
-            {
-                for: "Fer",
-                category: "Stalker Profesional 🕵️‍♀️",
-                text: "¿Has stalkeado las redes de Johel hasta fotos de hace años? Sé sincera Fer.",
-                extra: "No te hagas la santa 😜",
-                offlineProof: "💬 Hasta qué año llegaste"
-            },
-            {
-                for: "Ambos",
-                category: "El Radar Visual 👀",
-                text: "¿Qué es lo primero que le miras a alguien cuando lo ves por primera vez?",
-                extra: "Cero respuestas fingidas.",
-                offlineProof: "💬 En qué te fijas"
-            },
-            {
-                for: "Ambos",
-                category: "La Excusa Clásica ⏱️",
-                text: "¿Cuál es tu excusa favorita cuando llegas tarde o tardas en responder?",
-                extra: "La que siempre usas.",
-                offlineProof: "💬 Tu excusa típica"
-            },
-            {
-                for: "Ambos",
-                category: "Canción Imborrable 🎶",
+                id: "t16", level: 1, for: "Ambos", category: "Canción Imborrable 🎶",
                 text: "¿Qué canción te sabes de memoria de principio a fin sin equivocarte?",
-                extra: "Tararea un pedacito en audio.",
-                offlineProof: "🎙️ Audio tarareando"
+                extra: "Tararea un pedacito en audio.", offlineProof: "🎙️ Audio tarareando"
             },
             {
-                for: "Fer",
-                category: "Historia de Instagram 📱",
-                text: "¿Te atreverías a subir una foto de Johel a tus mejores amigos o historias principales?",
-                extra: "¿Sí o no y por qué?",
-                offlineProof: "💬 ¿Sí o no?"
-            },
-            {
-                for: "Ambos",
-                category: "Travesura del Pasado 🏫",
+                id: "t17", level: 1, for: "Ambos", category: "Travesura del Pasado 🏫",
                 text: "¿Cuál es la mayor travesura o locura que hiciste en la escuela/colegio?",
-                extra: "Momento anécdota.",
-                offlineProof: "🎙️ Audio contando la anécdota"
+                extra: "Momento anécdota.", offlineProof: "🎙️ Audio contando la anécdota"
             },
             {
-                for: "Fer",
-                category: "Detector de Celos 🔍",
-                text: "¿Alguna vez te has fijado a quién sigue o le da like Johel en redes?",
-                extra: "Atrapadísima Fer 💅",
-                offlineProof: "💬 Confiesa Fer"
-            },
-            {
-                for: "Ambos",
-                category: "Crítica de Moda 👔",
-                text: "¿Qué opinas del estilo y ropa de la otra persona del 1 al 10?",
-                extra: "Con calificación justificada.",
-                offlineProof: "💬 Nota y opinión"
-            },
-            {
-                for: "Ambos",
-                category: "Talento Inútil 🎪",
+                id: "t18", level: 1, for: "Ambos", category: "Talento Inútil 🎪",
                 text: "¿Cuál es tu talento oculto más inútil pero gracioso que sabes hacer con tu cuerpo o voz?",
-                extra: "Manda foto o video corto demostrándolo.",
-                offlineProof: "📸 Foto o video prueba"
+                extra: "Manda foto o video corto demostrándolo.", offlineProof: "📸 Foto o video prueba"
             },
             {
-                for: "Ambos",
-                category: "Atrapados en el Elevador 🛗",
-                text: "Si se quedan atrapados en un ascensor 3 horas solos... ¿qué harían para no desesperarse?",
-                extra: "Plan de emergencia.",
-                offlineProof: "💬 Tu plan"
-            },
-            {
-                for: "Ambos",
-                category: "Combinación Rara 🍕",
+                id: "t19", level: 1, for: "Ambos", category: "Combinación Rara 🍕",
                 text: "¿Qué comida rara o combinación extraña te gusta comer que a los demás les da asco?",
-                extra: "Confiesa tu crimen culinario.",
-                offlineProof: "💬 La mezcla prohibida"
+                extra: "Confiesa tu crimen culinario.", offlineProof: "💬 La mezcla prohibida"
             },
             {
-                for: "Ambos",
-                category: "El Gastador 💸",
-                text: "¿Quién de los dos crees que gasta más dinero en tonterías cuando sale?",
-                extra: "Sin mentir.",
-                offlineProof: "💬 Veredicto"
-            },
-            {
-                for: "Fer",
-                category: "15 Llamadas Perdidas 🚨",
-                text: "¿Qué pensarías si te despiertas y ves 15 llamadas perdidas de Johel de madrugada?",
-                extra: "¿Pánico o curiosidad?",
-                offlineProof: "💬 Lo primero que pensarías"
-            },
-            {
-                for: "Ambos",
-                category: "Humor Negro 🤭",
-                text: "¿Qué es algo que te da mucha risa pero que sabes que no debería darte risa?",
-                extra: "Sin juzgarse.",
-                offlineProof: "💬 Tu respuesta"
-            },
-            {
-                for: "Ambos",
-                category: "El Reino Animal 🦁",
+                id: "t20", level: 1, for: "Ambos", category: "El Reino Animal 🦁",
                 text: "Si la otra persona fuera un animal... ¿cuál sería y por qué le queda perfecto?",
-                extra: "Justifica el parecido.",
-                offlineProof: "💬 El animal y por qué"
+                extra: "Justifica el parecido.", offlineProof: "💬 El animal y por qué"
             },
             {
-                for: "Ambos",
-                category: "Mensaje Equivocado 🤦",
+                id: "t21", level: 1, for: "Ambos", category: "Mensaje Equivocado 🤦",
                 text: "¿Cuál es el mensaje más vergonzoso que le has enviado a la persona equivocada por error?",
-                extra: "Anécdota completa.",
-                offlineProof: "🎙️ Audio de la vergüenza"
+                extra: "Anécdota completa.", offlineProof: "🎙️ Audio de la vergüenza"
             },
             {
-                for: "Ambos",
-                category: "Superpoder Inútil 🦸",
+                id: "t22", level: 1, for: "Ambos", category: "Superpoder Inútil 🦸",
                 text: "Si pudieras darle un superpoder absurdo a la otra persona solo para fastidiarla... ¿cuál sería?",
-                extra: "Usa la imaginación.",
-                offlineProof: "💬 El poder absurdo"
+                extra: "Usa la imaginación.", offlineProof: "💬 El poder absurdo"
             },
             {
-                for: "Ambos",
-                category: "Apocalipsis Zombie 🧟",
-                text: "¿Quién de los dos sobreviviría más tiempo en un apocalipsis zombie: Fer o Johel?",
-                extra: "Explica quién muere primero.",
-                offlineProof: "💬 Quién sobrevive"
-            },
-            {
-                for: "Ambos",
-                category: "Defecto Confesado 🙃",
-                text: "¿Cuál es tu peor defecto según tú mismo/a cuando estás tratando con alguien?",
-                extra: "Momento sincero.",
-                offlineProof: "💬 Tu peor defecto"
-            },
-            {
-                for: "Ambos",
-                category: "Baile en la Calle 💃",
-                text: "¿Qué harías si la otra persona te saca a bailar en medio de la calle con gente mirando?",
-                extra: "¿Bailas o huyes?",
-                offlineProof: "💬 ¿Bailas o te escapas?"
-            },
-            {
-                for: "Ambos",
-                category: "La Frase Diaria 🗣️",
+                id: "t23", level: 1, for: "Ambos", category: "La Frase Diaria 🗣️",
                 text: "¿Cuál es la palabra o frase que más dices todos los días sin darte cuenta?",
-                extra: "Que el otro confirme si es verdad.",
-                offlineProof: "💬 Tu muletilla"
+                extra: "Que el otro confirme si es verdad.", offlineProof: "💬 Tu muletilla"
+            },
+            {
+                id: "t24", level: 1, for: "Fer", category: "La Paciencia 🧘‍♀️",
+                text: "Si tuvieras que calificar la paciencia que le tienes a Johel del 1 al 10... ¿cuánto le pones?",
+                extra: "Justifica tu nota.", offlineProof: "💬 Nota y queja"
+            },
+            {
+                id: "t25", level: 1, for: "Johel", category: "El Fastidio Favorito 😈",
+                text: "Del 1 al 10... ¿cuánto te encanta que Fer te diga que le caes mal?",
+                extra: "Admite que te da risa.", offlineProof: "💬 Tu número"
+            },
+
+            // NIVEL 2: COMPLICIDAD (Curiosidad, celitos chistosos, llamadas, mañas nocturnas)
+            {
+                id: "t26", level: 2, for: "Fer", category: "Pillada en la noche 📱",
+                text: "¿Alguna vez te has quedado mirando los mensajes de Johel tarde en la noche sonriendo sola?",
+                extra: "Johel ya lo sabe... solo admítelo Fer 😂", offlineProof: "🎙️ Confesión por audio"
+            },
+            {
+                id: "t27", level: 2, for: "Johel", category: "Confesión ⚽",
+                text: "¿Qué es lo que más te desconcentra o te da risa de Fer cuando están hablando?",
+                extra: "Sin hacerse el duro, Johel.", offlineProof: "💬 Texto detallado"
+            },
+            {
+                id: "t28", level: 2, for: "Fer", category: "Curiosidad o Celitos 👀",
+                text: "Del 1 al 10... ¿qué tan curiosa o pendiente te pones cuando no sabes qué está haciendo Johel?",
+                extra: "Sé honesta Fer 💅", offlineProof: "💬 Número con justificación"
+            },
+            {
+                id: "t29", level: 2, for: "Ambos", category: "La Salida Ideal ☕",
+                text: "Si tuvieras que planear una salida entre Fer y Johel sin límite de nada... ¿cómo sería?",
+                extra: "Detalla hasta lo que van a comer.", offlineProof: "🎙️ Audio explicando el plan"
+            },
+            {
+                id: "t30", level: 2, for: "Fer", category: "El Golpe Bajo 🥊",
+                text: "¿Qué hace Johel que de verdad te da rabia pero en el fondo te da ternura?",
+                extra: "Adelante, desahógate Fer.", offlineProof: "🎙️ Audio de desahogo"
+            },
+            {
+                id: "t31", level: 2, for: "Johel", category: "Mente Inquieta 🧠",
+                text: "¿Cuántas veces al día se te cruza Fer por la cabeza sin darte cuenta?",
+                extra: "Respuesta con número aproximado.", offlineProof: "💬 Número aproximado"
+            },
+            {
+                id: "t32", level: 2, for: "Ambos", category: "Primera Impresión ⚡",
+                text: "¿Qué detalle físico o de su personalidad fue lo que te hizo decir 'uy, esta persona tiene algo'?",
+                extra: "Cero respuestas genéricas.", offlineProof: "💬 Respuesta detallada"
+            },
+            {
+                id: "t33", level: 2, for: "Johel", category: "El Cae Mal en Acción 😈",
+                text: "¿Cuál es tu tema favorito para picarla y hacerla enojar sabiendo que se ve linda molesta?",
+                extra: "La táctica secreta al descubierto.", offlineProof: "💬 Tu secreto"
+            },
+            {
+                id: "t34", level: 2, for: "Ambos", category: "Misterio Nocturno 🌙",
+                text: "¿Alguna vez has soñado con la otra persona? Si es sí, ¿de qué trataba?",
+                extra: "Si es secreto, di al menos la vibra del sueño.", offlineProof: "🎙️ Audio corto"
+            },
+            {
+                id: "t35", level: 2, for: "Fer", category: "La Gran Duda 🤔",
+                text: "¿Qué es lo que más te da intriga o curiosidad saber de la vida de Johel?",
+                extra: "Aprovecha que no puede mentir.", offlineProof: "💬 Tu pregunta directa"
+            },
+            {
+                id: "t36", level: 2, for: "Ambos", category: "Nivel de Intensidad 🌡️",
+                text: "¿Qué prefieres: que te escriban todo el día o que te llamen en la noche para hablar horas?",
+                extra: "Definan cómo les gusta la dinámica.", offlineProof: "💬 Tu preferencia"
+            },
+            {
+                id: "t37", level: 2, for: "Johel", category: "Goles y Pensamientos ⚽",
+                text: "¿En qué momento exacto piensas en Fer cuando estás jugando o entrenando?",
+                extra: "Cuéntale la verdad de tus goles.", offlineProof: "💬 Confesión futbolera"
+            },
+            {
+                id: "t38", level: 2, for: "Fer", category: "Detector de Mentiras 🕵️‍♀️",
+                text: "¿Alguna vez le has contado a una amiga sobre Johel diciendo 'este me cae mal' pero hablando horas de él?",
+                extra: "¡Atrapadísima si dices que no! 😂", offlineProof: "💬 ¿Sí o no?"
+            },
+            {
+                id: "t39", level: 2, for: "Johel", category: "Buen Humor ✨",
+                text: "¿Qué es lo que hace Fer que le saca una risa instantánea a Johel incluso cuando está serio o cansado?",
+                extra: "Sé específico.", offlineProof: "💬 Tu respuesta"
+            },
+            {
+                id: "t40", level: 2, for: "Ambos", category: "Pacto Secreto 🤫",
+                text: "¿Qué es algo que solo ustedes dos entienden y que a cualquier otra persona le parecería raro?",
+                extra: "Su idioma patas negras.", offlineProof: "💬 La frase o chiste"
+            },
+            {
+                id: "t41", level: 2, for: "Ambos", category: "Futuro Cercano 🔮",
+                text: "¿A qué lugar te gustaría ir juntos en su primera salida seria?",
+                extra: "Pónganse de acuerdo en este momento.", offlineProof: "💬 Nombre del lugar"
+            },
+            {
+                id: "t42", level: 2, for: "Johel", category: "Paciencia Legendaria 🙃",
+                text: "¿Qué es lo más terco pero chistoso que tiene Fer que a Johel le divierte molestar?",
+                extra: "Sin filtros Johel.", offlineProof: "💬 Tu respuesta"
+            },
+            {
+                id: "t43", level: 2, for: "Fer", category: "Frecuencia Mental 📡",
+                text: "¿Alguna vez abriste el chat de Johel justo cuando él te estaba escribiendo?",
+                extra: "La telepatía patas negras.", offlineProof: "💬 ¿Sí o no?"
+            },
+            {
+                id: "t44", level: 2, for: "Fer", category: "El Detalle 🔍",
+                text: "¿Qué prenda de vestir o color se le ve mejor a Johel según tú?",
+                extra: "Para que lo use más seguido.", offlineProof: "💬 El color o prenda"
+            },
+            {
+                id: "t45", level: 2, for: "Johel", category: "El Peinado 💇‍♀️",
+                text: "¿Prefieres a Fer con el pelo suelto o recogido? ¿Y por qué?",
+                extra: "Opinión de experto.", offlineProof: "💬 Suelto o recogido"
+            },
+            {
+                id: "t46", level: 2, for: "Fer", category: "La Sospecha 🧐",
+                text: "¿En qué momento exacto te diste cuenta de que Johel no solo te hablaba como 'amigo normal'?",
+                extra: "Cuéntale el momento exacto.", offlineProof: "🎙️ Audio de anécdota"
+            },
+            {
+                id: "t47", level: 2, for: "Johel", category: "El Delator 🚨",
+                text: "¿Qué fue lo que hizo Fer que te hizo decir 'a esta chica no la puedo soltar'?",
+                extra: "Sin pena.", offlineProof: "💬 Momento exacto"
+            },
+            {
+                id: "t48", level: 2, for: "Ambos", category: "Apuestas 🎰",
+                text: "¿Quién de los dos cree que caería primero si hacen un reto de no hablarse por 24 horas?",
+                extra: "Apuesten algo real.", offlineProof: "💬 ¿Quién cae primero?"
+            },
+            {
+                id: "t49", level: 2, for: "Fer", category: "Reacción Tardía ⏱️",
+                text: "¿Alguna vez has escrito un mensaje largo para Johel y luego lo borraste por pena?",
+                extra: "Di qué decía aproximadamente.", offlineProof: "💬 Resumen del mensaje"
+            },
+            {
+                id: "t50", level: 2, for: "Johel", category: "El Celular 📲",
+                text: "¿Tienes algún apodo especial puesto para Fer en tu WhatsApp?",
+                extra: "Muestra o dilo.", offlineProof: "📱 Captura del contacto"
+            },
+            {
+                id: "t51", level: 2, for: "Ambos", category: "Modo Furia 😤",
+                text: "¿Quién da más miedo cuando se enoja de verdad: Fer o Johel?",
+                extra: "Voten al mismo tiempo.", offlineProof: "💬 Voto simultáneo"
+            },
+            {
+                id: "t52", level: 2, for: "Johel", category: "La Debilidad 🎯",
+                text: "¿Cuál es la carota que pone Fer que hace que Johel no le pueda decir que no a nada?",
+                extra: "Imítala o descríbela.", offlineProof: "💬 Descripción exacta"
+            },
+            {
+                id: "t53", level: 2, for: "Fer", category: "El Outfit Especial 👗",
+                text: "¿Alguna vez te has arreglado o peinado de cierta forma solo porque sabías que ibas a hablar con Johel?",
+                extra: "Adelante, admítelo Fer 💅", offlineProof: "💬 La verdad Fer"
+            },
+            {
+                id: "t54", level: 2, for: "Johel", category: "Foto Favorita 📸",
+                text: "¿Qué foto de Fer en sus redes o WhatsApp es tu favorita secreta?",
+                extra: "Describe cuál es.", offlineProof: "💬 Descripción de la foto"
+            },
+            {
+                id: "t55", level: 2, for: "Fer", category: "Stalker Profesional 🕵️‍♀️",
+                text: "¿Has stalkeado las redes de Johel hasta fotos de hace años? Sé sincera Fer.",
+                extra: "No te hagas la santa 😜", offlineProof: "💬 Hasta qué año llegaste"
+            },
+
+            // NIVEL 3: CANDELA PURA / SIN FILTRO (Celos reales, miradas, confesiones intensas)
+            {
+                id: "t56", level: 3, for: "Ambos", category: "La Mirada ✨",
+                text: "¿Qué sientes cuando se quedan mirando fijamente a los ojos sin decir nada?",
+                extra: "Sin evadir la respuesta.", offlineProof: "💬 Explicación sincera"
+            },
+            {
+                id: "t57", level: 3, for: "Fer", category: "El Abrazo 🤗",
+                text: "Si tuvieras a Johel al frente justo ahora... ¿qué es lo primero que le harías: un pellizco por molestar o un abrazo?",
+                extra: "No se valen las dos.", offlineProof: "💬 Pellizco o abrazo"
+            },
+            {
+                id: "t58", level: 3, for: "Fer", category: "Celos Ocultos 💅",
+                text: "¿Te molestaría si Johel empezara a molestar y bromear así con otra chica?",
+                extra: "Dilo claro Fer.", offlineProof: "🎙️ Audio con tu respuesta"
+            },
+            {
+                id: "t59", level: 3, for: "Johel", category: "Protector 🛡️",
+                text: "¿Qué tan celoso eres si ves que alguien le tira la onda a Fer?",
+                extra: "Sin disimular.", offlineProof: "💬 Del 1 al 10"
+            },
+            {
+                id: "t60", level: 3, for: "Fer", category: "El Apodo 🏷️",
+                text: "¿Cuál es el apodo más ridículo con el que te gustaría llamar a Johel en privado?",
+                extra: "Y tienes que empezar a usarlo.", offlineProof: "💬 El apodo"
+            },
+            {
+                id: "t61", level: 3, for: "Ambos", category: "Plan Loco 🚀",
+                text: "Si tuvieran que escaparse un día entero a hacer cualquier plan divertido o loco juntos... ¿a dónde irían?",
+                extra: "Armen el plan ya mismo.", offlineProof: "💬 El destino"
+            },
+            {
+                id: "t62", level: 3, for: "Ambos", category: "Cero Filtro 🤐",
+                text: "¿Cuál es un secreto tuyo que casi nadie sabe pero que le confiarías a la otra persona?",
+                extra: "Momento de confianza.", offlineProof: "💬 El secreto"
+            },
+            {
+                id: "t63", level: 3, for: "Ambos", category: "La Conclusión 🤌🏿",
+                text: "¿Qué es lo que más te alegra de haber coincidido con la otra persona?",
+                extra: "Sin rodeos.", offlineProof: "💬 Tu respuesta"
+            },
+            {
+                id: "t64", level: 3, for: "Ambos", category: "El Pacto Final 🤝",
+                text: "¿Cuál es una regla que jamás deberían romper entre ustedes dos?",
+                extra: "Fírmenla verbalmente.", offlineProof: "💬 La regla sagrada"
+            },
+            {
+                id: "t65", level: 3, for: "Fer", category: "El Cuarto Secreto 🙈",
+                text: "¿Qué es lo que más te daría pena que Johel viera en tu cuarto desordenado?",
+                extra: "Sinceridad Fer.", offlineProof: "💬 El objeto o desorden"
+            },
+            {
+                id: "t66", level: 3, for: "Johel", category: "Mentira Piadosa 😇",
+                text: "¿Cuál es la mentira más ridícula que le has dicho a Fer para hacerte el importante o zafar de algo?",
+                extra: "Hora de confesar Johel.", offlineProof: "💬 Tu mentira"
+            },
+            {
+                id: "t67", level: 3, for: "Ambos", category: "Guerra de Orgullo 😤",
+                text: "¿Quién de los dos es más orgulloso cuando tienen un desacuerdo tonto?",
+                extra: "El que pierda paga el helado.", offlineProof: "💬 ¿Quién es más terco?"
+            },
+            {
+                id: "t68", level: 3, for: "Fer", category: "Visita Sorpresa 🚪",
+                text: "¿Qué harías si Johel te cae de sorpresa justo ahora en la puerta de tu casa?",
+                extra: "¿Lo dejas pasar o le cierras la puerta? 😂", offlineProof: "💬 Tu reacción exacta"
+            },
+            {
+                id: "t69", level: 3, for: "Johel", category: "Táctica de Ataque 🎯",
+                text: "¿Cuál es tu táctica infalible para llamar la atención de Fer cuando te está ignorando o haciéndose la difícil?",
+                extra: "La estrategia al descubierto.", offlineProof: "💬 Tu mejor truco"
+            },
+            {
+                id: "t70", level: 3, for: "Ambos", category: "El Fastidio Digital 📵",
+                text: "¿Qué es lo que más te desespera de cómo escribe o manda audios la otra persona?",
+                extra: "Díganse las verdades.", offlineProof: "🎙️ Audio de reclamo"
+            },
+            {
+                id: "t71", level: 3, for: "Ambos", category: "El Radar Visual 👀",
+                text: "¿Qué es lo primero que le miras a alguien cuando lo ves por primera vez?",
+                extra: "Cero respuestas fingidas.", offlineProof: "💬 En qué te fijas"
+            },
+            {
+                id: "t72", level: 3, for: "Fer", category: "Historia de Instagram 📱",
+                text: "¿Te atreverías a subir una foto de Johel a tus mejores amigos o historias principales?",
+                extra: "¿Sí o no y por qué?", offlineProof: "💬 ¿Sí o no?"
+            },
+            {
+                id: "t73", level: 3, for: "Fer", category: "Detector de Celos 🔍",
+                text: "¿Alguna vez te has fijado a quién sigue o le da like Johel en redes?",
+                extra: "Atrapadísima Fer 💅", offlineProof: "💬 Confiesa Fer"
+            },
+            {
+                id: "t74", level: 3, for: "Ambos", category: "Crítica de Moda 👔",
+                text: "¿Qué opinas del estilo y ropa de la otra persona del 1 al 10?",
+                extra: "Con calificación justificada.", offlineProof: "💬 Nota y opinión"
+            },
+            {
+                id: "t75", level: 3, for: "Ambos", category: "Atrapados en el Elevador 🛗",
+                text: "Si se quedan atrapados en un ascensor 3 horas solos... ¿qué harían para no desesperarse?",
+                extra: "Plan de emergencia.", offlineProof: "💬 Tu plan"
+            },
+            {
+                id: "t76", level: 3, for: "Ambos", category: "El Gastador 💸",
+                text: "¿Quién de los dos crees que gasta más dinero en tonterías cuando sale?",
+                extra: "Sin mentir.", offlineProof: "💬 Veredicto"
+            },
+            {
+                id: "t77", level: 3, for: "Fer", category: "15 Llamadas Perdidas 🚨",
+                text: "¿Qué pensarías si te despiertas y ves 15 llamadas perdidas de Johel de madrugada?",
+                extra: "¿Pánico o curiosidad?", offlineProof: "💬 Lo primero que pensarías"
+            },
+            {
+                id: "t78", level: 3, for: "Ambos", category: "Humor Negro 🤭",
+                text: "¿Qué es algo que te da mucha risa pero que sabes que no debería darte risa?",
+                extra: "Sin juzgarse.", offlineProof: "💬 Tu respuesta"
+            },
+            {
+                id: "t79", level: 3, for: "Ambos", category: "Apocalipsis Zombie 🧟",
+                text: "¿Quién de los dos sobreviviría más tiempo en un apocalipsis zombie: Fer o Johel?",
+                extra: "Explica quién muere primero.", offlineProof: "💬 Quién sobrevive"
+            },
+            {
+                id: "t80", level: 3, for: "Ambos", category: "Defecto Confesado 🙃",
+                text: "¿Cuál es tu peor defecto según tú mismo/a cuando estás tratando con alguien?",
+                extra: "Momento sincero.", offlineProof: "💬 Tu peor defecto"
+            },
+            {
+                id: "t81", level: 3, for: "Ambos", category: "Baile en la Calle 💃",
+                text: "¿Qué harías si la otra persona te saca a bailar en medio de la calle con gente mirando?",
+                extra: "¿Bailas o huyes?", offlineProof: "💬 ¿Bailas o te escapas?"
+            },
+            {
+                id: "t82", level: 3, for: "Ambos", category: "La Excusa Clásica ⏱️",
+                text: "¿Cuál es tu excusa favorita cuando llegas tarde o tardas en responder?",
+                extra: "La que siempre usas.", offlineProof: "💬 Tu excusa típica"
+            },
+            {
+                id: "t83", level: 3, for: "Johel", category: "Sin Filtro Final 🔥",
+                text: "¿Qué es lo que más te pone nervioso cuando estás a punto de ver o hablar con Fer?",
+                extra: "Confesión definitiva de Johel.", offlineProof: "💬 Tu debilidad"
             }
         ];
 
-        /* ==================== BANCO MASIVO DE RETOS (61) ==================== */
+        /* ==================== BANCO MASIVO CLASIFICADO POR NIVEL (61 RETOS) ==================== */
         const allDares = [
+            // NIVEL 1: CALENTAMIENTO (Risas, fotos de caras, poemas, audios tontos)
             {
-                category: "Reto de Audio 🎙️",
+                id: "d1", level: 1, category: "Reto de Audio 🎙️",
                 text: "Mándale un audio de 15 segundos al otro imitándolo cuando se enoja o cuando se hace el difícil.",
-                extra: "Tiene que ser bien dramático.",
-                offlineProof: "🎙️ Audio de 15s",
-                isOfflineReady: true
+                extra: "Tiene que ser bien dramático.", offlineProof: "🎙️ Audio de 15s", isOfflineReady: true
             },
             {
-                category: "Miradas Fijas 👀",
-                text: "Mírense fijamente durante 30 segundos sin hablar y sin reírse. El primero que se ría pierde.",
-                extra: "El que se ría le debe un helado o café al otro.",
-                offlineProof: "👀 En vivo / Video corto",
-                isOfflineReady: false
-            },
-            {
-                category: "Foto Espontánea 📸",
+                id: "d2", level: 1, category: "Foto Espontánea 📸",
                 text: "Tómate una foto justo ahora con la carota más chistosa que tengas y mándala sin filtros ni repetir.",
-                extra: "Nada de posar bonita/o, cara graciosa obligatoria.",
-                offlineProof: "📸 Foto sin filtros",
-                isOfflineReady: true
+                extra: "Nada de posar bonita/o, cara graciosa obligatoria.", offlineProof: "📸 Foto sin filtros", isOfflineReady: true
             },
             {
-                category: "Apodo Oficial 🏷️",
-                text: "Tienes que inventarle un apodo nuevo y vergonzoso al otro y usarlo obligatoriamente las próximas 24 horas.",
-                extra: "Sin quejas ni reclamos.",
-                offlineProof: "💬 Escribir el apodo",
-                isOfflineReady: true
-            },
-            {
-                category: "Pregunta Prohibida 😈",
-                text: "El otro tiene derecho a hacerte CUALQUIER pregunta sin filtro y tienes que responderla con 'Sí' o 'No' obligatoriamente.",
-                extra: "Sin derecho a réplica.",
-                offlineProof: "💬 Responder Sí o No",
-                isOfflineReady: true
-            },
-            {
-                category: "Dedicatoria Musical 🎵",
-                text: "Cántale o tararéale un pedacito de una canción que te recuerde a él/ella por audio.",
-                extra: "Sin pena, aunque cantes feo.",
-                offlineProof: "🎙️ Audio cantando",
-                isOfflineReady: true
-            },
-            {
-                category: "Declaración con Voz Rara 🤖",
-                text: "Dile un halago súper cursi al otro pero usando voz de ardilla o de telenovela dramática.",
-                extra: "Tiene que dar risa obligatoria.",
-                offlineProof: "🎙️ Audio con voz rara",
-                isOfflineReady: true
-            },
-            {
-                category: "El Deudor 🍨",
-                text: "Firma un pagaré verbal: tienes que invitar la próxima comida o merienda que tengan juntos.",
-                extra: "Trato cerrado y sellado con 🤌🏿.",
-                offlineProof: "💬 Pagaré en texto",
-                isOfflineReady: true
-            },
-            {
-                category: "Llamada Sorpresa 📞",
-                text: "Llama al otro por teléfono justo ahora y dile 'solo llamaba para decirte que me caes súper mal' y cuélgale.",
-                extra: "A ver cuánto tardan en reírse.",
-                offlineProof: "📞 Llamada de 3 segundos",
-                isOfflineReady: false
-            },
-            {
-                category: "Foto de Bloqueo 📱",
-                text: "Manda captura de pantalla de tu pantalla de bloqueo y de tu última foto en la galería.",
-                extra: "Cero trampas ni borrar fotos.",
-                offlineProof: "📱 Captura de pantalla",
-                isOfflineReady: true
-            },
-            {
-                category: "Poema Improvisado ✍️",
+                id: "d3", level: 1, category: "Poema Improvisado ✍️",
                 text: "Tienes 20 segundos para inventar una rima graciosa de 4 versos con el nombre del otro.",
-                extra: "Tiene que rimar y dar risa.",
-                offlineProof: "💬 Rima en texto",
-                isOfflineReady: true
+                extra: "Tiene que rimar y dar risa.", offlineProof: "💬 Rima en texto", isOfflineReady: true
             },
             {
-                category: "El Susurro 🤫",
-                text: "Manda un audio de 5 segundos susurrando lo primero que se te venga a la mente sobre la otra persona.",
-                extra: "Tono misterioso obligatorio.",
-                offlineProof: "🎙️ Audio susurrando",
-                isOfflineReady: true
-            },
-            {
-                category: "Estatua 🗿",
-                text: "Quédate completamente congelado/a en videollamada o frente a la cámara 20 segundos sin pestañear.",
-                extra: "El otro intentará hacerte reír.",
-                offlineProof: "👀 En llamada",
-                isOfflineReady: false
-            },
-            {
-                category: "Confesión en Estado 💬",
-                text: "Pon en tu estado de WhatsApp una indirecta graciosa que solo la otra persona entienda por 30 minutos.",
-                extra: "Los demás quedarán intrigados.",
-                offlineProof: "📱 Captura del estado",
-                isOfflineReady: true
-            },
-            {
-                category: "Pellizco Virtual 🤏🏿",
+                id: "d4", level: 1, category: "Pellizco Virtual 🤏🏿",
                 text: "Manda 10 stickers seguidos que describan perfectamente cómo te sientes cuando la otra persona te molesta.",
-                extra: "Guerra de stickers.",
-                offlineProof: "🎭 10 stickers seguidos",
-                isOfflineReady: true
+                extra: "Guerra de stickers.", offlineProof: "🎭 10 stickers seguidos", isOfflineReady: true
             },
             {
-                category: "Lectura de Ojos 👁️",
-                text: "Manda un video de 5 segundos solo haciendo un guiño o mirando fijamente a la cámara con cara de sospecha.",
-                extra: "Sin reírse.",
-                offlineProof: "📸 Video corto de 5s",
-                isOfflineReady: true
-            },
-            {
-                category: "El Piropero Callejero 🚗",
-                text: "Tírale al otro el piropo más ridículo y exagerado que conozcas por audio.",
-                extra: "De esos que dan vergüenza ajena.",
-                offlineProof: "🎙️ Audio del piropo",
-                isOfflineReady: true
-            },
-            {
-                category: "Intercambio de Roles 🎭",
-                text: "Por los próximos 3 turnos tienes que hablar y responder actuando exactamente como la otra persona.",
-                extra: "Copia sus frases y modismos.",
-                offlineProof: "💬 Mensajes imitándolo/a",
-                isOfflineReady: true
-            },
-            {
-                category: "Tres Cosas Lindas ✨",
-                text: "Manda un audio diciendo 3 cosas que te gusten de su personalidad sin reírte.",
-                extra: "Momento tierno obligatorio.",
-                offlineProof: "🎙️ Audio sincero",
-                isOfflineReady: true
-            },
-            {
-                category: "Bailarín Estrella 💃",
-                text: "Manda un video de 8 segundos bailando cualquier canción ridícula sin música.",
-                extra: "Prohibido tener pena.",
-                offlineProof: "📸 Video de 8s",
-                isOfflineReady: true
-            },
-            {
-                category: "Captura Comprometida 🔍",
-                text: "Muestra el chat fijado #1 de tu WhatsApp o la última persona con la que hablaste en Instagram.",
-                extra: "Transparencia total.",
-                offlineProof: "📱 Captura de chats",
-                isOfflineReady: true
-            },
-            {
-                category: "La Promesa 🤝",
-                text: "Haz una promesa seria sobre algo divertido que vas a hacer por la otra persona la próxima vez que se vean.",
-                extra: "Queda registrada ante la ley.",
-                offlineProof: "💬 Promesa escrita",
-                isOfflineReady: true
-            },
-            {
-                category: "Recreación de Gol ⚽",
-                text: "Johel tiene que narrar un gol épico dedicado a Fer por audio, o Fer tiene que mandar un audio festejando como futbolista.",
-                extra: "Con narración apasionada.",
-                offlineProof: "🎙️ Audio de gol",
-                isOfflineReady: true
-            },
-            {
-                category: "El Mensaje al Azar 📬",
-                text: "Deja que el otro elija un emoji y tienes que mandar un audio explicando por qué ese emoji te recuerda a él/ella.",
-                extra: "Sin rodeos.",
-                offlineProof: "🎙️ Audio explicativo",
-                isOfflineReady: true
-            },
-            {
-                category: "Voz de Bebé 👶",
-                text: "Pídele perdón al otro por cualquier tontería que hayas hecho usando voz de bebé consentido en un audio.",
-                extra: "Tiene que sonar gracioso.",
-                offlineProof: "🎙️ Audio voz de bebé",
-                isOfflineReady: true
-            },
-            {
-                category: "Rey/Reina del Drama 🎭",
-                text: "Manda un audio de 10 segundos fingiendo reclamos dramáticos como si el otro te hubiera dejado en visto 3 días.",
-                extra: "Con reclamos exagerados y actuación de novela.",
-                offlineProof: "🎙️ Audio dramático",
-                isOfflineReady: true
-            },
-            {
-                category: "El Dibujante 🎨",
+                id: "d5", level: 1, category: "El Dibujante 🎨",
                 text: "Dibuja al otro en un papel o en el editor de fotos en 30 segundos y mándale el resultado.",
-                extra: "No importa si queda horrible.",
-                offlineProof: "📸 Foto del dibujo",
-                isOfflineReady: true
+                extra: "No importa si queda horrible.", offlineProof: "📸 Foto del dibujo", isOfflineReady: true
             },
             {
-                category: "El Traductor en Vivo 🤌🏿",
+                id: "d6", level: 1, category: "El Traductor en Vivo 🤌🏿",
                 text: "Manda un audio diciendo una frase normal pero usando modismos de 'patas negras' de forma exagerada.",
-                extra: "Con acento dramático.",
-                offlineProof: "🎙️ Audio patas negras",
-                isOfflineReady: true
+                extra: "Con acento dramático.", offlineProof: "🎙️ Audio patas negras", isOfflineReady: true
             },
             {
-                category: "Mayordomo Temporal 🛎️",
-                text: "Por los próximos 10 minutos, tienes que responder a todo lo que el otro diga en WhatsApp con 'Sí, lo que usted mande'.",
-                extra: "Cero rebeldía.",
-                offlineProof: "💬 Chat de obediencia",
-                isOfflineReady: true
-            },
-            {
-                category: "La Canción Rara 📻",
-                text: "Busca la canción más rara o graciosa en Spotify o YouTube y mándasela diciendo 'esta es nuestra canción'.",
-                extra: "A ver qué responde.",
-                offlineProof: "🎵 Link de la canción",
-                isOfflineReady: true
-            },
-            {
-                category: "El Interrogatorio 🔦",
-                text: "El otro tiene 15 segundos para hacerte 3 preguntas ultra rápidas y tienes que responderlas al instante por texto.",
-                extra: "Sin titubear.",
-                offlineProof: "💬 Respuestas rápidas",
-                isOfflineReady: true
-            },
-            {
-                category: "El Silencio Incómodo 🤫",
-                text: "Manda un audio de 10 segundos donde solo se escuche tu respiración y al final un suspiro dramático.",
-                extra: "Misterio total.",
-                offlineProof: "🎙️ Audio de 10s",
-                isOfflineReady: true
-            },
-            {
-                category: "El Imitador de Emojis 🤪",
-                text: "Manda 3 fotos imitando exactamente 3 emojis que el otro te elija en el chat.",
-                extra: "Cara idéntica obligatoria.",
-                offlineProof: "📸 3 fotos de emojis",
-                isOfflineReady: true
-            },
-            {
-                category: "La Apuesta del Café ☕",
-                text: "El que pierda la próxima carta debe pagar las bebidas la próxima vez que salgan.",
-                extra: "Pagaré sellado.",
-                offlineProof: "💬 Pagaré sellado",
-                isOfflineReady: true
-            },
-            {
-                category: "El Monólogo 🎤",
-                text: "Manda un audio de 20 segundos explicando por qué la otra persona tiene la culpa de todo en este juego.",
-                extra: "Argumentos sin sentido obligatorios.",
-                offlineProof: "🎙️ Audio de 20s",
-                isOfflineReady: true
-            },
-            {
-                category: "El Abrazo Virtual 🫂",
-                text: "Manda un video corto apretando la almohada o un peluche diciendo 'así de fuerte te voy a molestar cuando te vea'.",
-                extra: "Con cara de maldad divertida.",
-                offlineProof: "📸 Video corto",
-                isOfflineReady: true
-            },
-            {
-                category: "Voz de GPS 📍",
+                id: "d7", level: 1, category: "Voz de GPS 📍",
                 text: "Manda un audio dando indicaciones para llegar a tu casa pero usando voz robótica de Google Maps.",
-                extra: "En 200 metros gire a la derecha...",
-                offlineProof: "🎙️ Audio modo GPS",
-                isOfflineReady: true
+                extra: "En 200 metros gire a la derecha...", offlineProof: "🎙️ Audio modo GPS", isOfflineReady: true
             },
             {
-                category: "Rapero Callejero 🎤",
+                id: "d8", level: 1, category: "Rapero Callejero 🎤",
                 text: "Tira un rap improvisado de 15 segundos por audio rimando con objetos que tengas alrededor de tu cuarto.",
-                extra: "Con actitud de rapero profesional.",
-                offlineProof: "🎙️ Audio rapeando",
-                isOfflineReady: true
+                extra: "Con actitud de rapero profesional.", offlineProof: "🎙️ Audio rapeando", isOfflineReady: true
             },
             {
-                category: "Foto del Refrigerador ❄️",
+                id: "d9", level: 1, category: "Foto del Refrigerador ❄️",
                 text: "Manda foto de qué es lo más raro o gracioso que tienes guardado en la nevera ahora mismo.",
-                extra: "Sin ordenar nada.",
-                offlineProof: "📸 Foto de la nevera",
-                isOfflineReady: true
+                extra: "Sin ordenar nada.", offlineProof: "📸 Foto de la nevera", isOfflineReady: true
             },
             {
-                category: "Acento Extranjero 🌍",
-                text: "Tienes que mandar los próximos 3 audios con acento argentino, mexicano o español obligatoriamente.",
-                extra: "El que se salga del personaje paga castigo.",
-                offlineProof: "🎙️ 3 audios con acento",
-                isOfflineReady: true
-            },
-            {
-                category: "Cumplido Inverso 🙃",
-                text: "Manda un mensaje con un cumplido que suene como un insulto divertido o al revés.",
-                extra: "Ejemplo: 'Me encanta cómo finges que eres inteligente'.",
-                offlineProof: "💬 Mensaje de texto",
-                isOfflineReady: true
-            },
-            {
-                category: "Mímica de Película 🎬",
-                text: "Haz un video mudo de 10 segundos haciendo la mímica de una película famosa y el otro tiene que adivinarla.",
-                extra: "Prohibido hacer sonidos.",
-                offlineProof: "📸 Video mudo",
-                isOfflineReady: true
-            },
-            {
-                category: "Vendedor de Infomerciales 📺",
-                text: "Manda un audio de 20 segundos vendiendo cualquier objeto inútil de tu mesa como si fuera el invento del siglo.",
-                extra: "¡Llame ya!",
-                offlineProof: "🎙️ Audio infomercial",
-                isOfflineReady: true
-            },
-            {
-                category: "Risa de Villano 🦹",
+                id: "d10", level: 1, category: "Risa de Villano 🦹",
                 text: "Manda un audio con tu mejor risa malvada de villano de película de Disney.",
-                extra: "Bien exagerada.",
-                offlineProof: "🎙️ Audio de risa",
-                isOfflineReady: true
+                extra: "Bien exagerada.", offlineProof: "🎙️ Audio de risa", isOfflineReady: true
             },
             {
-                category: "Filtro Deforme 🤪",
+                id: "d11", level: 1, category: "Filtro Deforme 🤪",
                 text: "Tómate una foto o video corto usando el filtro más feo y deforme que encuentres en tu teléfono.",
-                extra: "Mándala sin pena.",
-                offlineProof: "📸 Foto con filtro feo",
-                isOfflineReady: true
+                extra: "Mándala sin pena.", offlineProof: "📸 Foto con filtro feo", isOfflineReady: true
             },
             {
-                category: "Modo Loro 🦜",
-                text: "Tienes que responder en el chat repitiendo la última palabra de lo que el otro te escriba por 5 minutos.",
-                extra: "Prohibido olvidarlo.",
-                offlineProof: "💬 Modo loro en chat",
-                isOfflineReady: true
-            },
-            {
-                category: "Serenata Desafinada 🎶",
-                text: "Canta el coro de cualquier canción a todo pulmón por audio pero lo más desafinado y dramático posible.",
-                extra: "Por audio.",
-                offlineProof: "🎙️ Audio serenata",
-                isOfflineReady: true
-            },
-            {
-                category: "Preguntas Relámpago ⚡",
-                text: "El otro te manda 3 preguntas seguidas en el chat y tienes 30 segundos para contestarlas todas.",
-                extra: "Bajo presión.",
-                offlineProof: "💬 Respuestas rápidas",
-                isOfflineReady: true
-            },
-            {
-                category: "Lotería Ganada 🤑",
+                id: "d12", level: 1, category: "Lotería Ganada 🤑",
                 text: "Manda una foto fingiendo tu reacción exacta como si te acabaras de ganar 1 millón de dólares.",
-                extra: "Cara de euforia total.",
-                offlineProof: "📸 Foto de euforia",
-                isOfflineReady: true
+                extra: "Cara de euforia total.", offlineProof: "📸 Foto de euforia", isOfflineReady: true
             },
             {
-                category: "Noticiero de Última Hora 📰",
-                text: "Manda un audio narrando lo que hiciste hoy como si fuera una noticia de última hora en televisión nacional.",
-                extra: "Con tono de reportero serio.",
-                offlineProof: "🎙️ Audio de reportero",
-                isOfflineReady: true
-            },
-            {
-                category: "Abrazo a la Nada 👻",
+                id: "d13", level: 1, category: "Abrazo a la Nada 👻",
                 text: "Manda un video corto abrazando el aire durante 10 segundos con cara de emoción como si abrazaras a un fantasma.",
-                extra: "Sin reírse.",
-                offlineProof: "📸 Video de abrazo al aire",
-                isOfflineReady: true
+                extra: "Sin reírse.", offlineProof: "📸 Video de abrazo al aire", isOfflineReady: true
             },
             {
-                category: "El Traductor Animal 🐱",
+                id: "d14", level: 1, category: "El Traductor Animal 🐱",
                 text: "Manda un audio explicando por qué el otro es insoportable pero usando solo maullidos o ladridos.",
-                extra: "Traducción perruna/gatuna.",
-                offlineProof: "🎙️ Audio maullando/ladrando",
-                isOfflineReady: true
+                extra: "Traducción perruna/gatuna.", offlineProof: "🎙️ Audio maullando/ladrando", isOfflineReady: true
             },
             {
-                category: "Chisme Inventado 🗣️",
-                text: "Manda un audio inventando un chisme absurdo sobre ti mismo/a con tono de telenovela.",
-                extra: "No te imaginas lo que pasó...",
-                offlineProof: "🎙️ Audio de chisme",
-                isOfflineReady: true
-            },
-            {
-                category: "Guiños en Cadena 😉",
+                id: "d15", level: 1, category: "Guiños en Cadena 😉",
                 text: "Haz un video de 5 segundos intentando hacer 5 guiños rápidos seguidos con el mismo ojo.",
-                extra: "A ver si tienes puntería.",
-                offlineProof: "📸 Video de guiños",
-                isOfflineReady: true
+                extra: "A ver si tienes puntería.", offlineProof: "📸 Video de guiños", isOfflineReady: true
             },
             {
-                category: "Frase de Emojis Raros 🧩",
+                id: "d16", level: 1, category: "Frase de Emojis Raros 🧩",
                 text: "Elige los 4 emojis más raros de tu teclado y escribe una frase coherente en el chat usándolos todos.",
-                extra: "Desafío lingüístico.",
-                offlineProof: "💬 Frase con emojis",
-                isOfflineReady: true
+                extra: "Desafío lingüístico.", offlineProof: "💬 Frase con emojis", isOfflineReady: true
             },
             {
-                category: "Minuto de Silencio 🤫",
-                text: "1 minuto completo sin mandar mensajes en WhatsApp. El que escriba primero pierde y debe un castigo.",
-                extra: "A ver quién resiste.",
-                offlineProof: "⏱️ Silencio en chat",
-                isOfflineReady: true
-            },
-            {
-                category: "Chef Michelin 👨‍🍳",
+                id: "d17", level: 1, category: "Chef Michelin 👨‍🍳",
                 text: "Manda un audio explicando la receta gourmet para preparar un vaso con agua con tono de chef profesional.",
-                extra: "Con ingredientes exclusivos.",
-                offlineProof: "🎙️ Audio receta gourmet",
-                isOfflineReady: true
+                extra: "Con ingredientes exclusivos.", offlineProof: "🎙️ Audio receta gourmet", isOfflineReady: true
             },
             {
-                category: "Modelo de Portada 💃",
+                id: "d18", level: 1, category: "Modelo de Portada 💃",
                 text: "Tómate una foto intentando posar como modelo de alta costura pero con tu ropa de estar en casa.",
-                extra: "Pose de revista.",
-                offlineProof: "📸 Foto de modelo",
-                isOfflineReady: true
+                extra: "Pose de revista.", offlineProof: "📸 Foto de modelo", isOfflineReady: true
             },
             {
-                category: "Declaración al Celular 📱",
-                text: "Manda un video corto diciéndole a tu teléfono por qué lo quieres tanto mirando fijamente a la cámara.",
-                extra: "Agradece que no se traba.",
-                offlineProof: "📸 Video al celular",
-                isOfflineReady: true
-            },
-            {
-                category: "Grito Espartano ⚔️",
+                id: "d19", level: 1, category: "Grito Espartano ⚔️",
                 text: "Manda un audio con tu mejor grito de guerra espartano de 3 segundos.",
-                extra: "¡Esto es Esparta!",
-                offlineProof: "🎙️ Audio espartano",
-                isOfflineReady: true
+                extra: "¡Esto es Esparta!", offlineProof: "🎙️ Audio espartano", isOfflineReady: true
             },
             {
-                category: "El Reto Libre 👑",
+                id: "d20", level: 1, category: "La Canción Rara 📻",
+                text: "Busca la canción más rara o graciosa en Spotify o YouTube y mándasela diciendo 'esta es nuestra canción'.",
+                extra: "A ver qué responde.", offlineProof: "🎵 Link de la canción", isOfflineReady: true
+            },
+
+            // NIVEL 2: COMPLICIDAD (Apodos, audios actuados, estados, llamadas, imitaciones)
+            {
+                id: "d21", level: 2, category: "Miradas Fijas 👀",
+                text: "Mírense fijamente durante 30 segundos sin hablar y sin reírse. El primero que se ría pierde.",
+                extra: "El que se ría le debe un helado o café al otro.", offlineProof: "👀 En vivo / Video corto", isOfflineReady: false
+            },
+            {
+                id: "d22", level: 2, category: "Apodo Oficial 🏷️",
+                text: "Tienes que inventarle un apodo nuevo y vergonzoso al otro y usarlo obligatoriamente las próximas 24 horas.",
+                extra: "Sin quejas ni reclamos.", offlineProof: "💬 Escribir el apodo", isOfflineReady: true
+            },
+            {
+                id: "d23", level: 2, category: "Dedicatoria Musical 🎵",
+                text: "Cántale o tararéale un pedacito de una canción que te recuerde a él/ella por audio.",
+                extra: "Sin pena, aunque cantes feo.", offlineProof: "🎙️ Audio cantando", isOfflineReady: true
+            },
+            {
+                id: "d24", level: 2, category: "Declaración con Voz Rara 🤖",
+                text: "Dile un halago súper cursi al otro pero usando voz de ardilla o de telenovela dramática.",
+                extra: "Tiene que dar risa obligatoria.", offlineProof: "🎙️ Audio con voz rara", isOfflineReady: true
+            },
+            {
+                id: "d25", level: 2, category: "El Deudor 🍨",
+                text: "Firma un pagaré verbal: tienes que invitar la próxima comida o merienda que tengan juntos.",
+                extra: "Trato cerrado y sellado con 🤌🏿.", offlineProof: "💬 Pagaré en texto", isOfflineReady: true
+            },
+            {
+                id: "d26", level: 2, category: "Llamada Sorpresa 📞",
+                text: "Llama al otro por teléfono justo ahora y dile 'solo llamaba para decirte que me caes súper mal' y cuélgale.",
+                extra: "A ver cuánto tardan en reírse.", offlineProof: "📞 Llamada de 3 segundos", isOfflineReady: false
+            },
+            {
+                id: "d27", level: 2, category: "Foto de Bloqueo 📱",
+                text: "Manda captura de pantalla de tu pantalla de bloqueo y de tu última foto en la galería.",
+                extra: "Cero trampas ni borrar fotos.", offlineProof: "📱 Captura de pantalla", isOfflineReady: true
+            },
+            {
+                id: "d28", level: 2, category: "El Susurro 🤫",
+                text: "Manda un audio de 5 segundos susurrando lo primero que se te venga a la mente sobre la otra persona.",
+                extra: "Tono misterioso obligatorio.", offlineProof: "🎙️ Audio susurrando", isOfflineReady: true
+            },
+            {
+                id: "d29", level: 2, category: "Estatua 🗿",
+                text: "Quédate completamente congelado/a en videollamada o frente a la cámara 20 segundos sin pestañear.",
+                extra: "El otro intentará hacerte reír.", offlineProof: "👀 En llamada", isOfflineReady: false
+            },
+            {
+                id: "d30", level: 2, category: "Confesión en Estado 💬",
+                text: "Pon en tu estado de WhatsApp una indirecta graciosa que solo la otra persona entienda por 30 minutos.",
+                extra: "Los demás quedarán intrigados.", offlineProof: "📱 Captura del estado", isOfflineReady: true
+            },
+            {
+                id: "d31", level: 2, category: "Lectura de Ojos 👁️",
+                text: "Manda un video de 5 segundos solo haciendo un guiño o mirando fijamente a la cámara con cara de sospecha.",
+                extra: "Sin reírse.", offlineProof: "📸 Video corto de 5s", isOfflineReady: true
+            },
+            {
+                id: "d32", level: 2, category: "Intercambio de Roles 🎭",
+                text: "Por los próximos 3 turnos tienes que hablar y responder actuando exactamente como la otra persona.",
+                extra: "Copia sus frases y modismos.", offlineProof: "💬 Mensajes imitándolo/a", isOfflineReady: true
+            },
+            {
+                id: "d33", level: 2, category: "Tres Cosas Lindas ✨",
+                text: "Manda un audio diciendo 3 cosas que te gusten de su personalidad sin reírte.",
+                extra: "Momento tierno obligatorio.", offlineProof: "🎙️ Audio sincero", isOfflineReady: true
+            },
+            {
+                id: "d34", level: 2, category: "Bailarín Estrella 💃",
+                text: "Manda un video de 8 segundos bailando cualquier canción ridícula sin música.",
+                extra: "Prohibido tener pena.", offlineProof: "📸 Video de 8s", isOfflineReady: true
+            },
+            {
+                id: "d35", level: 2, category: "Recreación de Gol ⚽",
+                text: "Johel tiene que narrar un gol épico dedicado a Fer por audio, o Fer tiene que mandar un audio festejando como futbolista.",
+                extra: "Con narración apasionada.", offlineProof: "🎙️ Audio de gol", isOfflineReady: true
+            },
+            {
+                id: "d36", level: 2, category: "El Mensaje al Azar 📬",
+                text: "Deja que el otro elija un emoji y tienes que mandar un audio explicando por qué ese emoji te recuerda a él/ella.",
+                extra: "Sin rodeos.", offlineProof: "🎙️ Audio explicativo", isOfflineReady: true
+            },
+            {
+                id: "d37", level: 2, category: "Voz de Bebé 👶",
+                text: "Pídele perdón al otro por cualquier tontería que hayas hecho usando voz de bebé consentido en un audio.",
+                extra: "Tiene que sonar gracioso.", offlineProof: "🎙️ Audio voz de bebé", isOfflineReady: true
+            },
+            {
+                id: "d38", level: 2, category: "Rey/Reina del Drama 🎭",
+                text: "Manda un audio de 10 segundos fingiendo reclamos dramáticos como si el otro te hubiera dejado en visto 3 días.",
+                extra: "Con reclamos exagerados y actuación de novela.", offlineProof: "🎙️ Audio dramático", isOfflineReady: true
+            },
+            {
+                id: "d39", level: 2, category: "Acento Extranjero 🌍",
+                text: "Tienes que mandar los próximos 3 audios con acento argentino, mexicano o español obligatoriamente.",
+                extra: "El que se salga del personaje paga castigo.", offlineProof: "🎙️ 3 audios con acento", isOfflineReady: true
+            },
+            {
+                id: "d40", level: 2, category: "Cumplido Inverso 🙃",
+                text: "Manda un mensaje con un cumplido que suene como un insulto divertido o al revés.",
+                extra: "Ejemplo: 'Me encanta cómo finges que eres inteligente'.", offlineProof: "💬 Mensaje de texto", isOfflineReady: true
+            },
+            {
+                id: "d41", level: 2, category: "Vendedor de Infomerciales 📺",
+                text: "Manda un audio de 20 segundos vendiendo cualquier objeto inútil de tu mesa como si fuera el invento del siglo.",
+                extra: "¡Llame ya!", offlineProof: "🎙️ Audio infomercial", isOfflineReady: true
+            },
+            {
+                id: "d42", level: 2, category: "Modo Loro 🦜",
+                text: "Tienes que responder en el chat repitiendo la última palabra de lo que el otro te escriba por 5 minutos.",
+                extra: "Prohibido olvidarlo.", offlineProof: "💬 Modo loro en chat", isOfflineReady: true
+            },
+            {
+                id: "d43", level: 2, category: "Noticiero de Última Hora 📰",
+                text: "Manda un audio narrando lo que hiciste hoy como si fuera una noticia de última hora en televisión nacional.",
+                extra: "Con tono de reportero serio.", offlineProof: "🎙️ Audio de reportero", isOfflineReady: true
+            },
+            {
+                id: "d44", level: 2, category: "Chisme Inventado 🗣️",
+                text: "Manda un audio inventando un chisme absurdo sobre ti mismo/a con tono de telenovela.",
+                extra: "No te imaginas lo que pasó...", offlineProof: "🎙️ Audio de chisme", isOfflineReady: true
+            },
+            {
+                id: "d45", level: 2, category: "Declaración al Celular 📱",
+                text: "Manda un video corto diciéndole a tu teléfono por qué lo quieres tanto mirando fijamente a la cámara.",
+                extra: "Agradece que no se traba.", offlineProof: "📸 Video al celular", isOfflineReady: true
+            },
+
+            // NIVEL 3: CANDELA PURA (Preguntas prohibidas, capturas comprometidas, obediencia, secretos)
+            {
+                id: "d46", level: 3, category: "Pregunta Prohibida 😈",
+                text: "El otro tiene derecho a hacerte CUALQUIER pregunta sin filtro y tienes que responderla con 'Sí' o 'No' obligatoriamente.",
+                extra: "Sin derecho a réplica.", offlineProof: "💬 Responder Sí o No", isOfflineReady: true
+            },
+            {
+                id: "d47", level: 3, category: "El Piropero Callejero 🚗",
+                text: "Tírale al otro el piropo más ridículo y exagerado que conozcas por audio.",
+                extra: "De esos que dan vergüenza ajena.", offlineProof: "🎙️ Audio del piropo", isOfflineReady: true
+            },
+            {
+                id: "d48", level: 3, category: "Captura Comprometida 🔍",
+                text: "Muestra el chat fijado #1 de tu WhatsApp o la última persona con la que hablaste en Instagram.",
+                extra: "Transparencia total.", offlineProof: "📱 Captura de chats", isOfflineReady: true
+            },
+            {
+                id: "d49", level: 3, category: "La Promesa 🤝",
+                text: "Haz una promesa seria sobre algo divertido que vas a hacer por la otra persona la próxima vez que se vean.",
+                extra: "Queda registrada ante la ley.", offlineProof: "💬 Promesa escrita", isOfflineReady: true
+            },
+            {
+                id: "d50", level: 3, category: "Mayordomo Temporal 🛎️",
+                text: "Por los próximos 10 minutos, tienes que responder a todo lo que el otro diga en WhatsApp con 'Sí, lo que usted mande'.",
+                extra: "Cero rebeldía.", offlineProof: "💬 Chat de obediencia", isOfflineReady: true
+            },
+            {
+                id: "d51", level: 3, category: "El Interrogatorio 🔦",
+                text: "El otro tiene 15 segundos para hacerte 3 preguntas ultra rápidas y tienes que responderlas al instante por texto.",
+                extra: "Sin titubear.", offlineProof: "💬 Respuestas rápidas", isOfflineReady: true
+            },
+            {
+                id: "d52", level: 3, category: "El Silencio Incómodo 🤫",
+                text: "Manda un audio de 10 segundos donde solo se escuche tu respiración y al final un suspiro dramático.",
+                extra: "Misterio total.", offlineProof: "🎙️ Audio de 10s", isOfflineReady: true
+            },
+            {
+                id: "d53", level: 3, category: "El Imitador de Emojis 🤪",
+                text: "Manda 3 fotos imitando exactamente 3 emojis que el otro te elija en el chat.",
+                extra: "Cara idéntica obligatoria.", offlineProof: "📸 3 fotos de emojis", isOfflineReady: true
+            },
+            {
+                id: "d54", level: 3, category: "La Apuesta del Café ☕",
+                text: "El que pierda la próxima carta debe pagar las bebidas la próxima vez que salgan.",
+                extra: "Pagaré sellado.", offlineProof: "💬 Pagaré sellado", isOfflineReady: true
+            },
+            {
+                id: "d55", level: 3, category: "El Monólogo 🎤",
+                text: "Manda un audio de 20 segundos explicando por qué la otra persona tiene la culpa de todo en este juego.",
+                extra: "Argumentos sin sentido obligatorios.", offlineProof: "🎙️ Audio de 20s", isOfflineReady: true
+            },
+            {
+                id: "d56", level: 3, category: "El Abrazo Virtual 🫂",
+                text: "Manda un video corto apretando la almohada o un peluche diciendo 'así de fuerte te voy a molestar cuando te vea'.",
+                extra: "Con cara de maldad divertida.", offlineProof: "📸 Video corto", isOfflineReady: true
+            },
+            {
+                id: "d57", level: 3, category: "Mímica de Película 🎬",
+                text: "Haz un video mudo de 10 segundos haciendo la mímica de una película famosa y el otro tiene que adivinarla.",
+                extra: "Prohibido hacer sonidos.", offlineProof: "📸 Video mudo", isOfflineReady: true
+            },
+            {
+                id: "d58", level: 3, category: "Serenata Desafinada 🎶",
+                text: "Canta el coro de cualquier canción a todo pulmón por audio pero lo más desafinado y dramático posible.",
+                extra: "Por audio.", offlineProof: "🎙️ Audio serenata", isOfflineReady: true
+            },
+            {
+                id: "d59", level: 3, category: "Preguntas Relámpago ⚡",
+                text: "El otro te manda 3 preguntas seguidas en el chat y tienes 30 segundos para contestarlas todas.",
+                extra: "Bajo presión.", offlineProof: "💬 Respuestas rápidas", isOfflineReady: true
+            },
+            {
+                id: "d60", level: 3, category: "Minuto de Silencio 🤫",
+                text: "1 minuto completo sin mandar mensajes en WhatsApp. El que escriba primero pierde y debe un castigo.",
+                extra: "A ver quién resiste.", offlineProof: "⏱️ Silencio en chat", isOfflineReady: true
+            },
+            {
+                id: "d61", level: 3, category: "El Reto Libre 👑",
                 text: "El otro tiene el poder absoluto de ponerte CUALQUIER reto libre por el chat justo en este instante.",
-                extra: "Sin derecho a rechazar.",
-                offlineProof: "💬 Reto libre",
-                isOfflineReady: true
+                extra: "Sin derecho a rechazar.", offlineProof: "💬 Reto libre", isOfflineReady: true
             }
         ];
 
-        /* ==================== MAZOS Y FILTRADO OFFLINE ==================== */
+        /* ==================== MAZOS FILTRADOS POR NIVEL Y MEMORIA ==================== */
         let remainingTruths = [];
         let remainingDares = [];
 
         function resetDecks() {
-            if (currentMode === 'offline') {
-                remainingTruths = allTruths.map(t => ({ ...t }));
-                remainingDares = allDares.filter(d => d.isOfflineReady !== false).map(d => ({ ...d }));
-            } else {
-                remainingTruths = allTruths.map(t => ({ ...t }));
-                remainingDares = allDares.map(d => ({ ...d }));
+            const playedTruths = getPlayedSet(STORAGE_KEY_TRUTHS);
+            const playedDares = getPlayedSet(STORAGE_KEY_DARES);
+
+            // Filtrar verdades: por nivel actual + que NO hayan sido jugadas en sesiones anteriores
+            let tPool = allTruths.filter(t => !playedTruths.has(t.id));
+            let dPool = allDares.filter(d => !playedDares.has(d.id));
+
+            // Si se agotaron las cartas no jugadas, se resetea la memoria de ese tipo
+            if (tPool.length === 0) {
+                localStorage.removeItem(STORAGE_KEY_TRUTHS);
+                tPool = allTruths.map(t => ({ ...t }));
             }
+            if (dPool.length === 0) {
+                localStorage.removeItem(STORAGE_KEY_DARES);
+                dPool = allDares.map(d => ({ ...d }));
+            }
+
+            // Filtrado por modo offline si está activo
+            if (currentMode === 'offline') {
+                dPool = dPool.filter(d => d.isOfflineReady !== false);
+            }
+
+            // Filtrado por nivel
+            let tFiltered = tPool.filter(t => t.level === currentLevel);
+            let dFiltered = dPool.filter(d => d.level === currentLevel);
+
+            // Si no quedan de ese nivel exacto, toma de cualquier nivel disponible
+            remainingTruths = tFiltered.length > 0 ? tFiltered : tPool;
+            remainingDares = dFiltered.length > 0 ? dFiltered : dPool;
+
             updateDeckCounters();
         }
         resetDecks();
+        updateLevelUI();
 
         function updateDeckCounters() {
-            document.getElementById('truthCountPill').innerHTML = `Verdades: <strong>${remainingTruths.length}</strong>`;
-            document.getElementById('dareCountPill').innerHTML = `Retos: <strong>${remainingDares.length}</strong>`;
+            const playedTruths = getPlayedSet(STORAGE_KEY_TRUTHS);
+            const playedDares = getPlayedSet(STORAGE_KEY_DARES);
+            const totalRemainingTruths = allTruths.length - playedTruths.size;
+            const totalRemainingDares = allDares.length - playedDares.size;
+
+            document.getElementById('truthCountPill').innerHTML = `Verdades disponibles: <strong>${totalRemainingTruths > 0 ? totalRemainingTruths : allTruths.length}</strong>`;
+            document.getElementById('dareCountPill').innerHTML = `Retos disponibles: <strong>${totalRemainingDares > 0 ? totalRemainingDares : allDares.length}</strong>`;
             document.getElementById('totalTruthsCount').innerText = allTruths.length;
             document.getElementById('totalDaresCount').innerText = allDares.length;
         }
@@ -1938,29 +1928,38 @@
 
         function getRandomItem() {
             if (!currentType) return;
-            
+
             let pool = currentType === 'truth' ? remainingTruths : remainingDares;
 
             if (pool.length === 0) {
                 resetDecks();
                 pool = currentType === 'truth' ? remainingTruths : remainingDares;
-                alert(`🃏 ¡Se jugaron todas las ${currentType === 'truth' ? 'verdades' : 'retos'} del modo ${currentMode}! Barajando el mazo de nuevo...`);
             }
 
             const randomIndex = Math.floor(Math.random() * pool.length);
             currentCardItem = pool.splice(randomIndex, 1)[0];
 
+            // Guardar en memoria de localStorage para no repetir en futuras sesiones
+            if (currentType === 'truth') {
+                savePlayedId(STORAGE_KEY_TRUTHS, currentCardItem.id);
+            } else {
+                savePlayedId(STORAGE_KEY_DARES, currentCardItem.id);
+            }
+
+            roundNumber++;
+            calcAutoLevel();
             updateDeckCounters();
 
             const cardBox = document.getElementById('cardBox');
             const banner = document.getElementById('cardTurnBanner');
+            const lvlTag = document.getElementById('cardLevelTag');
             const proofPill = document.getElementById('offlineProofPill');
             const cat = document.getElementById('cardCategory');
             const prompt = document.getElementById('cardPrompt');
             const extra = document.getElementById('cardExtra');
             const btnShare = document.getElementById('btnShareWhatsApp');
 
-            // Animación elegante de giro y pulso
+            // Animación 3D aesthetic
             cardBox.style.transform = 'scale(0.92) rotateX(15deg)';
             cardBox.style.opacity = '0.4';
 
@@ -1971,6 +1970,23 @@
                 } else {
                     banner.className = 'turn-flag johel';
                     banner.innerText = '🤌🏿 Turno de JOHEL: Te toca a ti';
+                }
+
+                // Nivel de la carta
+                const lvlNum = currentCardItem.level || 1;
+                lvlTag.style.display = 'inline-block';
+                if (lvlNum === 1) {
+                    lvlTag.style.background = 'rgba(56, 189, 248, 0.2)';
+                    lvlTag.style.color = '#38bdf8';
+                    lvlTag.innerText = '🧊 Nivel 1: Calentamiento';
+                } else if (lvlNum === 2) {
+                    lvlTag.style.background = 'rgba(245, 158, 11, 0.2)';
+                    lvlTag.style.color = '#f59e0b';
+                    lvlTag.innerText = '🌶️ Nivel 2: Complicidad';
+                } else {
+                    lvlTag.style.background = 'rgba(239, 68, 68, 0.2)';
+                    lvlTag.style.color = '#ef4444';
+                    lvlTag.innerText = '🔥 Nivel 3: Candela Pura';
                 }
 
                 if (currentCardItem.offlineProof) {
@@ -2005,10 +2021,11 @@
             const isTruth = currentType === 'truth';
             const icon = isTruth ? '🧠 VERDAD' : '🔥 RETO';
             const targetName = currentPlayer === 'Fer' ? 'FER 💅' : 'JOHEL 🤌🏿';
+            const lvlEmoji = currentCardItem.level === 3 ? '🔥 (Nivel 3: Candela)' : currentCardItem.level === 2 ? '🌶️ (Nivel 2: Pique)' : '🧊 (Nivel 1)';
             const proofText = currentCardItem.offlineProof ? `\n📌 *Prueba requerida:* ${currentCardItem.offlineProof}` : '';
             const extraText = currentCardItem.extra ? `\n👉 *Detalle:* ${currentCardItem.extra}` : '';
 
-            const message = `🎲 *VERDAD O RETO (Fer & Johel) 🤌🏿*\n🎯 *Turno de:* ${targetName}\n${icon}: "${currentCardItem.text}"${extraText}${proofText}\n\n⏱️ _¡Tienes que responder o mandar la prueba por aquí antes de que te rajes!_ 🐔`;
+            const message = `🎲 *VERDAD O RETO (Fer & Johel) 🤌🏿*\n🎯 *Turno de:* ${targetName} ${lvlEmoji}\n${icon}: "${currentCardItem.text}"${extraText}${proofText}\n\n⏱️ _¡Tienes que responder o mandar la prueba por aquí antes de que te rajes!_ 🐔`;
 
             const encoded = encodeURIComponent(message);
             const waUrl = `https://api.whatsapp.com/send?text=${encoded}`;
@@ -2106,10 +2123,11 @@
                 const forBadge = item.for ? ` • Para: ${item.for}` : '';
                 const proofTag = item.offlineProof ? ` • [${item.offlineProof}]` : '';
                 const badgeClass = isTruth ? 'truth' : 'dare';
+                const lvlBadge = item.level === 3 ? '🔥 Nivel 3' : item.level === 2 ? '🌶️ Nivel 2' : '🧊 Nivel 1';
 
                 card.innerHTML = `
                     <div class="row-item-badge ${badgeClass}">
-                        #${idx + 1} ${item.category}${forBadge}${proofTag}
+                        #${idx + 1} ${item.category}${forBadge} • ${lvlBadge}${proofTag}
                     </div>
                     <div class="row-item-title">${item.text}</div>
                     ${item.extra ? `<div class="row-item-extra">${item.extra}</div>` : ''}
