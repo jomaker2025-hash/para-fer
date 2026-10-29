@@ -799,6 +799,355 @@
             margin-top: 4px;
             font-style: italic;
         }
+
+        /* ==================== MENÚ DE JUEGOS (MULTI-MODO) ==================== */
+        .game-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin: 4px 0 16px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+        }
+
+        .game-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.68rem;
+            line-height: 1.15;
+            padding: 8px 2px;
+            border-radius: 13px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            transition: all 0.25s ease;
+        }
+
+        .game-tab .tab-emoji { font-size: 1.25rem; }
+
+        .game-tab.active {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.28), rgba(124, 58, 237, 0.32));
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+        }
+
+        .game-panel { display: none; animation: panelIn 0.35s ease; }
+        .game-panel.active { display: block; }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cabecera de nivel compartida por los modos extra */
+        .xm-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 8px;
+        }
+
+        .xm-lvl {
+            font-size: 0.72rem;
+            font-weight: 900;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+        }
+        .xm-lvl.l1 { background: rgba(56, 189, 248, 0.16); color: var(--lvl-1-color); border: 1px solid rgba(56, 189, 248, 0.4); }
+        .xm-lvl.l2 { background: rgba(245, 158, 11, 0.16); color: var(--lvl-2-color); border: 1px solid rgba(245, 158, 11, 0.4); }
+        .xm-lvl.l3 { background: rgba(239, 68, 68, 0.16); color: var(--lvl-3-color); border: 1px solid rgba(239, 68, 68, 0.45); }
+
+        .xm-round {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            font-weight: 700;
+        }
+
+        .xm-card {
+            position: relative;
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 22px 16px;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+
+        .xm-card.pop { animation: cardPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+        @keyframes cardPop {
+            0% { transform: scale(0.9) rotate(-2deg); opacity: 0.2; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .xm-kicker {
+            font-size: 0.74rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-accent);
+        }
+
+        .xm-text {
+            font-size: 1.22rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .xm-text.serif {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+        }
+
+        /* ¿Qué prefieres? */
+        .pf-options { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+
+        .pf-opt {
+            border-radius: 18px;
+            padding: 14px 14px 14px 46px;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.35;
+            text-align: left;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .pf-opt::before {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.85rem;
+            color: #111;
+        }
+
+        .pf-opt.a { background: rgba(56, 189, 248, 0.12); border: 1.5px solid rgba(56, 189, 248, 0.45); }
+        .pf-opt.a::before { content: 'A'; background: var(--truth-cyan); }
+        .pf-opt.b { background: rgba(244, 63, 94, 0.12); border: 1.5px solid rgba(244, 63, 94, 0.45); }
+        .pf-opt.b::before { content: 'B'; background: var(--dare-pink); }
+        .pf-opt.winner { transform: scale(1.03); box-shadow: 0 0 24px rgba(250, 204, 21, 0.35); border-color: var(--gold-accent); }
+
+        .pf-vs {
+            align-self: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--gold-accent);
+            background: rgba(250, 204, 21, 0.1);
+            padding: 3px 12px;
+            border-radius: 20px;
+        }
+
+        /* Filas de votación */
+        .xm-votes { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+
+        .xm-vote-row {
+            display: grid;
+            grid-template-columns: 82px 1fr 1fr;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .xm-who {
+            font-weight: 900;
+            font-size: 0.82rem;
+            padding: 9px 4px;
+            border-radius: 14px;
+            color: #111;
+        }
+        .xm-who.fer { background: var(--fer-gradient); }
+        .xm-who.johel { background: var(--johel-gradient); }
+
+        .xm-vote-btn {
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.86rem;
+            padding: 10px 6px;
+            border-radius: 14px;
+            border: 1.5px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .xm-vote-btn:active { transform: scale(0.94); }
+        .xm-vote-btn.sel-a { background: var(--truth-cyan); color: #0b1220; border-color: var(--truth-cyan); }
+        .xm-vote-btn.sel-b { background: var(--dare-pink); color: #fff; border-color: var(--dare-pink); }
+        .xm-vote-btn.sel-fer { background: var(--fer-gradient); color: #111; border-color: #f472b6; }
+        .xm-vote-btn.sel-johel { background: var(--johel-gradient); color: #111; border-color: #fbbf24; }
+        .xm-vote-btn.sel-yes { background: linear-gradient(135deg, #f43f5e, #be123c); color: #fff; border-color: #f43f5e; }
+        .xm-vote-btn.sel-no { background: linear-gradient(135deg, #a7f3d0, #34d399); color: #052e1c; border-color: #34d399; }
+        .xm-vote-btn.locked { pointer-events: none; opacity: 0.55; }
+        .xm-vote-btn.locked[class*="sel-"] { opacity: 1; }
+
+        .xm-hint {
+            font-size: 0.76rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
+
+        .xm-result {
+            display: none;
+            border-radius: 18px;
+            padding: 14px;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            font-weight: 600;
+            animation: cardPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .xm-result.show { display: block; }
+        .xm-result.good { background: rgba(52, 211, 153, 0.12); border: 1px solid rgba(52, 211, 153, 0.45); color: #a7f3d0; }
+        .xm-result.clash { background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.45); color: #fecdd3; }
+        .xm-result.gold { background: rgba(250, 204, 21, 0.12); border: 1px solid rgba(250, 204, 21, 0.45); color: #fef08a; }
+        .xm-result strong { color: #fff; }
+
+        .xm-btn-main {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            font-weight: 900;
+            font-size: 0.98rem;
+            padding: 14px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-bottom: 8px;
+        }
+        .xm-btn-main:active { transform: scale(0.97); }
+
+        .xm-btn-ghost {
+            display: block;
+            width: 100%;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1.5px solid rgba(34, 197, 94, 0.55);
+            color: #86efac;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.88rem;
+            padding: 11px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .xm-btn-ghost.purple {
+            background: rgba(250, 204, 21, 0.08);
+            border-color: rgba(250, 204, 21, 0.5);
+            color: #fde68a;
+        }
+
+        .xm-foot {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.78rem;
+            color: var(--text-sub);
+        }
+        .xm-foot strong { color: #fff; font-size: 0.92rem; }
+
+        .xm-reset {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            text-decoration: underline;
+            font-family: inherit;
+            font-size: 0.72rem;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        /* Yo nunca: vidas */
+        .yn-lives {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .yn-life-box {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
+            padding: 8px 6px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .yn-life-name { font-size: 0.74rem; font-weight: 900; margin-bottom: 3px; }
+        .yn-life-name.fer { color: #f472b6; }
+        .yn-life-name.johel { color: #fbbf24; }
+        .yn-hearts { font-size: 1.05rem; letter-spacing: 1px; }
+        .yn-hearts .lost { filter: grayscale(1); opacity: 0.25; }
+        .yn-hearts.hit { animation: heartShake 0.5s ease; }
+
+        @keyframes heartShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        /* Cuenta regresiva "1, 2, 3... ¡Señalen!" */
+        .xm-countdown {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(9, 7, 18, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .xm-countdown.show { display: flex; }
+        .xm-countdown span {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f472b6, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: countPulse 0.8s ease;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .xm-countdown span.small { font-size: 3rem; }
+
+        @keyframes countPulse {
+            0% { transform: scale(2.2); opacity: 0; }
+            40% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.85; }
+        }
     </style>
 </head>
 <body>
@@ -811,9 +1160,18 @@
     <div class="app-wrapper">
         <div class="main-card">
             <span class="top-badge">✨ Edición Especial 🤌🏿</span>
-            <h1 class="game-title">Verdad o Reto</h1>
-            <p class="game-subtitle">Entre Fer y Johel 🤌🏿</p>
+            <h1 class="game-title" id="gameTitle">Verdad o Reto</h1>
+            <p class="game-subtitle" id="gameSubtitle">Entre Fer y Johel 🤌🏿</p>
 
+            <!-- ==================== MENÚ DE JUEGOS ==================== -->
+            <div class="game-tabs">
+                <button class="game-tab active" id="tab-vor" onclick="switchGame('vor')"><span class="tab-emoji">🃏</span>Verdad o Reto</button>
+                <button class="game-tab" id="tab-pf" onclick="switchGame('pf')"><span class="tab-emoji">⚖️</span>¿Qué Prefieres?</button>
+                <button class="game-tab" id="tab-qd" onclick="switchGame('qd')"><span class="tab-emoji">👥</span>¿Quién de los Dos?</button>
+                <button class="game-tab" id="tab-yn" onclick="switchGame('yn')"><span class="tab-emoji">🍷</span>Yo Nunca Nunca</button>
+            </div>
+
+            <div class="game-panel active" id="panel-vor">
             <!-- ==================== MEDIDOR PROGRESIVO DE INTENSIDAD ==================== -->
             <div class="level-meter-box">
                 <div class="level-meta-row">
@@ -929,6 +1287,121 @@
                 <button class="btn-pin-toggle" onclick="openPinModal()">
                     🔒 Ver mazo completo (PIN secreto)
                 </button>
+            </div>
+            </div><!-- /panel-vor -->
+
+            <!-- ==================== MODO: ¿QUÉ PREFIERES? ==================== -->
+            <div class="game-panel" id="panel-pf">
+                <div class="xm-meta">
+                    <span class="xm-lvl l1" id="pfLvl">🧊 NIVEL 1</span>
+                    <span class="xm-round" id="pfRound">Dilema #0 · Quedan 0</span>
+                </div>
+                <div class="xm-card" id="pfCard">
+                    <div class="xm-kicker">⚖️ ¿Qué prefieres?</div>
+                    <div class="pf-options">
+                        <div class="pf-opt a" id="pfA">Toca "Siguiente dilema" para empezar...</div>
+                        <div class="pf-vs">VS</div>
+                        <div class="pf-opt b" id="pfB">...y a ver si piensan igual 👀</div>
+                    </div>
+                </div>
+                <div class="xm-hint">Cada quien vota sin ver al otro. Si no coinciden... ¡a defender su respuesta! 🎤</div>
+                <div class="xm-votes">
+                    <div class="xm-vote-row">
+                        <span class="xm-who fer">💅 FER</span>
+                        <button class="xm-vote-btn" id="pf-Fer-A" onclick="pfVote('Fer','A')">🅰️ Opción A</button>
+                        <button class="xm-vote-btn" id="pf-Fer-B" onclick="pfVote('Fer','B')">🅱️ Opción B</button>
+                    </div>
+                    <div class="xm-vote-row">
+                        <span class="xm-who johel">🤌🏿 JOHEL</span>
+                        <button class="xm-vote-btn" id="pf-Johel-A" onclick="pfVote('Johel','A')">🅰️ Opción A</button>
+                        <button class="xm-vote-btn" id="pf-Johel-B" onclick="pfVote('Johel','B')">🅱️ Opción B</button>
+                    </div>
+                </div>
+                <div class="xm-result" id="pfResult"></div>
+                <button class="xm-btn-main" onclick="pfNext()">Siguiente dilema ⚖️</button>
+                <button class="xm-btn-ghost" onclick="xmShare('pf')">💬 Mandar dilema por WhatsApp</button>
+                <div class="xm-foot">
+                    <span>💞 Coincidencias: <strong id="pfMatch">0</strong></span>
+                    <span>⚡ Choques: <strong id="pfClash">0</strong></span>
+                </div>
+                <button class="xm-reset" onclick="xmReset('pf')">💾 Reiniciar memoria de dilemas</button>
+            </div>
+
+            <!-- ==================== MODO: ¿QUIÉN DE LOS DOS? ==================== -->
+            <div class="game-panel" id="panel-qd">
+                <div class="xm-meta">
+                    <span class="xm-lvl l1" id="qdLvl">🧊 NIVEL 1</span>
+                    <span class="xm-round" id="qdRound">Pregunta #0 · Quedan 0</span>
+                </div>
+                <div class="xm-card" id="qdCard">
+                    <div class="xm-kicker">👥 ¿Quién de los dos...?</div>
+                    <div class="xm-text" id="qdText">Toca "Siguiente" para sacar la primera pregunta 🫵</div>
+                </div>
+                <button class="xm-btn-ghost purple" onclick="qdCountdown()">🫵 1, 2, 3... ¡Señalen!</button>
+                <div class="xm-votes">
+                    <div class="xm-vote-row">
+                        <span class="xm-who fer">💅 FER dice</span>
+                        <button class="xm-vote-btn" id="qd-Fer-Fer" onclick="qdVote('Fer','Fer')">💅 Fer</button>
+                        <button class="xm-vote-btn" id="qd-Fer-Johel" onclick="qdVote('Fer','Johel')">🤌🏿 Johel</button>
+                    </div>
+                    <div class="xm-vote-row">
+                        <span class="xm-who johel">🤌🏿 JOHEL dice</span>
+                        <button class="xm-vote-btn" id="qd-Johel-Fer" onclick="qdVote('Johel','Fer')">💅 Fer</button>
+                        <button class="xm-vote-btn" id="qd-Johel-Johel" onclick="qdVote('Johel','Johel')">🤌🏿 Johel</button>
+                    </div>
+                </div>
+                <div class="xm-result" id="qdResult"></div>
+                <button class="xm-btn-main" onclick="qdNext()">Siguiente pregunta 👥</button>
+                <button class="xm-btn-ghost" onclick="xmShare('qd')">💬 Mandar pregunta por WhatsApp</button>
+                <div class="xm-foot">
+                    <span>🫵 Fer señalada: <strong id="qdScoreFer">0</strong></span>
+                    <span>🫵 Johel señalado: <strong id="qdScoreJohel">0</strong></span>
+                </div>
+                <button class="xm-reset" onclick="xmReset('qd')">💾 Reiniciar memoria de preguntas</button>
+            </div>
+
+            <!-- ==================== MODO: YO NUNCA NUNCA ==================== -->
+            <div class="game-panel" id="panel-yn">
+                <div class="xm-meta">
+                    <span class="xm-lvl l1" id="ynLvl">🧊 NIVEL 1</span>
+                    <span class="xm-round" id="ynRound">Frase #0 · Quedan 0</span>
+                </div>
+                <div class="yn-lives">
+                    <div class="yn-life-box">
+                        <div class="yn-life-name fer">💅 FER</div>
+                        <div class="yn-hearts" id="ynHeartsFer"></div>
+                    </div>
+                    <div class="yn-life-box">
+                        <div class="yn-life-name johel">🤌🏿 JOHEL</div>
+                        <div class="yn-hearts" id="ynHeartsJohel"></div>
+                    </div>
+                </div>
+                <div class="xm-card" id="ynCard">
+                    <div class="xm-kicker">🍷 Yo nunca nunca...</div>
+                    <div class="xm-text serif" id="ynText">Toca "Siguiente" para la primera confesión 🙈</div>
+                </div>
+                <div class="xm-hint">Cada "Yo sí" cuesta una vida ❤️. El primero en quedarse sin vidas paga castigo.</div>
+                <div class="xm-votes">
+                    <div class="xm-vote-row">
+                        <span class="xm-who fer">💅 FER</span>
+                        <button class="xm-vote-btn" id="yn-Fer-yes" onclick="ynVote('Fer','yes')">🙈 Yo sí</button>
+                        <button class="xm-vote-btn" id="yn-Fer-no" onclick="ynVote('Fer','no')">😇 Yo nunca</button>
+                    </div>
+                    <div class="xm-vote-row">
+                        <span class="xm-who johel">🤌🏿 JOHEL</span>
+                        <button class="xm-vote-btn" id="yn-Johel-yes" onclick="ynVote('Johel','yes')">🙈 Yo sí</button>
+                        <button class="xm-vote-btn" id="yn-Johel-no" onclick="ynVote('Johel','no')">😇 Yo nunca</button>
+                    </div>
+                </div>
+                <div class="xm-result" id="ynResult"></div>
+                <button class="xm-btn-main" onclick="ynNext()">Siguiente "Yo nunca" 🍷</button>
+                <button class="xm-btn-ghost" onclick="xmShare('yn')">💬 Mandar frase por WhatsApp</button>
+                <div class="xm-foot">
+                    <span>💀 Castigos Fer: <strong id="ynPenFer">0</strong></span>
+                    <span>💀 Castigos Johel: <strong id="ynPenJohel">0</strong></span>
+                </div>
+                <button class="xm-reset" onclick="ynResetLives()">❤️ Rellenar vidas</button>
+                <button class="xm-reset" onclick="xmReset('yn')">💾 Reiniciar memoria de frases</button>
             </div>
         </div>
     </div>
@@ -2595,6 +3068,511 @@
                 body.appendChild(card);
             });
         }
+    </script>
+
+    <!-- Cuenta regresiva para "¿Quién de los dos?" -->
+    <div class="xm-countdown" id="xmCountdown"><span id="xmCountdownNum">3</span></div>
+
+    <script>
+        /* =====================================================================
+           MODOS EXTRA: ¿QUÉ PREFIERES? · ¿QUIÉN DE LOS DOS? · YO NUNCA NUNCA
+           - Cada modo sube de nivel poco a poco (1 → 2 → 3) según la ronda.
+           - Memoria entre sesiones con localStorage (no se repiten).
+           - Para agregar más contenido: añadir al FINAL de cada lista
+             (los IDs se generan por posición, así la memoria no se rompe).
+           ===================================================================== */
+        const GAME_URL = 'https://jomaker2025-hash.github.io/para-fer/';
+
+        /* ---------- ¿QUÉ PREFIERES? [nivel, opción A, opción B] ---------- */
+        const PREFIERES_RAW = [
+            // Nivel 1: Calentamiento
+            [1, "Comer solo pizza por un mes", "Comer solo tacos por un mes"],
+            [1, "Que el otro lea en voz alta tus últimos 5 chats con tu mejor amigo/a", "Que vea tu galería durante 1 minuto"],
+            [1, "Hablar cantando todo un día", "Hablar solo con emojis todo un día"],
+            [1, "Perder el celular por un día", "Perder la voz por un día"],
+            [1, "Ver puras películas de terror juntos", "Ver puras novelas dramáticas juntos"],
+            [1, "Que el otro te escoja la ropa por una semana", "Que te escoja el peinado por una semana"],
+            [1, "Dormir sin almohada", "Dormir sin cobija"],
+            [1, "Vivir en la playa", "Vivir en la montaña"],
+            [1, "Que te canten las mañanitas a gritos en un restaurante", "Que te griten tu apodo en plena calle"],
+            [1, "Ser siempre el que llega tarde", "Ser siempre el que espera"],
+            [1, "Tener un perro gigante y baboso", "Tener un gato que te odie"],
+            [1, "Viajar al pasado", "Viajar al futuro"],
+            [1, "No volver a usar stickers nunca", "No volver a mandar audios nunca"],
+            [1, "Reírte sin parar en un momento serio", "Llorar con una película enfrente del otro"],
+            [1, "Que el otro cocine para ti (aunque cocine horrible)", "Cocinar tú para el otro (y que te critique)"],
+            [1, "Tener que decir siempre la verdad por un día", "Tener que mentir en todo por un día"],
+            // Nivel 2: Complicidad
+            [2, "Que el otro vea tu historial de Google", "Que vea tu historial de TikTok / YouTube"],
+            [2, "Una cita de picnic al atardecer", "Una cita de feria con juegos mecánicos"],
+            [2, "Recibir un audio de buenos días todos los días", "Recibir una llamada de buenas noches todos los días"],
+            [2, "Que te celen un poquito", "Que les dé completamente igual"],
+            [2, "Quedarse en llamada hasta dormirse", "Despertar con un mensaje largo del otro"],
+            [2, "Un apodo cursi en público", "Un apodo burlón en privado"],
+            [2, "Recibir flores", "Recibir tu comida favorita de sorpresa"],
+            [2, "Que el otro sepa tus secretos más vergonzosos", "Que sepa todo lo que piensas de él/ella"],
+            [2, "Bailar juntos frente a todos en una fiesta", "Cantar un dueto en karaoke"],
+            [2, "Que el otro te gane siempre en los juegos", "Que se deje ganar y lo notes"],
+            [2, "Darle tu celular desbloqueado 10 minutos", "Responder 10 verdades seguidas sin saltarte ninguna"],
+            [2, "Una salida espontánea sin plan", "Una salida planeada al detalle"],
+            [2, "Que te mire fijo 1 minuto sin hablar", "Que te diga 3 cumplidos seguidos mirándote a los ojos"],
+            [2, "Que el otro lea todos tus mensajes viejos con él/ella", "Leer tú todos los suyos"],
+            [2, "Que te escriba una carta a mano", "Que te dedique una canción en público"],
+            [2, "Admitir quién extraña más al otro", "Admitir quién stalkea más al otro"],
+            // Nivel 3: Candela
+            [3, "Un abrazo por la espalda inesperado", "Que te tome de la mano en público sin avisar"],
+            [3, "Que te susurre algo al oído", "Que te dé un beso en la mejilla por sorpresa"],
+            [3, "Estar esposados el uno al otro 12 horas", "Darle tu celular desbloqueado 15 minutos"],
+            [3, "Quedarse a oscuras en un elevador 1 hora", "Quedarse bajo la lluvia sin paraguas juntos"],
+            [3, "Que el otro sepa tu pensamiento más atrevido sobre él/ella", "Que te pregunte lo que quiera sin poder mentir"],
+            [3, "Bailar lento bien pegaditos", "Una guerra de cosquillas sin piedad"],
+            [3, "Película en casa con cobija compartida", "Ver estrellas de noche acostados en el pasto"],
+            [3, "Recibir una foto estética y atrevida del otro", "Recibir un audio susurrando"],
+            [3, "Ser siempre el que da el primer paso", "Ser siempre el que lo recibe"],
+            [3, "Que el otro te robe un beso", "Robárselo tú"],
+            [3, "Una noche de juegos con castigos", "Una noche de verdades sin filtro"],
+            [3, "Un día entero juntos sin celular", "Un día sin verse pero hablando sin parar"],
+            [3, "Que el otro elija tu outfit para una cita", "Elegir tú el suyo y que lo use sí o sí"],
+            [3, "Que te miren los labios mientras hablas", "Que te acomoden el cabello sin decir nada"]
+        ];
+
+        /* ---------- ¿QUIÉN DE LOS DOS? [nivel, texto] ---------- */
+        const QUIEN_RAW = [
+            [1, "¿Quién es más probable que se enoje por una bobada?"],
+            [1, "¿Quién tarda más en arreglarse para salir?"],
+            [1, "¿Quién se quedaría dormido/a primero en llamada?"],
+            [1, "¿Quién es más dramático/a?"],
+            [1, "¿Quién se comería la comida del otro sin preguntar?"],
+            [1, "¿Quién tiene peor sentido de orientación?"],
+            [1, "¿Quién se ríe de sus propios chistes?"],
+            [1, "¿Quién deja en visto más seguido?"],
+            [1, "¿Quién llora más con las películas?"],
+            [1, "¿Quién moriría primero en una película de terror?"],
+            [1, "¿Quién es más chismoso/a?"],
+            [1, "¿Quién es más terco/a?"],
+            [1, "¿Quién gasta más dinero en tonterías?"],
+            [1, "¿Quién tiene la risa más contagiosa?"],
+            [1, "¿Quién manda los stickers más raros?"],
+            [1, "¿Quién es peor perdedor/a?"],
+            [1, "¿Quién se pondría a bailar en público primero?"],
+            [2, "¿Quién es más celoso/a en secreto?"],
+            [2, "¿Quién stalkea más las redes del otro?"],
+            [2, "¿Quién extraña más cuando no hablan?"],
+            [2, "¿Quién se hace el/la difícil más seguido?"],
+            [2, "¿Quién relee los chats viejos?"],
+            [2, "¿Quién aplica más la ley del hielo?"],
+            [2, "¿Quién pide perdón primero después de pelear?"],
+            [2, "¿Quién escribe y borra mensajes antes de mandarlos?"],
+            [2, "¿Quién se pone más nervioso/a cuando se ven?"],
+            [2, "¿Quién tiene más capturas de pantalla del otro?"],
+            [2, "¿Quién es más cursi aunque lo niegue?"],
+            [2, "¿Quién planearía la mejor cita?"],
+            [2, "¿Quién sonríe más viendo el celular por culpa del otro?"],
+            [2, "¿Quién ha dicho 'estoy bien' cuando no lo estaba?"],
+            [2, "¿Quién se sonroja más fácil?"],
+            [2, "¿Quién guardaría un regalo del otro para siempre?"],
+            [3, "¿Quién daría el primer paso?"],
+            [3, "¿Quién robaría un beso primero?"],
+            [3, "¿Quién aguanta menos una mirada fija?"],
+            [3, "¿Quién es más atrevido/a en privado?"],
+            [3, "¿Quién ha tenido más pensamientos atrevidos sobre el otro?"],
+            [3, "¿Quién se rendiría primero en una guerra de cosquillas?"],
+            [3, "¿Quién provoca más al otro solo por diversión?"],
+            [3, "¿Quién sería más tóxico/a en una relación?"],
+            [3, "¿Quién se pone más intenso/a a las 2 AM?"],
+            [3, "¿Quién no soltaría al otro en un abrazo?"],
+            [3, "¿Quién mandaría un audio atrevido y luego lo borraría?"],
+            [3, "¿Quién se pondría rojo/a primero si el otro le susurra algo?"],
+            [3, "¿Quién sabe exactamente cómo poner nervioso/a al otro?"],
+            [3, "¿Quién se guarda más lo que siente?"]
+        ];
+
+        /* ---------- YO NUNCA NUNCA [nivel, texto] ---------- */
+        const YONUNCA_RAW = [
+            [1, "he fingido estar dormido/a para no contestar"],
+            [1, "he dicho 'ya voy en camino' cuando ni me había bañado"],
+            [1, "me he caído en público"],
+            [1, "he cantado a todo pulmón en la regadera"],
+            [1, "me he comido algo que se cayó al piso"],
+            [1, "he mandado un mensaje a la persona equivocada"],
+            [1, "he fingido que me gustó un regalo"],
+            [1, "he hablado solo/a frente al espejo"],
+            [1, "me he quedado dormido/a en clase"],
+            [1, "he stalkeado a alguien hasta fotos de hace años"],
+            [1, "he llorado viendo una caricatura"],
+            [1, "he dejado en visto a propósito"],
+            [1, "he usado la misma ropa 3 días seguidos"],
+            [1, "he fingido saber de qué hablaban para no quedar mal"],
+            [1, "he ensayado una conversación en mi cabeza antes de tenerla"],
+            [1, "me he reído en un momento muy serio"],
+            [2, "he releído nuestros chats viejos"],
+            [2, "he sonreído como tonto/a leyendo un mensaje del otro"],
+            [2, "he tomado captura de una conversación nuestra"],
+            [2, "he escrito un mensaje para el otro y lo borré"],
+            [2, "he sentido celos por alguien que le habló al otro"],
+            [2, "me he desvelado solo por seguir hablando con el otro"],
+            [2, "he revisado si el otro estaba en línea"],
+            [2, "he visto una historia del otro más de una vez"],
+            [2, "he fingido que no me importaba algo que sí me importaba"],
+            [2, "le he contado a alguien de nuestras conversaciones"],
+            [2, "he escuchado una canción pensando en el otro"],
+            [2, "he hecho algo solo para llamar la atención del otro"],
+            [2, "he esperado a que el otro escriba primero a propósito"],
+            [2, "he guardado una foto del otro"],
+            [2, "he tardado en contestar para no verme desesperado/a"],
+            [2, "me he puesto nervioso/a antes de una llamada con el otro"],
+            [3, "he soñado con el otro"],
+            [3, "he pensado en cómo sería besar al otro"],
+            [3, "he tenido un pensamiento atrevido viendo una foto del otro"],
+            [3, "he querido abrazar al otro y no me atreví"],
+            [3, "me he imaginado una cita con el otro"],
+            [3, "he querido decirle algo intenso al otro y me arrepentí"],
+            [3, "me he puesto celoso/a y lo disimulé"],
+            [3, "le he mirado los labios al otro mientras hablaba"],
+            [3, "he subido una foto pensando en que el otro la viera"],
+            [3, "me he quedado viendo al otro sin que se diera cuenta"],
+            [3, "he querido que una llamada no se acabara nunca"],
+            [3, "he fingido estar enojado/a solo para que me contentaran"],
+            [3, "he dicho 'me caes mal' queriendo decir lo contrario"],
+            [3, "he imaginado qué pasaría si estuviéramos solos"]
+        ];
+
+        const YN_PENALTIES = [
+            "Manda la foto más fea que tengas en tu galería 📸",
+            "Le debes un helado o café al otro en la próxima salida 🍦",
+            "Audio de 15 segundos cantando la canción que el otro elija 🎤",
+            "Cambia tu foto de perfil 1 hora por la que el otro elija 🖼️",
+            "Responde una pregunta sin filtro que el otro invente 🔥",
+            "3 cumplidos sinceros seguidos por audio 🥹",
+            "Imita al otro durante 20 segundos 🎭",
+            "El otro elige tu apodo en WhatsApp por 24 horas 🏷️"
+        ];
+
+        const QD_MINI_DARES = [
+            "explicar con detalles por qué es culpable 🎤",
+            "contar una anécdota que lo compruebe 📖",
+            "mandar un audio aceptando su culpa dramáticamente 🎭",
+            "hacer lo que el otro diga por 1 minuto 👑",
+            "mandar un sticker de disculpa 🙏"
+        ];
+
+        function xmBuild(raw, prefix, mapper) {
+            return raw.map((r, i) => Object.assign({ id: prefix + (i + 1), level: r[0] }, mapper(r)));
+        }
+
+        const XM = {
+            pf: { key: 'fer_johel_played_prefieres_v1', round: 1, current: null,
+                  items: xmBuild(PREFIERES_RAW, 'pf', r => ({ a: r[1], b: r[2] })) },
+            qd: { key: 'fer_johel_played_quien_v1', round: 1, current: null,
+                  items: xmBuild(QUIEN_RAW, 'qd', r => ({ text: r[1] })) },
+            yn: { key: 'fer_johel_played_yonunca_v1', round: 1, current: null,
+                  items: xmBuild(YONUNCA_RAW, 'yn', r => ({ text: r[1] })) }
+        };
+
+        /* ---------- Memoria y nivel progresivo ---------- */
+        function xmGetPlayed(key) {
+            try { return new Set(JSON.parse(localStorage.getItem(key) || '[]')); } catch (e) { return new Set(); }
+        }
+        function xmSavePlayed(key, set) {
+            try { localStorage.setItem(key, JSON.stringify(Array.from(set))); } catch (e) {}
+        }
+        // Rondas 1-6: Nivel 1 · Rondas 7-14: Nivel 2 · Ronda 15+: Nivel 3
+        function xmTargetLevel(round) { return round <= 6 ? 1 : (round <= 14 ? 2 : 3); }
+
+        function xmDraw(mode) {
+            const st = XM[mode];
+            const played = xmGetPlayed(st.key);
+            let avail = st.items.filter(i => !played.has(i.id));
+            if (avail.length === 0) {
+                played.clear();
+                xmSavePlayed(st.key, played);
+                avail = st.items.slice();
+                alert('🎉 ¡Se acabaron todas las cartas de este modo! El mazo se reinicia.');
+            }
+            const target = xmTargetLevel(st.round);
+            let pool = [];
+            for (const lv of [target, target - 1, target + 1, target - 2, target + 2]) {
+                pool = avail.filter(i => i.level === lv);
+                if (pool.length) break;
+            }
+            if (!pool.length) pool = avail;
+            const item = pool[Math.floor(Math.random() * pool.length)];
+            played.add(item.id);
+            xmSavePlayed(st.key, played);
+            st.current = item;
+            st.round++;
+            return item;
+        }
+
+        function xmUpdateMeta(mode, prefixLabel) {
+            const st = XM[mode];
+            const lvl = st.current ? st.current.level : 1;
+            const tag = document.getElementById(mode + 'Lvl');
+            tag.className = 'xm-lvl l' + lvl;
+            tag.innerText = lvl === 3 ? '🔥 NIVEL 3: CANDELA' : lvl === 2 ? '🌶️ NIVEL 2: PIQUE' : '🧊 NIVEL 1: CHILL';
+            const remaining = st.items.length - xmGetPlayed(st.key).size;
+            document.getElementById(mode + 'Round').innerText = `${prefixLabel} #${st.round - 1} · Quedan ${remaining}`;
+        }
+
+        function xmPop(id) {
+            const el = document.getElementById(id);
+            el.classList.remove('pop');
+            void el.offsetWidth;
+            el.classList.add('pop');
+        }
+
+        function xmVibrate(ms) { if (navigator.vibrate) navigator.vibrate(ms); }
+
+        function xmReset(mode) {
+            if (!confirm('¿Reiniciar la memoria de este modo? Volverán a salir todas las cartas.')) return;
+            localStorage.removeItem(XM[mode].key);
+            XM[mode].round = 1;
+            if (mode === 'pf') pfNext();
+            if (mode === 'qd') qdNext();
+            if (mode === 'yn') ynNext();
+        }
+
+        function xmShare(mode) {
+            const st = XM[mode];
+            if (!st.current) { alert('Primero saca una carta 😉'); return; }
+            let msg = '';
+            if (mode === 'pf') {
+                msg = `⚖️ *¿QUÉ PREFIERES?* (Fer vs Johel 🤌🏿)\n\n🅰️ ${st.current.a}\n\n— o —\n\n🅱️ ${st.current.b}\n\n👉 Responde *A* o *B* y explica por qué 👀\n_(yo ya elegí la mía 😏)_`;
+            } else if (mode === 'qd') {
+                msg = `👥 *¿QUIÉN DE LOS DOS...?* 🫵\n\n${st.current.text}\n\n👉 Responde: *Fer* o *Johel*\n_(yo ya tengo mi respuesta 😏)_`;
+            } else {
+                msg = `🍷 *YO NUNCA NUNCA...*\n\n"Yo nunca nunca ${st.current.text}"\n\n👉 ¿*Yo sí* 🙈 o *Yo nunca* 😇? Sin mentir 🤌🏿`;
+            }
+            msg += `\n\n🎮 ${GAME_URL}`;
+            if (navigator.clipboard) navigator.clipboard.writeText(msg).catch(() => {});
+            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        /* ---------- Helpers de votación ---------- */
+        function xmSetVoteUI(mode, player, options, chosen, selClassFn) {
+            options.forEach(opt => {
+                const btn = document.getElementById(`${mode}-${player}-${opt}`);
+                btn.className = 'xm-vote-btn' + (opt === chosen ? ' ' + selClassFn(opt) : '');
+            });
+        }
+        function xmLockVotes(mode, players, options, lock) {
+            players.forEach(p => options.forEach(o => {
+                document.getElementById(`${mode}-${p}-${o}`).classList.toggle('locked', lock);
+            }));
+        }
+        function xmShowResult(id, cls, html) {
+            const el = document.getElementById(id);
+            el.className = 'xm-result show ' + cls;
+            el.innerHTML = html;
+        }
+        function xmHideResult(id) { document.getElementById(id).className = 'xm-result'; }
+
+        /* ==================== ¿QUÉ PREFIERES? ==================== */
+        let pfVotes = { Fer: null, Johel: null };
+        let pfMatch = 0, pfClash = 0;
+
+        function pfNext() {
+            const item = xmDraw('pf');
+            document.getElementById('pfA').innerText = item.a;
+            document.getElementById('pfB').innerText = item.b;
+            document.getElementById('pfA').classList.remove('winner');
+            document.getElementById('pfB').classList.remove('winner');
+            pfVotes = { Fer: null, Johel: null };
+            ['Fer', 'Johel'].forEach(p => xmSetVoteUI('pf', p, ['A', 'B'], null, () => ''));
+            xmLockVotes('pf', ['Fer', 'Johel'], ['A', 'B'], false);
+            xmHideResult('pfResult');
+            xmUpdateMeta('pf', 'Dilema');
+            xmPop('pfCard');
+        }
+
+        function pfVote(player, opt) {
+            if (!XM.pf.current) { pfNext(); return; }
+            pfVotes[player] = opt;
+            xmSetVoteUI('pf', player, ['A', 'B'], opt, o => o === 'A' ? 'sel-a' : 'sel-b');
+            xmVibrate(20);
+            if (pfVotes.Fer && pfVotes.Johel) {
+                xmLockVotes('pf', ['Fer', 'Johel'], ['A', 'B'], true);
+                if (pfVotes.Fer === pfVotes.Johel) {
+                    pfMatch++;
+                    document.getElementById('pf' + pfVotes.Fer).classList.add('winner');
+                    xmShowResult('pfResult', 'good', `💞 <strong>¡Coincidieron!</strong> Los dos eligieron la opción <strong>${pfVotes.Fer}</strong>.<br>Mentes conectadas... ¿o se copiaron? 👀`);
+                } else {
+                    pfClash++;
+                    xmShowResult('pfResult', 'clash', `⚡ <strong>¡Choque!</strong> Fer eligió <strong>${pfVotes.Fer}</strong> y Johel eligió <strong>${pfVotes.Johel}</strong>.<br>🎤 Cada uno tiene 15 segundos para convencer al otro. ¡El que no convenza cumple un mini reto!`);
+                }
+                document.getElementById('pfMatch').innerText = pfMatch;
+                document.getElementById('pfClash').innerText = pfClash;
+                xmVibrate([30, 40, 30]);
+            }
+        }
+
+        /* ==================== ¿QUIÉN DE LOS DOS? ==================== */
+        let qdVotes = { Fer: null, Johel: null };
+        let qdScore = { Fer: 0, Johel: 0 };
+
+        function qdNext() {
+            const item = xmDraw('qd');
+            document.getElementById('qdText').innerText = item.text;
+            qdVotes = { Fer: null, Johel: null };
+            ['Fer', 'Johel'].forEach(p => xmSetVoteUI('qd', p, ['Fer', 'Johel'], null, () => ''));
+            xmLockVotes('qd', ['Fer', 'Johel'], ['Fer', 'Johel'], false);
+            xmHideResult('qdResult');
+            xmUpdateMeta('qd', 'Pregunta');
+            xmPop('qdCard');
+        }
+
+        function qdCountdown() {
+            if (!XM.qd.current) qdNext();
+            const overlay = document.getElementById('xmCountdown');
+            const num = document.getElementById('xmCountdownNum');
+            const steps = ['3', '2', '1', '🫵 ¡SEÑALEN!'];
+            let i = 0;
+            overlay.classList.add('show');
+            const tick = () => {
+                num.className = steps[i].length > 2 ? 'small' : '';
+                num.innerText = steps[i];
+                void num.offsetWidth;
+                num.style.animation = 'none';
+                void num.offsetWidth;
+                num.style.animation = '';
+                xmVibrate(i === steps.length - 1 ? 200 : 40);
+                i++;
+                if (i < steps.length) setTimeout(tick, 800);
+                else setTimeout(() => overlay.classList.remove('show'), 1100);
+            };
+            tick();
+        }
+
+        function qdVote(player, target) {
+            if (!XM.qd.current) { qdNext(); return; }
+            qdVotes[player] = target;
+            xmSetVoteUI('qd', player, ['Fer', 'Johel'], target, t => t === 'Fer' ? 'sel-fer' : 'sel-johel');
+            xmVibrate(20);
+            if (qdVotes.Fer && qdVotes.Johel) {
+                xmLockVotes('qd', ['Fer', 'Johel'], ['Fer', 'Johel'], true);
+                qdScore[qdVotes.Fer]++;
+                qdScore[qdVotes.Johel]++;
+                document.getElementById('qdScoreFer').innerText = qdScore.Fer;
+                document.getElementById('qdScoreJohel').innerText = qdScore.Johel;
+                const dare = QD_MINI_DARES[Math.floor(Math.random() * QD_MINI_DARES.length)];
+                if (qdVotes.Fer === qdVotes.Johel) {
+                    const who = qdVotes.Fer === 'Fer' ? 'FER 💅' : 'JOHEL 🤌🏿';
+                    xmShowResult('qdResult', 'gold', `🎯 <strong>¡Culpable confirmado: ${who}!</strong><br>Los dos están de acuerdo. Ahora le toca ${dare}`);
+                } else if (qdVotes.Fer === 'Johel' && qdVotes.Johel === 'Fer') {
+                    xmShowResult('qdResult', 'clash', `😂 <strong>¡Se echaron la culpa mutuamente!</strong><br>Debate de 30 segundos: cada uno da pruebas de que es el otro. ¡Gana el más convincente!`);
+                } else {
+                    xmShowResult('qdResult', 'good', `🙈 <strong>¡Los dos se declararon culpables!</strong><br>Honestidad total 👏 Cada uno cuente una anécdota que lo demuestre.`);
+                }
+                xmVibrate([30, 40, 30]);
+            }
+        }
+
+        /* ==================== YO NUNCA NUNCA ==================== */
+        const YN_MAX_LIVES = 5;
+        let ynLives = { Fer: YN_MAX_LIVES, Johel: YN_MAX_LIVES };
+        let ynPen = { Fer: 0, Johel: 0 };
+        let ynVotes = { Fer: null, Johel: null };
+
+        function ynRenderHearts() {
+            ['Fer', 'Johel'].forEach(p => {
+                let html = '';
+                for (let i = 0; i < YN_MAX_LIVES; i++) {
+                    html += i < ynLives[p] ? '<span>❤️</span>' : '<span class="lost">❤️</span>';
+                }
+                document.getElementById('ynHearts' + p).innerHTML = html;
+            });
+            document.getElementById('ynPenFer').innerText = ynPen.Fer;
+            document.getElementById('ynPenJohel').innerText = ynPen.Johel;
+        }
+
+        function ynResetLives() {
+            ynLives = { Fer: YN_MAX_LIVES, Johel: YN_MAX_LIVES };
+            ynRenderHearts();
+        }
+
+        function ynNext() {
+            const item = xmDraw('yn');
+            document.getElementById('ynText').innerText = `"Yo nunca nunca ${item.text}..."`;
+            ynVotes = { Fer: null, Johel: null };
+            ['Fer', 'Johel'].forEach(p => xmSetVoteUI('yn', p, ['yes', 'no'], null, () => ''));
+            xmLockVotes('yn', ['Fer', 'Johel'], ['yes', 'no'], false);
+            xmHideResult('ynResult');
+            xmUpdateMeta('yn', 'Frase');
+            xmPop('ynCard');
+        }
+
+        function ynVote(player, ans) {
+            if (!XM.yn.current) { ynNext(); return; }
+            ynVotes[player] = ans;
+            xmSetVoteUI('yn', player, ['yes', 'no'], ans, a => a === 'yes' ? 'sel-yes' : 'sel-no');
+            xmVibrate(20);
+            if (!(ynVotes.Fer && ynVotes.Johel)) return;
+
+            xmLockVotes('yn', ['Fer', 'Johel'], ['yes', 'no'], true);
+            const guilty = ['Fer', 'Johel'].filter(p => ynVotes[p] === 'yes');
+            guilty.forEach(p => {
+                ynLives[p]--;
+                const h = document.getElementById('ynHearts' + p);
+                h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit');
+            });
+
+            let html, cls;
+            if (guilty.length === 2) {
+                cls = 'clash';
+                html = `😏 <strong>¡Los dos culpables!</strong> Cuéntense los detalles... sin censura 👀`;
+            } else if (guilty.length === 1) {
+                const who = guilty[0] === 'Fer' ? 'FER 💅' : 'JOHEL 🤌🏿';
+                cls = 'gold';
+                html = `👀 <strong>${who} lo ha hecho...</strong> ¡Ahora cuenta la historia completa!`;
+            } else {
+                cls = 'good';
+                html = `😇 <strong>Pura inocencia...</strong> ¿Seguros? Nadie les cree 🤨`;
+            }
+
+            const dead = guilty.filter(p => ynLives[p] <= 0);
+            dead.forEach(p => {
+                ynPen[p]++;
+                ynLives[p] = YN_MAX_LIVES;
+                const pen = YN_PENALTIES[Math.floor(Math.random() * YN_PENALTIES.length)];
+                const who = p === 'Fer' ? 'FER' : 'JOHEL';
+                html += `<br><br>💀 <strong>¡${who} SE QUEDÓ SIN VIDAS!</strong><br>Castigo: <strong>${pen}</strong><br><em>(Vidas rellenadas ❤️)</em>`;
+                cls = 'clash';
+            });
+
+            xmShowResult('ynResult', cls, html);
+            ynRenderHearts();
+            xmVibrate(dead.length ? [80, 60, 200] : [30, 40, 30]);
+        }
+
+        /* ==================== MENÚ DE JUEGOS ==================== */
+        const GAME_META = {
+            vor: { title: 'Verdad o Reto', sub: 'Entre Fer y Johel 🤌🏿' },
+            pf:  { title: '¿Qué Prefieres?', sub: 'Dilemas imposibles · Fer vs Johel ⚖️' },
+            qd:  { title: '¿Quién de los Dos?', sub: '1, 2, 3... ¡señalen al culpable! 🫵' },
+            yn:  { title: 'Yo Nunca Nunca', sub: 'Confesiones con 5 vidas ❤️' }
+        };
+
+        function switchGame(game) {
+            Object.keys(GAME_META).forEach(g => {
+                document.getElementById('panel-' + g).classList.toggle('active', g === game);
+                document.getElementById('tab-' + g).classList.toggle('active', g === game);
+            });
+            document.getElementById('gameTitle').innerText = GAME_META[game].title;
+            document.getElementById('gameSubtitle').innerText = GAME_META[game].sub;
+            try { localStorage.setItem('fer_johel_last_game', game); } catch (e) {}
+            if (game !== 'vor' && !XM[game].current) {
+                if (game === 'pf') pfNext();
+                if (game === 'qd') qdNext();
+                if (game === 'yn') ynNext();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        ynRenderHearts();
+        try {
+            const last = localStorage.getItem('fer_johel_last_game');
+            if (last && GAME_META[last] && last !== 'vor') switchGame(last);
+        } catch (e) {}
     </script>
 </body>
 </html>
