@@ -6,21 +6,23 @@
     <title>Verdad o Reto | Entre Fer y Johel 🤌🏿</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-main: #0c0a14;
-            --card-bg: #171424;
-            --truth-color: #38bdf8;
-            --dare-color: #f43f5e;
-            --offline-color: #a855f7;
-            --accent-gold: #ffb703;
-            --whatsapp-green: #25d366;
-            --fer-pink: #ec4899;
-            --johel-gold: #f59e0b;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-deep: #090712;
+            --card-glass: rgba(26, 21, 41, 0.85);
+            --truth-cyan: #38bdf8;
+            --truth-glow: rgba(56, 189, 248, 0.35);
+            --dare-pink: #f43f5e;
+            --dare-glow: rgba(244, 63, 94, 0.35);
+            --offline-purple: #c084fc;
+            --gold-accent: #facc15;
+            --whatsapp-green: #22c55e;
+            --fer-gradient: linear-gradient(135deg, #f472b6, #db2777);
+            --johel-gradient: linear-gradient(135deg, #fbbf24, #d97706);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
         }
 
         * {
@@ -32,140 +34,201 @@
         }
 
         body {
-            background: radial-gradient(circle at 50% 15%, #251638 0%, #0c0a14 100%);
-            color: var(--text-light);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 14px 10px;
+            padding: 16px 12px;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .game-card {
+        /* Esferas de luz flotantes aesthetic en el fondo */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.55;
+            animation: orbFloat 10s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, #db2777, transparent 70%);
+            top: -60px;
+            left: -60px;
+        }
+
+        .orb-2 {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #7c3aed, transparent 70%);
+            bottom: -80px;
+            right: -80px;
+            animation-duration: 12s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #d97706, transparent 70%);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.25;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(30px) scale(1.12); }
+        }
+
+        /* Contenedor Principal Glassmorphism */
+        .app-wrapper {
+            position: relative;
+            z-index: 10;
             width: 100%;
             max-width: 440px;
-            background: var(--card-bg);
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
-            padding: 22px 18px;
+        }
+
+        .main-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 32px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(124, 58, 237, 0.12);
+            padding: 24px 20px;
             text-align: center;
             position: relative;
         }
 
-        .header-tag {
-            display: inline-block;
-            background: rgba(255, 183, 3, 0.15);
-            color: var(--accent-gold);
-            border: 1px solid rgba(255, 183, 3, 0.3);
-            border-radius: 20px;
-            padding: 4px 14px;
-            font-size: 0.78rem;
+        /* Badge Superior */
+        .top-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(250, 204, 21, 0.14);
+            border: 1px solid rgba(250, 204, 21, 0.35);
+            color: var(--gold-accent);
+            border-radius: 50px;
+            padding: 5px 14px;
+            font-size: 0.75rem;
             font-weight: 800;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
             margin-bottom: 8px;
         }
 
-        h1 {
-            font-size: 1.7rem;
+        h1.game-title {
+            font-size: 1.85rem;
             font-weight: 900;
-            line-height: 1.2;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
             margin-bottom: 4px;
+            background: linear-gradient(135deg, #fff 40%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 14px;
+        .game-subtitle {
+            color: var(--text-sub);
+            font-size: 0.88rem;
+            margin-bottom: 16px;
+            font-weight: 500;
         }
 
-        /* ==================== SELECTOR DE MODO (ONLINE VS OFFLINE) ==================== */
-        .game-mode-toggle {
+        /* ==================== SWITCH DE MODO (LLAMADA VS OFFLINE) ==================== */
+        .mode-segmented {
             display: flex;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 4px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             gap: 6px;
         }
 
-        .mode-toggle-btn {
+        .segment-btn {
             flex: 1;
-            padding: 8px 10px;
-            border-radius: 12px;
+            padding: 9px 10px;
+            border-radius: 14px;
             border: none;
             background: transparent;
-            color: var(--text-muted);
+            color: var(--text-sub);
             font-weight: 800;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 6px;
         }
 
-        .mode-toggle-btn.active {
-            background: rgba(255, 255, 255, 0.1);
+        .segment-btn.active {
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
         }
 
-        .mode-toggle-btn.active.offline-mode {
-            background: rgba(168, 85, 247, 0.25);
-            color: #d8b4fe;
-            border: 1px solid var(--offline-color);
+        .segment-btn.active.offline-btn {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(124, 58, 237, 0.4));
+            color: #f3e8ff;
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
         }
 
-        /* Banner informativo de Modo Offline */
-        .offline-badge-info {
-            background: rgba(168, 85, 247, 0.15);
+        .offline-indicator-banner {
+            background: rgba(168, 85, 247, 0.14);
             border: 1px solid rgba(168, 85, 247, 0.35);
-            color: #e9d5ff;
-            border-radius: 12px;
+            color: #f3e8ff;
+            border-radius: 14px;
             padding: 8px 12px;
             font-size: 0.78rem;
             margin-bottom: 14px;
             display: none;
-            line-height: 1.35;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
         }
 
-        /* ==================== CONTROL DE TURNOS CLARÍSIMO ==================== */
-        .turn-section {
-            background: rgba(255, 255, 255, 0.04);
+        /* ==================== SELECTOR DE TURNOS AESTHETIC ==================== */
+        .turn-box-aesthetic {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 10px 12px;
+            border-radius: 22px;
+            padding: 12px;
             margin-bottom: 16px;
         }
 
-        .turn-section-title {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .turn-caption {
+            font-size: 0.72rem;
+            color: var(--text-sub);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             margin-bottom: 8px;
         }
 
-        .player-tabs {
+        .turn-pills-row {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .player-tab-btn {
+        .turn-pill-btn {
             flex: 1;
-            padding: 10px 8px;
-            border-radius: 14px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-muted);
+            padding: 11px 12px;
+            border-radius: 16px;
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-sub);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -173,123 +236,134 @@
             gap: 8px;
             font-weight: 800;
             font-size: 0.95rem;
-            transition: all 0.22s ease;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .player-tab-btn.active-fer {
-            background: rgba(236, 72, 153, 0.18);
-            border-color: var(--fer-pink);
+        .turn-pill-btn:active {
+            transform: scale(0.97);
+        }
+
+        .turn-pill-btn.active-fer {
+            background: var(--fer-gradient);
+            border-color: transparent;
             color: #fff;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+            box-shadow: 0 8px 24px rgba(219, 39, 119, 0.45);
+            transform: translateY(-2px);
         }
 
-        .player-tab-btn.active-johel {
-            background: rgba(245, 158, 11, 0.18);
-            border-color: var(--johel-gold);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        .turn-pill-btn.active-johel {
+            background: var(--johel-gradient);
+            border-color: transparent;
+            color: #111;
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.45);
+            transform: translateY(-2px);
         }
 
-        .tab-indicator {
-            font-size: 0.75rem;
-            padding: 2px 7px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Botones de Selección: VERDAD o RETO */
-        .modes-container {
+        /* ==================== BOTONES VERDAD & RETO ==================== */
+        .choices-row {
             display: flex;
             gap: 12px;
             margin-bottom: 14px;
         }
 
-        .btn-choice {
+        .btn-game-choice {
             flex: 1;
-            padding: 14px 10px;
-            border-radius: 18px;
-            border: 2px solid transparent;
+            padding: 16px 12px;
+            border-radius: 20px;
+            border: 1.5px solid transparent;
             cursor: pointer;
             font-weight: 900;
-            font-size: 1.15rem;
+            font-size: 1.18rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 3px;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-truth {
-            background: rgba(56, 189, 248, 0.12);
-            border-color: rgba(56, 189, 248, 0.4);
-            color: var(--truth-color);
+        .btn-game-choice:active {
+            transform: scale(0.96);
         }
 
-        .btn-truth:hover, .btn-truth.active {
-            background: var(--truth-color);
-            color: #0c0a14;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+        .btn-game-choice.truth-style {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.35);
+            color: var(--truth-cyan);
         }
 
-        .btn-dare {
-            background: rgba(244, 63, 94, 0.12);
-            border-color: rgba(244, 63, 94, 0.4);
-            color: var(--dare-color);
+        .btn-game-choice.truth-style:hover, .btn-game-choice.truth-style.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #041017;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--truth-glow);
+            border-color: transparent;
         }
 
-        .btn-dare:hover, .btn-dare.active {
-            background: var(--dare-color);
+        .btn-game-choice.dare-style {
+            background: rgba(244, 63, 94, 0.1);
+            border-color: rgba(244, 63, 94, 0.35);
+            color: var(--dare-pink);
+        }
+
+        .btn-game-choice.dare-style:hover, .btn-game-choice.dare-style.active {
+            background: linear-gradient(135deg, #e11d48, #f43f5e);
             color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--dare-glow);
+            border-color: transparent;
         }
 
-        .choice-sub {
+        .sub-caption {
             font-size: 0.72rem;
-            font-weight: 600;
+            font-weight: 700;
             opacity: 0.85;
+            letter-spacing: 0.4px;
         }
 
-        /* Contador del mazo */
-        .deck-counter {
-            font-size: 0.76rem;
-            color: var(--text-muted);
-            margin-bottom: 14px;
+        /* Contadores en Píldoras */
+        .stats-counter-row {
             display: flex;
             justify-content: space-between;
-            padding: 0 6px;
+            font-size: 0.76rem;
+            color: var(--text-sub);
+            margin-bottom: 14px;
+            padding: 0 4px;
         }
 
-        .deck-pill {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 3px 9px;
-            border-radius: 12px;
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 3px 10px;
         }
 
-        /* Tarjeta de la Carta / Pregunta */
-        .card-display {
-            background: #201b33;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 22px;
-            padding: 22px 16px;
-            min-height: 205px;
+        /* ==================== TARJETA DE CARTA 3D / AESTHETIC ==================== */
+        .card-stage-container {
+            perspective: 1000px;
+            margin-bottom: 16px;
+        }
+
+        .card-inner-box {
+            background: linear-gradient(145deg, rgba(35, 29, 54, 0.95), rgba(20, 16, 32, 0.95));
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 26px;
+            padding: 24px 18px;
+            min-height: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            margin-bottom: 14px;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.22s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
         }
 
-        .card-turn-banner {
-            background: rgba(255, 255, 255, 0.08);
+        .turn-flag {
             padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.82rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 800;
             margin-bottom: 8px;
             display: inline-flex;
@@ -297,88 +371,93 @@
             gap: 6px;
         }
 
-        .card-turn-banner.fer {
-            background: rgba(236, 72, 153, 0.25);
+        .turn-flag.fer {
+            background: rgba(236, 72, 153, 0.22);
             color: #fbcfe8;
-            border: 1px solid var(--fer-pink);
+            border: 1px solid rgba(236, 72, 153, 0.5);
         }
 
-        .card-turn-banner.johel {
-            background: rgba(245, 158, 11, 0.25);
+        .turn-flag.johel {
+            background: rgba(245, 158, 11, 0.22);
             color: #fde68a;
-            border: 1px solid var(--johel-gold);
+            border: 1px solid rgba(245, 158, 11, 0.5);
         }
 
-        /* Indicador de Tipo de Prueba Offline */
-        .offline-proof-pill {
+        .proof-tag-pill {
             background: rgba(168, 85, 247, 0.2);
-            color: #d8b4fe;
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            padding: 3px 10px;
+            color: #e9d5ff;
+            border: 1px solid rgba(168, 85, 247, 0.45);
+            padding: 3px 11px;
             border-radius: 20px;
-            font-size: 0.72rem;
+            font-size: 0.74rem;
             font-weight: 800;
             margin-bottom: 8px;
             display: none;
         }
 
-        .card-category {
+        .category-label {
             font-size: 0.76rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            color: var(--accent-gold);
+            color: var(--gold-accent);
         }
 
-        .card-text {
-            font-size: 1.15rem;
+        .prompt-text {
+            font-size: 1.18rem;
             line-height: 1.45;
-            font-weight: 600;
-            color: #f1f5f9;
+            font-weight: 700;
+            color: #fff;
         }
 
-        .card-extra {
-            font-size: 0.84rem;
+        .extra-hint {
+            font-size: 0.86rem;
             color: #cbd5e1;
             margin-top: 10px;
             font-style: italic;
         }
 
-        /* Botones de acción */
-        .actions-group {
+        /* ==================== BOTONES DE ACCIÓN ==================== */
+        .buttons-stack {
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 100%;
         }
 
-        .btn-next {
-            background: linear-gradient(135deg, var(--dare-color), var(--accent-gold));
+        .btn-next-action {
+            background: linear-gradient(135deg, #f43f5e, #f59e0b);
             border: none;
             color: #111;
-            font-weight: 800;
-            font-size: 0.98rem;
-            padding: 14px 28px;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 15px 28px;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.35);
-            transition: transform 0.18s ease;
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.4);
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
             width: 100%;
+            display: none;
         }
 
-        .btn-next:active {
+        .btn-next-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-next-action:active {
             transform: scale(0.98);
         }
 
-        /* Botón de Enviar a WhatsApp / Copiar para Chat */
-        .btn-whatsapp-share {
-            background: rgba(37, 211, 102, 0.18);
+        /* Botón WhatsApp Aesthetic */
+        .btn-whatsapp-action {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(21, 128, 61, 0.28));
             border: 1.5px solid var(--whatsapp-green);
             color: #86efac;
             font-weight: 800;
-            font-size: 0.92rem;
-            padding: 12px 20px;
+            font-size: 0.95rem;
+            padding: 13px 22px;
             border-radius: 50px;
             cursor: pointer;
             display: none;
@@ -387,37 +466,39 @@
             gap: 8px;
             transition: all 0.2s;
             width: 100%;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
         }
 
-        .btn-whatsapp-share:hover {
+        .btn-whatsapp-action:hover {
             background: var(--whatsapp-green);
-            color: #0c0a14;
+            color: #090712;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
         }
 
-        /* Marcador de puntos / castigos */
-        .score-row {
+        /* Marcador de Risas y Puntos */
+        .game-footer-stats {
             display: flex;
             justify-content: space-around;
-            margin-top: 15px;
-            padding-top: 12px;
+            margin-top: 16px;
+            padding-top: 14px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 0.82rem;
-            color: var(--text-muted);
+            color: var(--text-sub);
         }
 
-        .score-item strong {
+        .footer-stat strong {
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.98rem;
         }
 
-        /* Botón Ver Lista con candado */
-        .btn-view-list {
+        /* Botón de Candado PIN */
+        .btn-pin-toggle {
             margin-top: 14px;
             background: transparent;
-            border: 1px dashed rgba(255, 183, 3, 0.4);
-            color: var(--accent-gold);
-            padding: 7px 15px;
-            border-radius: 20px;
+            border: 1px dashed rgba(250, 204, 21, 0.4);
+            color: var(--gold-accent);
+            padding: 7px 16px;
+            border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
@@ -427,16 +508,16 @@
             gap: 6px;
         }
 
-        .btn-view-list:hover {
-            background: rgba(255, 183, 3, 0.1);
+        .btn-pin-toggle:hover {
+            background: rgba(250, 204, 21, 0.12);
         }
 
-        /* Modal con PIN */
-        .modal-overlay {
+        /* ==================== MODAL CON PIN AESTHETIC ==================== */
+        .modal-screen {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
             z-index: 100;
             display: none;
             align-items: center;
@@ -444,44 +525,44 @@
             padding: 16px;
         }
 
-        .modal-overlay.active {
+        .modal-screen.active {
             display: flex;
         }
 
-        .modal-content {
-            background: #181528;
-            border: 1.5px solid rgba(255, 183, 3, 0.35);
-            border-radius: 24px;
+        .modal-card-aesthetic {
+            background: #181427;
+            border: 1.5px solid rgba(250, 204, 21, 0.35);
+            border-radius: 28px;
             width: 100%;
             max-width: 440px;
             max-height: 85vh;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            padding: 22px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.85);
         }
 
-        .modal-header {
+        .modal-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .modal-title {
+        .modal-title-text {
             font-size: 1.15rem;
             font-weight: 800;
             color: #fff;
         }
 
-        .modal-close {
-            background: rgba(255,255,255,0.1);
+        .modal-close-btn {
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: #fff;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 1rem;
@@ -490,70 +571,72 @@
             justify-content: center;
         }
 
-        .pin-box {
+        .pin-gate {
             text-align: center;
-            padding: 20px 10px;
+            padding: 24px 10px;
         }
 
-        .pin-input {
+        .pin-input-field {
             width: 160px;
-            height: 48px;
+            height: 50px;
             background: rgba(255, 255, 255, 0.08);
-            border: 2px solid var(--accent-gold);
-            border-radius: 14px;
+            border: 2px solid var(--gold-accent);
+            border-radius: 16px;
             color: #fff;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 900;
             text-align: center;
             letter-spacing: 6px;
-            margin: 14px 0;
+            margin: 16px 0;
             outline: none;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
         }
 
-        .pin-btn {
-            background: var(--accent-gold);
+        .pin-submit-btn {
+            background: var(--gold-accent);
             color: #111;
-            font-weight: 800;
+            font-weight: 900;
             border: none;
-            padding: 10px 22px;
+            padding: 12px 26px;
             border-radius: 50px;
             cursor: pointer;
             font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.35);
         }
 
-        .pin-error {
+        .pin-error-msg {
             color: #f87171;
             font-size: 0.85rem;
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: 12px;
             display: none;
         }
 
-        .tabs-row {
+        .unlocked-tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 12px;
         }
 
-        .tab-btn {
+        .unlocked-tab-btn {
             flex: 1;
-            padding: 8px 12px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.05);
+            padding: 9px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
             color: #cbd5e1;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 0.85rem;
             cursor: pointer;
         }
 
-        .tab-btn.active {
-            background: var(--accent-gold);
-            color: #000;
-            border-color: var(--accent-gold);
+        .unlocked-tab-btn.active {
+            background: var(--gold-accent);
+            color: #111;
+            border-color: var(--gold-accent);
         }
 
-        .modal-list-body {
+        .unlocked-list-scroll {
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -562,188 +645,198 @@
             scrollbar-width: thin;
         }
 
-        .list-item-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            padding: 12px 14px;
+        .card-row-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 14px;
             text-align: left;
         }
 
-        .list-item-badge {
+        .row-item-badge {
             display: inline-block;
             font-size: 0.72rem;
             font-weight: 800;
-            padding: 2px 8px;
+            padding: 2px 9px;
             border-radius: 10px;
             margin-bottom: 6px;
         }
 
-        .list-item-badge.truth {
+        .row-item-badge.truth {
             background: rgba(56, 189, 248, 0.2);
-            color: var(--truth-color);
+            color: var(--truth-cyan);
         }
 
-        .list-item-badge.dare {
+        .row-item-badge.dare {
             background: rgba(244, 63, 94, 0.2);
-            color: var(--dare-color);
+            color: var(--dare-pink);
         }
 
-        .list-item-text {
-            font-size: 0.92rem;
+        .row-item-title {
+            font-size: 0.94rem;
             font-weight: 600;
             color: #f1f5f9;
             line-height: 1.35;
         }
 
-        .list-item-extra {
-            font-size: 0.78rem;
+        .row-item-extra {
+            font-size: 0.8rem;
             color: #94a3b8;
             margin-top: 4px;
             font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="game-card">
-        <span class="header-tag">Edición Especial 🤌🏿</span>
-        <h1>Verdad o Reto</h1>
-        <p class="subtitle">Entre Fer y Johel 🤌🏿</p>
+    <!-- Esferas de luz aesthetic de fondo -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
 
-        <!-- ==================== SELECTOR DE MODO (ONLINE VS OFFLINE) ==================== -->
-        <div class="game-mode-toggle">
-            <button class="mode-toggle-btn active" id="btnModeLive" onclick="setGameMode('live')">
-                <span>📞 Modo En Llamada</span>
-            </button>
-            <button class="mode-toggle-btn" id="btnModeOffline" onclick="setGameMode('offline')">
-                <span>💬 Modo Offline (Por Chat)</span>
-            </button>
-        </div>
+    <div class="app-wrapper">
+        <div class="main-card">
+            <span class="top-badge">✨ Edición Especial 🤌🏿</span>
+            <h1 class="game-title">Verdad o Reto</h1>
+            <p class="game-subtitle">Entre Fer y Johel 🤌🏿</p>
 
-        <div class="offline-badge-info" id="offlineInfoBanner">
-            🌙 <strong>Modo Offline Activado:</strong> Retos y verdades adaptados para enviar por mensaje, foto, audio o stickers. ¡Copia el reto y mándaselo al chat!
-        </div>
-
-        <!-- ==================== SELECTOR DE TURNOS CLARÍSIMO ==================== -->
-        <div class="turn-section">
-            <div class="turn-section-title">¿A quién le toca responder o retar?</div>
-            <div class="player-tabs">
-                <button class="player-tab-btn active-fer" id="btnPlayerFer" onclick="selectPlayer('Fer')">
-                    <span>💅 Le toca a FER</span>
-                    <span class="tab-indicator" id="indicatorFer">ACTIVO</span>
+            <!-- ==================== SELECTOR DE MODO ==================== -->
+            <div class="mode-segmented">
+                <button class="segment-btn active" id="btnModeLive" onclick="setGameMode('live')">
+                    <span>📞 En Llamada</span>
                 </button>
-                <button class="player-tab-btn" id="btnPlayerJohel" onclick="selectPlayer('Johel')">
-                    <span>🤌🏿 Le toca a JOHEL</span>
-                    <span class="tab-indicator" id="indicatorJohel" style="display: none;">ACTIVO</span>
+                <button class="segment-btn" id="btnModeOffline" onclick="setGameMode('offline')">
+                    <span>💬 Offline (Por Chat)</span>
                 </button>
             </div>
-        </div>
 
-        <!-- Botones Verdad o Reto -->
-        <div class="modes-container">
-            <button class="btn-choice btn-truth" onclick="selectType('truth')">
-                <span>VERDAD 🧠</span>
-                <span class="choice-sub">Cero mentiras</span>
-            </button>
-            <button class="btn-choice btn-dare" onclick="selectType('dare')">
-                <span>RETO 🔥</span>
-                <span class="choice-sub">Sin acobardarse</span>
-            </button>
-        </div>
-
-        <!-- Contador del mazo anti-repetición -->
-        <div class="deck-counter">
-            <div class="deck-pill" id="truthCountPill">Verdades en mazo: <strong>83</strong></div>
-            <div class="deck-pill" id="dareCountPill">Retos en mazo: <strong>61</strong></div>
-        </div>
-
-        <!-- Tarjeta de Contenido -->
-        <div class="card-display" id="cardBox">
-            <div class="card-turn-banner fer" id="cardTurnBanner">
-                💅 Turno de FER
+            <div class="offline-indicator-banner" id="offlineInfoBanner">
+                🌙 <strong>Modo Offline:</strong> Retos diseñados exclusivamente para enviar por notas de voz, fotos, stickers y chat. ¡Toca enviar para abrir WhatsApp!
             </div>
-            <div class="offline-proof-pill" id="offlineProofPill">
-                📸 Prueba Requerida
-            </div>
-            <div class="card-category" id="cardCategory">¿Te atreves?</div>
-            <div class="card-text" id="cardPrompt">
-                Elige <strong>VERDAD</strong> o <strong>RETO</strong> para empezar a jugar... 🤌🏿
-            </div>
-            <div class="card-extra" id="cardExtra"></div>
-        </div>
 
-        <!-- Botones de Acción -->
-        <div class="actions-group">
-            <button class="btn-whatsapp-share" id="btnShareWhatsApp" onclick="shareToWhatsApp()">
-                <span>💬 Enviar reto por WhatsApp</span>
-                <span>👉</span>
-            </button>
-
-            <button class="btn-next" id="btnNext" onclick="getRandomItem()" style="display: none;">
-                Siguiente Carta (Sin Repetir) 🎲
-            </button>
-        </div>
-
-        <!-- Puntuación rápida de risas -->
-        <div class="score-row">
-            <div class="score-item">
-                Cumplidos: <strong id="doneCount">0</strong>
+            <!-- ==================== SELECTOR DE TURNOS ==================== -->
+            <div class="turn-box-aesthetic">
+                <div class="turn-caption">¿A quién le toca el turno?</div>
+                <div class="turn-pills-row">
+                    <button class="turn-pill-btn active-fer" id="btnPlayerFer" onclick="selectPlayer('Fer')">
+                        <span>💅 Le toca a FER</span>
+                    </button>
+                    <button class="turn-pill-btn" id="btnPlayerJohel" onclick="selectPlayer('Johel')">
+                        <span>🤌🏿 Le toca a JOHEL</span>
+                    </button>
+                </div>
             </div>
-            <div class="score-item">
-                Acobardados: <strong id="chickenedCount">0</strong>
-            </div>
-            <div class="score-item" style="cursor: pointer; color: var(--accent-gold);" onclick="chickenOut()">
-                ¿Se rajó? 🐔
-            </div>
-        </div>
 
-        <!-- Botón para ver la lista con candado 4390 -->
-        <div>
-            <button class="btn-view-list" onclick="openPinModal()">
-                🔒 Ver mazo completo (PIN secreto)
-            </button>
+            <!-- ==================== BOTONES VERDAD O RETO ==================== -->
+            <div class="choices-row">
+                <button class="btn-game-choice truth-style" onclick="selectType('truth')">
+                    <span>VERDAD 🧠</span>
+                    <span class="sub-caption">Cero mentiras</span>
+                </button>
+                <button class="btn-game-choice dare-style" onclick="selectType('dare')">
+                    <span>RETO 🔥</span>
+                    <span class="sub-caption">Sin acobardarse</span>
+                </button>
+            </div>
+
+            <!-- Contador de cartas en mazo -->
+            <div class="stats-counter-row">
+                <div class="stat-pill" id="truthCountPill">Verdades: <strong>83</strong></div>
+                <div class="stat-pill" id="dareCountPill">Retos: <strong>61</strong></div>
+            </div>
+
+            <!-- ==================== CARTA INTERACTIVA AESTHETIC ==================== -->
+            <div class="card-stage-container">
+                <div class="card-inner-box" id="cardBox">
+                    <div class="turn-flag fer" id="cardTurnBanner">
+                        💅 Turno de FER
+                    </div>
+                    <div class="proof-tag-pill" id="offlineProofPill">
+                        📸 Prueba Requerida
+                    </div>
+                    <div class="category-label" id="cardCategory">¿Te atreves?</div>
+                    <div class="prompt-text" id="cardPrompt">
+                        Elige <strong>VERDAD</strong> o <strong>RETO</strong> para sacar una carta... 🤌🏿
+                    </div>
+                    <div class="extra-hint" id="cardExtra"></div>
+                </div>
+            </div>
+
+            <!-- ==================== BOTONES DE ACCIÓN ==================== -->
+            <div class="buttons-stack">
+                <button class="btn-whatsapp-action" id="btnShareWhatsApp" onclick="shareToWhatsApp()">
+                    <span>💬 Enviar reto por WhatsApp</span>
+                    <span>✨</span>
+                </button>
+
+                <button class="btn-next-action" id="btnNext" onclick="getRandomItem()">
+                    Siguiente Carta (Sin Repetir) 🎲
+                </button>
+            </div>
+
+            <!-- Marcador de Risas -->
+            <div class="game-footer-stats">
+                <div class="footer-stat">
+                    Cumplidos: <strong id="doneCount">0</strong>
+                </div>
+                <div class="footer-stat">
+                    Acobardados: <strong id="chickenedCount">0</strong>
+                </div>
+                <div class="footer-stat" style="cursor: pointer; color: var(--gold-accent);" onclick="chickenOut()">
+                    ¿Se rajó? 🐔
+                </div>
+            </div>
+
+            <!-- Botón PIN Secreto -->
+            <div>
+                <button class="btn-pin-toggle" onclick="openPinModal()">
+                    🔒 Ver mazo completo (PIN secreto)
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Modal con PIN 4390 y Lista Completa -->
-    <div class="modal-overlay" id="listModal" onclick="closeModalOnBg(event)">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title" id="modalTitle">🔐 Acceso Confidencial</div>
-                <button class="modal-close" onclick="closeModal()">✕</button>
+    <!-- ==================== MODAL PIN 4390 ==================== -->
+    <div class="modal-screen" id="listModal" onclick="closeModalOnBg(event)">
+        <div class="modal-card-aesthetic">
+            <div class="modal-head">
+                <div class="modal-title-text" id="modalTitle">🔐 Acceso Confidencial</div>
+                <button class="modal-close-btn" onclick="closeModal()">✕</button>
             </div>
 
-            <!-- Paso 1: Pide PIN -->
-            <div class="pin-box" id="pinFormBox">
+            <div class="pin-gate" id="pinFormBox">
                 <p style="font-size: 0.92rem; color: #cbd5e1;">
                     Ingresa el PIN de 4 dígitos para desbloquear todas las cartas:
                 </p>
-                <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" inputmode="numeric">
+                <input type="password" id="pinInput" class="pin-input-field" maxlength="4" placeholder="••••" inputmode="numeric">
                 <br>
-                <button class="pin-btn" onclick="verifyPin()">Desbloquear 🔓</button>
-                <div class="pin-error" id="pinError">
+                <button class="pin-submit-btn" onclick="verifyPin()">Desbloquear 🔓</button>
+                <div class="pin-error-msg" id="pinError">
                     🚫 PIN incorrecto. ¡Ferchis no puede espiar las preguntas! 😜🤌🏿
                 </div>
             </div>
 
-            <!-- Paso 2: Contenido desbloqueado con código 4390 -->
             <div id="unlockedContent" style="display: none; height: 100%; flex-direction: column;">
-                <div class="tabs-row">
-                    <button class="tab-btn active" id="tabTruths" onclick="switchTab('truths')">
+                <div class="unlocked-tabs">
+                    <button class="unlocked-tab-btn active" id="tabTruths" onclick="switchTab('truths')">
                         🧠 Verdades (<span id="totalTruthsCount">0</span>)
                     </button>
-                    <button class="tab-btn" id="tabDares" onclick="switchTab('dares')">
+                    <button class="unlocked-tab-btn" id="tabDares" onclick="switchTab('dares')">
                         🔥 Retos (<span id="totalDaresCount">0</span>)
                     </button>
                 </div>
-                <div class="modal-list-body" id="modalListBody"></div>
+                <div class="unlocked-list-scroll" id="modalListBody"></div>
             </div>
         </div>
     </div>
 
     <script>
-        let currentMode = "live"; // "live" o "offline"
+        let currentMode = "live";
         let currentPlayer = "Fer";
         let currentType = null;
         let currentCardItem = null;
@@ -752,7 +845,7 @@
         let isPinUnlocked = false;
         const SECRET_PIN = "4390";
 
-        /* ==================== CONTROL DE MODO (ONLINE VS OFFLINE) ==================== */
+        /* ==================== CONTROL DE MODO ==================== */
         function setGameMode(mode) {
             currentMode = mode;
             const btnLive = document.getElementById('btnModeLive');
@@ -760,44 +853,37 @@
             const banner = document.getElementById('offlineInfoBanner');
 
             if (mode === 'offline') {
-                btnLive.className = 'mode-toggle-btn';
-                btnOffline.className = 'mode-toggle-btn active offline-mode';
+                btnLive.className = 'segment-btn';
+                btnOffline.className = 'segment-btn active offline-btn';
                 banner.style.display = 'block';
             } else {
-                btnLive.className = 'mode-toggle-btn active';
-                btnOffline.className = 'mode-toggle-btn';
+                btnLive.className = 'segment-btn active';
+                btnOffline.className = 'segment-btn';
                 banner.style.display = 'none';
             }
 
-            // Reinicializar mazos según el modo
             resetDecks();
             if (currentType) {
                 getRandomItem();
             }
         }
 
-        /* ==================== CONTROL CLARO DE TURNOS ==================== */
+        /* ==================== CONTROL DE TURNOS ==================== */
         function selectPlayer(player) {
             currentPlayer = player;
             const btnFer = document.getElementById('btnPlayerFer');
             const btnJohel = document.getElementById('btnPlayerJohel');
-            const indFer = document.getElementById('indicatorFer');
-            const indJohel = document.getElementById('indicatorJohel');
             const banner = document.getElementById('cardTurnBanner');
 
             if (player === 'Fer') {
-                btnFer.className = 'player-tab-btn active-fer';
-                btnJohel.className = 'player-tab-btn';
-                indFer.style.display = 'inline-block';
-                indJohel.style.display = 'none';
-                banner.className = 'card-turn-banner fer';
+                btnFer.className = 'turn-pill-btn active-fer';
+                btnJohel.className = 'turn-pill-btn';
+                banner.className = 'turn-flag fer';
                 banner.innerText = '💅 Turno de FER';
             } else {
-                btnFer.className = 'player-tab-btn';
-                btnJohel.className = 'player-tab-btn active-johel';
-                indFer.style.display = 'none';
-                indJohel.style.display = 'inline-block';
-                banner.className = 'card-turn-banner johel';
+                btnFer.className = 'turn-pill-btn';
+                btnJohel.className = 'turn-pill-btn active-johel';
+                banner.className = 'turn-flag johel';
                 banner.innerText = '🤌🏿 Turno de JOHEL';
             }
 
@@ -1821,7 +1907,6 @@
 
         function resetDecks() {
             if (currentMode === 'offline') {
-                // En modo offline filtramos retos que se puedan hacer por chat/audio/foto
                 remainingTruths = allTruths.map(t => ({ ...t }));
                 remainingDares = allDares.filter(d => d.isOfflineReady !== false).map(d => ({ ...d }));
             } else {
@@ -1841,11 +1926,11 @@
 
         function selectType(type) {
             currentType = type;
-            document.querySelectorAll('.btn-choice').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.btn-game-choice').forEach(b => b.classList.remove('active'));
             if (type === 'truth') {
-                document.querySelector('.btn-truth').classList.add('active');
+                document.querySelector('.truth-style').classList.add('active');
             } else {
-                document.querySelector('.btn-dare').classList.add('active');
+                document.querySelector('.dare-style').classList.add('active');
             }
             document.getElementById('btnNext').style.display = 'block';
             getRandomItem();
@@ -1875,19 +1960,19 @@
             const extra = document.getElementById('cardExtra');
             const btnShare = document.getElementById('btnShareWhatsApp');
 
-            cardBox.style.transform = 'scale(0.95)';
-            cardBox.style.opacity = '0.5';
+            // Animación elegante de giro y pulso
+            cardBox.style.transform = 'scale(0.92) rotateX(15deg)';
+            cardBox.style.opacity = '0.4';
 
             setTimeout(() => {
                 if (currentPlayer === 'Fer') {
-                    banner.className = 'card-turn-banner fer';
+                    banner.className = 'turn-flag fer';
                     banner.innerText = '💅 Turno de FER: Responde tú';
                 } else {
-                    banner.className = 'card-turn-banner johel';
+                    banner.className = 'turn-flag johel';
                     banner.innerText = '🤌🏿 Turno de JOHEL: Te toca a ti';
                 }
 
-                // Mostrar prueba si está en offline o disponible
                 if (currentCardItem.offlineProof) {
                     proofPill.innerText = currentCardItem.offlineProof;
                     proofPill.style.display = 'inline-block';
@@ -1897,23 +1982,23 @@
 
                 const forBadge = currentCardItem.for ? ` • Para: ${currentCardItem.for}` : '';
                 cat.innerText = `${currentType === 'truth' ? 'VERDAD 🧠' : 'RETO 🔥'} • ${currentCardItem.category}${forBadge}`;
-                cat.style.color = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
+                cat.style.color = currentType === 'truth' ? 'var(--truth-cyan)' : 'var(--dare-pink)';
                 prompt.innerText = currentCardItem.text;
                 extra.innerText = currentCardItem.extra || '';
 
-                cardBox.style.borderColor = currentType === 'truth' ? 'var(--truth-color)' : 'var(--dare-color)';
-                cardBox.style.transform = 'scale(1)';
+                cardBox.style.borderColor = currentType === 'truth' ? 'rgba(56, 189, 248, 0.45)' : 'rgba(244, 63, 94, 0.45)';
+                cardBox.style.boxShadow = currentType === 'truth' ? '0 15px 35px rgba(56, 189, 248, 0.2)' : '0 15px 35px rgba(244, 63, 94, 0.2)';
+                cardBox.style.transform = 'scale(1) rotateX(0deg)';
                 cardBox.style.opacity = '1';
 
-                // Mostrar botón de WhatsApp en modo offline o siempre
                 btnShare.style.display = 'inline-flex';
 
                 done++;
                 document.getElementById('doneCount').innerText = done;
-            }, 160);
+            }, 180);
         }
 
-        /* ==================== COMPARTIR DIRECTO A WHATSAPP O COPIAR ==================== */
+        /* ==================== WHATSAPP SHARE ==================== */
         function shareToWhatsApp() {
             if (!currentCardItem) return;
 
@@ -1925,11 +2010,9 @@
 
             const message = `🎲 *VERDAD O RETO (Fer & Johel) 🤌🏿*\n🎯 *Turno de:* ${targetName}\n${icon}: "${currentCardItem.text}"${extraText}${proofText}\n\n⏱️ _¡Tienes que responder o mandar la prueba por aquí antes de que te rajes!_ 🐔`;
 
-            // En móvil abre WhatsApp, en PC también
             const encoded = encodeURIComponent(message);
             const waUrl = `https://api.whatsapp.com/send?text=${encoded}`;
 
-            // Si soporta navigator.clipboard también lo copia
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(message).catch(() => {});
             }
@@ -1943,7 +2026,7 @@
             alert(`🐔 ¡Se acobardó ${currentPlayer}! Debe un castigo o responder una verdad extra.`);
         }
 
-        /* ==================== MODAL CON PIN 4390 ==================== */
+        /* ==================== MODAL PIN 4390 ==================== */
         let activeTab = 'truths';
 
         function openPinModal() {
@@ -2018,18 +2101,18 @@
 
             items.forEach((item, idx) => {
                 const card = document.createElement('div');
-                card.className = 'list-item-card';
+                card.className = 'card-row-item';
 
                 const forBadge = item.for ? ` • Para: ${item.for}` : '';
                 const proofTag = item.offlineProof ? ` • [${item.offlineProof}]` : '';
                 const badgeClass = isTruth ? 'truth' : 'dare';
 
                 card.innerHTML = `
-                    <div class="list-item-badge ${badgeClass}">
+                    <div class="row-item-badge ${badgeClass}">
                         #${idx + 1} ${item.category}${forBadge}${proofTag}
                     </div>
-                    <div class="list-item-text">${item.text}</div>
-                    ${item.extra ? `<div class="list-item-extra">${item.extra}</div>` : ''}
+                    <div class="row-item-title">${item.text}</div>
+                    ${item.extra ? `<div class="row-item-extra">${item.extra}</div>` : ''}
                 `;
                 body.appendChild(card);
             });
