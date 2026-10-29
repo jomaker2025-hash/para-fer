@@ -1182,6 +1182,349 @@
             40% { transform: scale(1); opacity: 1; }
             100% { transform: scale(0.9); opacity: 0.85; }
         }
+
+        /* ==================== BARRA SUPERIOR DE HERRAMIENTAS Y MODO ==================== */
+        .top-controls-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .theme-switch-wrap {
+            display: flex;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 3px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-family: inherit;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 5px 11px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .theme-toggle-btn.active {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.35), rgba(124, 58, 237, 0.4));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .quick-tools-wrap {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tool-pill-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .tool-pill-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .debt-count-badge {
+            background: var(--gold-accent);
+            color: #111;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+
+        /* ==================== MODO CAE MAL (SIGILOSO: ROJO Y NEGRO) ==================== */
+        body.theme-caemal {
+            --bg-deep: #050508;
+            --card-glass: rgba(14, 14, 18, 0.98);
+            --truth-cyan: #ef4444;
+            --truth-glow: rgba(239, 68, 68, 0.2);
+            --dare-pink: #dc2626;
+            --dare-glow: rgba(220, 38, 38, 0.25);
+            --offline-purple: #991b1b;
+            --gold-accent: #ef4444;
+            --whatsapp-green: #22c55e;
+            --lvl-1-color: #f87171;
+            --lvl-2-color: #ef4444;
+            --lvl-3-color: #b91c1c;
+            --fer-gradient: linear-gradient(135deg, #ef4444, #991b1b);
+            --johel-gradient: linear-gradient(135deg, #450a0a, #1c0505);
+            --text-main: #f8fafc;
+            --text-sub: #71717a;
+        }
+
+        body.theme-caemal .ambient-orb {
+            display: none !important;
+        }
+
+        body.theme-caemal .main-card {
+            background: #0d0d11;
+            border-color: rgba(239, 68, 68, 0.22);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(220, 38, 38, 0.08);
+        }
+
+        body.theme-caemal .top-badge {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #f87171;
+        }
+
+        body.theme-caemal .theme-toggle-btn.active {
+            background: #dc2626;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
+        }
+
+        body.theme-caemal .debt-count-badge {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        body.theme-caemal .game-tab.active {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.35), rgba(69, 10, 10, 0.5));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3), inset 0 0 0 1px rgba(239, 68, 68, 0.4);
+        }
+
+        body.theme-caemal .btn-next-action,
+        body.theme-caemal .xm-btn-main {
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.35);
+        }
+
+        body.theme-caemal .turn-pill-btn.active-fer {
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            color: #fff;
+        }
+
+        body.theme-caemal .turn-pill-btn.active-johel {
+            background: linear-gradient(135deg, #27272a, #09090b);
+            color: #fca5a5;
+            border: 1.5px solid #dc2626;
+        }
+
+        body.theme-caemal .choices-row .truth-style {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+        }
+
+        body.theme-caemal .choices-row .dare-style {
+            background: rgba(185, 28, 28, 0.18);
+            border-color: rgba(185, 28, 28, 0.5);
+            color: #fecaca;
+        }
+
+        body.theme-caemal .yn-life-box {
+            background: rgba(20, 20, 26, 0.8);
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+
+        /* En modo Cae Mal, las vidas son bloques discretos de energía, NO corazones */
+        body.theme-caemal .yn-hearts span {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: #ef4444;
+            border-radius: 3px;
+            margin: 0 2px;
+            font-size: 0;
+            box-shadow: 0 0 6px rgba(239, 68, 68, 0.5);
+        }
+
+        body.theme-caemal .yn-hearts span.lost {
+            background: #27272a;
+            box-shadow: none;
+            opacity: 0.3;
+        }
+
+        /* Botón Se Hizo la Loca */
+        .evasion-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-evasion-trigger {
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fda4af;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 7px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        .btn-evasion-trigger:hover {
+            background: rgba(244, 63, 94, 0.25);
+            transform: scale(1.02);
+        }
+
+        /* Modal Ruleta */
+        .roulette-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .roulette-pointer {
+            position: absolute;
+            top: -10px;
+            z-index: 10;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 22px solid #ef4444;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        #rouletteCanvas {
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.5);
+            max-width: 100%;
+        }
+
+        .roulette-result-box {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            padding: 14px;
+            margin-top: 12px;
+            text-align: center;
+            animation: cardPop 0.4s ease;
+        }
+        .roulette-result-box.show { display: block; }
+
+        /* Modal Deudas */
+        .debts-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .debts-tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-sub);
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 800;
+            padding: 10px 4px;
+            border-radius: 14px;
+            cursor: pointer;
+        }
+        .debts-tab-btn.active {
+            background: var(--gold-accent);
+            color: #111;
+            border-color: var(--gold-accent);
+        }
+        body.theme-caemal .debts-tab-btn.active {
+            background: #ef4444;
+            color: #fff;
+            border-color: #ef4444;
+        }
+        .debt-add-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .debt-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 10px 14px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+        }
+        .debt-add-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0 16px;
+            border-radius: 14px;
+            cursor: pointer;
+        }
+        .debts-list-box {
+            max-height: 250px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-right: 4px;
+        }
+        .debt-card-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .debt-card-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            text-align: left;
+            flex: 1;
+        }
+        .debt-pay-btn {
+            background: rgba(34, 197, 94, 0.18);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #86efac;
+            font-family: inherit;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .debt-pay-btn:hover {
+            background: #22c55e;
+            color: #090712;
+        }
     </style>
 </head>
 <body>
@@ -1193,7 +1536,19 @@
 
     <div class="app-wrapper">
         <div class="main-card">
-            <span class="top-badge">✨ Edición Especial 🤌🏿</span>
+            <!-- ==================== BARRA SUPERIOR DE MODO Y HERRAMIENTAS ==================== -->
+            <div class="top-controls-bar">
+                <div class="theme-switch-wrap">
+                    <button class="theme-toggle-btn active" id="btnThemeFer" onclick="setAppTheme('fer')">🌸 Modo Fer</button>
+                    <button class="theme-toggle-btn" id="btnThemeCaeMal" onclick="setAppTheme('caemal')">🕶️ Cae Mal</button>
+                </div>
+                <div class="quick-tools-wrap">
+                    <button class="tool-pill-btn" onclick="openRouletteModal()">🎡 Ruleta</button>
+                    <button class="tool-pill-btn" onclick="openDebtsModal()">📒 Deudas <span class="debt-count-badge" id="debtBadgeCount">0</span></button>
+                </div>
+            </div>
+
+            <span class="top-badge" id="topBadge">✨ Edición Especial 🤌🏿</span>
             <h1 class="game-title" id="gameTitle">Verdad o Reto</h1>
             <p class="game-subtitle" id="gameSubtitle">Entre Fer y Johel 🤌🏿</p>
 
@@ -1307,9 +1662,15 @@
                 <div class="footer-stat">
                     Acobardados: <strong id="chickenedCount">0</strong>
                 </div>
-                <div class="footer-stat" style="cursor: pointer; color: var(--gold-accent);" onclick="chickenOut()">
-                    ¿Se rajó? 🐔
-                </div>
+            </div>
+
+            <div class="evasion-row">
+                <button class="btn-evasion-trigger" onclick="triggerEvasion('loca')">
+                    <span>🙄 ¡Se hizo la loca!</span>
+                </button>
+                <button class="btn-evasion-trigger" onclick="triggerEvasion('rajo')">
+                    <span>🐔 ¿Se acobardó?</span>
+                </button>
             </div>
 
             <div class="memory-info-pill">
@@ -1469,6 +1830,71 @@
                 </div>
                 <button class="xm-reset" onclick="xmReset('sc')">💾 Reiniciar memoria de preguntas</button>
             </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL RULETA DE CASTIGOS ==================== -->
+    <div class="modal-screen" id="rouletteModal" onclick="closeRouletteOnBg(event)">
+        <div class="modal-card-aesthetic" style="text-align: center;">
+            <div class="modal-head">
+                <div class="modal-title-text" id="rouletteTitle">🎡 Ruleta de Castigos</div>
+                <button class="modal-close-btn" onclick="closeRouletteModal()">✕</button>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-sub); margin-bottom: 8px;" id="rouletteSubtitle">
+                ¿Se rajó o se hizo la loca? ¡La ruleta decide su penitencia!
+            </p>
+            <div class="roulette-container">
+                <div class="roulette-pointer"></div>
+                <canvas id="rouletteCanvas" width="270" height="270"></canvas>
+            </div>
+            <button class="xm-btn-main" id="btnSpinRoulette" onclick="spinRoulette()" style="margin-top: 10px;">
+                ¡Girar Ruleta! 🎡
+            </button>
+            <div class="roulette-result-box" id="rouletteResultBox">
+                <div style="font-size: 0.74rem; font-weight: 900; letter-spacing: 1px; color: var(--gold-accent); text-transform: uppercase;" id="rouletteTargetPlayer">
+                    Castigo Asignado
+                </div>
+                <div style="font-size: 1.12rem; font-weight: 800; color: #fff; margin: 6px 0;" id="rouletteResultText">
+                    ...
+                </div>
+                <div style="display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap;">
+                    <button class="xm-btn-ghost" id="btnSaveDebtFromRoulette" onclick="saveRouletteToDebt()" style="width: auto; margin-bottom: 0; padding: 8px 14px; font-size: 0.78rem;">
+                        ➕ Anotar a Libreta de Deudas
+                    </button>
+                    <button class="xm-btn-ghost purple" onclick="shareRouletteWhatsApp()" style="width: auto; margin-bottom: 0; padding: 8px 14px; font-size: 0.78rem;">
+                        💬 Mandar a WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL LIBRETA DE DEUDAS ==================== -->
+    <div class="modal-screen" id="debtsModal" onclick="closeDebtsOnBg(event)">
+        <div class="modal-card-aesthetic">
+            <div class="modal-head">
+                <div class="modal-title-text">📒 Libreta de Deudas ("En Persona")</div>
+                <button class="modal-close-btn" onclick="closeDebtsModal()">✕</button>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px;">
+                Apuestas y castigos pendientes para cobrarse en la próxima salida 👀
+            </p>
+            <div class="debts-tabs">
+                <button class="debts-tab-btn active" id="debtTabFer" onclick="switchDebtTab('Fer')">
+                    💅 Fer debe a Johel (<span id="countFerDebts">0</span>)
+                </button>
+                <button class="debts-tab-btn" id="debtTabJohel" onclick="switchDebtTab('Johel')">
+                    🤌🏿 Johel debe a Fer (<span id="countJohelDebts">0</span>)
+                </button>
+            </div>
+            <div class="debt-add-row">
+                <input type="text" id="debtInput" class="debt-input" placeholder="Nueva deuda (ej: 1 helado, 1 masaje...)" maxlength="60">
+                <button class="debt-add-btn" onclick="addDebtFromInput()">Anotar ✍️</button>
+            </div>
+            <div class="debts-list-box" id="debtsListBox"></div>
+            <button class="xm-btn-ghost" onclick="shareDebtsWhatsApp()" style="margin-top: 12px; margin-bottom: 0;">
+                💬 Mandar lista de cobro a WhatsApp
+            </button>
         </div>
     </div>
 
@@ -3604,10 +4030,13 @@
         let ynVotes = { Fer: null, Johel: null };
 
         function ynRenderHearts() {
+            const isCaeMal = document.body.classList.contains('theme-caemal');
+            const aliveSym = isCaeMal ? '■' : '❤️';
+            const lostSym = isCaeMal ? '□' : '❤️';
             ['Fer', 'Johel'].forEach(p => {
                 let html = '';
                 for (let i = 0; i < YN_MAX_LIVES; i++) {
-                    html += i < ynLives[p] ? '<span>❤️</span>' : '<span class="lost">❤️</span>';
+                    html += i < ynLives[p] ? `<span>${aliveSym}</span>` : `<span class="lost">${lostSym}</span>`;
                 }
                 document.getElementById('ynHearts' + p).innerHTML = html;
             });
@@ -3783,7 +4212,8 @@
                 document.getElementById('tab-' + g).classList.toggle('active', g === game);
             });
             document.getElementById('gameTitle').innerText = GAME_META[game].title;
-            document.getElementById('gameSubtitle').innerText = GAME_META[game].sub;
+            const isCaeMal = document.body.classList.contains('theme-caemal');
+            document.getElementById('gameSubtitle').innerText = isCaeMal ? 'SESIÓN PRIVADA · J & F' : GAME_META[game].sub;
             try { localStorage.setItem('fer_johel_last_game', game); } catch (e) {}
             if (game !== 'vor' && !XM[game].current) {
                 if (game === 'pf') pfNext();
@@ -3794,8 +4224,356 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        /* ==================== SISTEMA DE TEMAS: MODO FER VS MODO CAE MAL ==================== */
+        let currentTheme = 'fer';
+
+        function setAppTheme(theme) {
+            currentTheme = theme;
+            const isCaeMal = theme === 'caemal';
+            document.body.classList.toggle('theme-caemal', isCaeMal);
+            
+            const btnFer = document.getElementById('btnThemeFer');
+            const btnCae = document.getElementById('btnThemeCaeMal');
+            if (btnFer) btnFer.classList.toggle('active', !isCaeMal);
+            if (btnCae) btnCae.classList.toggle('active', isCaeMal);
+
+            const badge = document.getElementById('topBadge');
+            if (badge) {
+                badge.innerText = isCaeMal ? '🕶️ MODO DISCRETO // ROJO Y NEGRO' : '✨ Edición Especial 🤌🏿';
+            }
+
+            const activeGame = localStorage.getItem('fer_johel_last_game') || 'vor';
+            const sub = document.getElementById('gameSubtitle');
+            if (sub) {
+                sub.innerText = isCaeMal ? 'SESIÓN PRIVADA · J & F' : (GAME_META[activeGame] ? GAME_META[activeGame].sub : 'Entre Fer y Johel 🤌🏿');
+            }
+
+            ynRenderHearts();
+            drawRoulette();
+            try { localStorage.setItem('fer_johel_theme', theme); } catch (e) {}
+        }
+
+        /* ==================== RULETA DE CASTIGOS INTERACTIVA ==================== */
+        const ROULETTE_SLICES = [
+            { text: "1 Helado o café pendiente 🍦", short: "1 Helado / Café", isDebt: true },
+            { text: "Foto peor ángulo sin filtro 📸", short: "Foto sin filtro", isDebt: false },
+            { text: "Audio cantando 15s desafinado 🎤", short: "Audio cantando", isDebt: false },
+            { text: "Estado WhatsApp elegido por el otro 🏷️", short: "Estado WhatsApp", isDebt: false },
+            { text: "1 Masaje de 5 min en hombros 💆", short: "1 Masaje 5 min", isDebt: true },
+            { text: "Comida o antojo a elección del otro 🍫", short: "Comida / Antojo", isDebt: true },
+            { text: "1 minuto completo de silencio 🤐", short: "1 min silencio", isDebt: false },
+            { text: "Responder con la mano en el pecho 🔥", short: "Verdad sin filtro", isDebt: false }
+        ];
+
+        let rouletteAngle = 0;
+        let isSpinningRoulette = false;
+        let lastRouletteResult = null;
+        let rouletteTarget = 'Fer';
+
+        function drawRoulette() {
+            const canvas = document.getElementById('rouletteCanvas');
+            if (!canvas || !canvas.getContext) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            const cx = w / 2, cy = h / 2, r = w / 2 - 10;
+            const num = ROULETTE_SLICES.length;
+            const step = (Math.PI * 2) / num;
+            const isCaeMal = document.body.classList.contains('theme-caemal');
+
+            const ferColors = ['#f472b6', '#38bdf8', '#fbbf24', '#c084fc', '#34d399', '#f87171', '#a78bfa', '#fb923c'];
+            const caeColors = ['#18181b', '#b91c1c', '#27272a', '#dc2626', '#1c1917', '#ef4444', '#3f3f46', '#991b1b'];
+            const colors = isCaeMal ? caeColors : ferColors;
+
+            ctx.clearRect(0, 0, w, h);
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(rouletteAngle);
+
+            for (let i = 0; i < num; i++) {
+                const angle = i * step;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, r, angle, angle + step);
+                ctx.closePath();
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                ctx.strokeStyle = isCaeMal ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.2)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.save();
+                ctx.rotate(angle + step / 2);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 11px Outfit, sans-serif';
+                ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                ctx.shadowBlur = 4;
+                ctx.fillText(ROULETTE_SLICES[i].short, r - 16, 4);
+                ctx.restore();
+            }
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 22, 0, Math.PI * 2);
+            ctx.fillStyle = isCaeMal ? '#ef4444' : '#1e1b4b';
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function openRouletteModal(customTitle, targetPlayer) {
+            rouletteTarget = targetPlayer || currentPlayer || 'Fer';
+            const modal = document.getElementById('rouletteModal');
+            if (modal) modal.classList.add('active');
+            const title = document.getElementById('rouletteTitle');
+            if (title) title.innerText = customTitle || '🎡 Ruleta de Castigos';
+            const sub = document.getElementById('rouletteSubtitle');
+            if (sub) {
+                const targetName = rouletteTarget === 'Fer' ? 'Fer 💅' : 'Johel 🤌🏿';
+                sub.innerText = `¡Penitencia en juego para ${targetName}!`;
+            }
+            const resBox = document.getElementById('rouletteResultBox');
+            if (resBox) resBox.style.display = 'none';
+            drawRoulette();
+        }
+
+        function closeRouletteModal() {
+            const modal = document.getElementById('rouletteModal');
+            if (modal) modal.classList.remove('active');
+            isSpinningRoulette = false;
+        }
+
+        function closeRouletteOnBg(e) {
+            if (e.target.id === 'rouletteModal') closeRouletteModal();
+        }
+
+        function triggerEvasion(reason) {
+            chickened++;
+            const counter = document.getElementById('chickenedCount');
+            if (counter) counter.innerText = chickened;
+            const targetName = currentPlayer === 'Fer' ? 'Fer 💅' : 'Johel 🤌🏿';
+            const title = reason === 'loca' ? `🙄 ¡Se hizo la loca! (${targetName})` : `🐔 ¡Se acobardó! (${targetName})`;
+            openRouletteModal(title, currentPlayer);
+        }
+
+        function spinRoulette() {
+            if (isSpinningRoulette) return;
+            isSpinningRoulette = true;
+            const resBox = document.getElementById('rouletteResultBox');
+            if (resBox) resBox.style.display = 'none';
+
+            const num = ROULETTE_SLICES.length;
+            const step = (Math.PI * 2) / num;
+            const winningIndex = Math.floor(Math.random() * num);
+            
+            const targetMod = (3 * Math.PI / 2) - (winningIndex * step + step / 2);
+            const extraRotations = (5 + Math.floor(Math.random() * 3)) * (Math.PI * 2);
+            const targetAngle = rouletteAngle + extraRotations + ((targetMod - (rouletteAngle % (Math.PI * 2)) + Math.PI * 4) % (Math.PI * 2));
+
+            const startAngle = rouletteAngle;
+            const totalDelta = targetAngle - startAngle;
+            const duration = 3000;
+            const startTime = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+
+            function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+            function animate(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                const eased = easeOutCubic(progress);
+                rouletteAngle = startAngle + totalDelta * eased;
+                drawRoulette();
+
+                if (progress < 1) {
+                    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(animate);
+                } else {
+                    isSpinningRoulette = false;
+                    lastRouletteResult = ROULETTE_SLICES[winningIndex];
+                    showRouletteResult(winningIndex);
+                }
+            }
+            if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(animate);
+            else { rouletteAngle = targetAngle; drawRoulette(); lastRouletteResult = ROULETTE_SLICES[winningIndex]; showRouletteResult(winningIndex); }
+            xmVibrate([40, 30, 40]);
+        }
+
+        function showRouletteResult(idx) {
+            const item = ROULETTE_SLICES[idx];
+            const box = document.getElementById('rouletteResultBox');
+            const targetTag = document.getElementById('rouletteTargetPlayer');
+            const resText = document.getElementById('rouletteResultText');
+            const btnSaveDebt = document.getElementById('btnSaveDebtFromRoulette');
+
+            const targetName = rouletteTarget === 'Fer' ? 'FER 💅' : 'JOHEL 🤌🏿';
+            targetTag.innerText = `💥 Penitencia para: ${targetName}`;
+            resText.innerText = item.text;
+
+            if (btnSaveDebt) {
+                btnSaveDebt.style.display = item.isDebt ? 'inline-block' : 'none';
+                btnSaveDebt.innerText = '➕ Anotar a Libreta de Deudas';
+                btnSaveDebt.disabled = false;
+            }
+
+            box.style.display = 'block';
+            xmVibrate([60, 40, 100]);
+        }
+
+        function saveRouletteToDebt() {
+            if (!lastRouletteResult) return;
+            const btn = document.getElementById('btnSaveDebtFromRoulette');
+            addDebt(rouletteTarget, lastRouletteResult.short);
+            if (btn) {
+                btn.innerText = '✅ ¡Anotado en Deudas!';
+                btn.disabled = true;
+            }
+        }
+
+        function shareRouletteWhatsApp() {
+            if (!lastRouletteResult) return;
+            const targetName = rouletteTarget === 'Fer' ? 'FER 💅' : 'JOHEL 🤌🏿';
+            const msg = `🎡 *¡RULETA DE CASTIGOS!* 🤌🏿\n\n🎯 *Le tocó a:* ${targetName}\n💥 *Castigo obligatorio:* "${lastRouletteResult.text}"\n\n📌 _¡Prohibido hacerse la loca y prohibido rajarse!_ 🐔\n\n🎮 ${GAME_URL}`;
+            if (navigator.clipboard) navigator.clipboard.writeText(msg).catch(() => {});
+            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank');
+        }
+
+        /* ==================== LIBRETA DE DEUDAS ("EN PERSONA") ==================== */
+        const STORAGE_KEY_DEBTS = 'fer_johel_debts_v2';
+        let currentDebtTab = 'Fer';
+
+        function getDebts() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY_DEBTS) || '[]'); } catch (e) { return []; }
+        }
+
+        function saveDebts(list) {
+            try { localStorage.setItem(STORAGE_KEY_DEBTS, JSON.stringify(list)); } catch (e) {}
+            updateDebtsUI();
+        }
+
+        function updateDebtsUI() {
+            const list = getDebts();
+            const ferDebts = list.filter(d => d.whoOwes === 'Fer');
+            const johelDebts = list.filter(d => d.whoOwes === 'Johel');
+
+            const countBadge = document.getElementById('debtBadgeCount');
+            if (countBadge) countBadge.innerText = list.length;
+
+            const ferCount = document.getElementById('countFerDebts');
+            if (ferCount) ferCount.innerText = ferDebts.length;
+
+            const johelCount = document.getElementById('countJohelDebts');
+            if (johelCount) johelCount.innerText = johelDebts.length;
+
+            const listBox = document.getElementById('debtsListBox');
+            if (!listBox) return;
+
+            const activeList = currentDebtTab === 'Fer' ? ferDebts : johelDebts;
+            listBox.innerHTML = '';
+
+            if (activeList.length === 0) {
+                listBox.innerHTML = `<div style="text-align: center; color: var(--text-sub); font-size: 0.82rem; padding: 18px;">
+                    ✨ No hay deudas pendientes aquí... ¡apuesta algo para cobrarle! 👀
+                </div>`;
+                return;
+            }
+
+            activeList.forEach(debt => {
+                const item = document.createElement('div');
+                item.className = 'debt-card-item';
+                item.innerHTML = `
+                    <div class="debt-card-text">
+                        <span>📌 ${debt.text}</span>
+                        <div style="font-size: 0.72rem; color: var(--text-sub); margin-top: 2px;">${debt.date || ''}</div>
+                    </div>
+                    <button class="debt-pay-btn" onclick="payDebt(${debt.id})">✅ ¡Pagado!</button>
+                `;
+                listBox.appendChild(item);
+            });
+        }
+
+        function openDebtsModal() {
+            const modal = document.getElementById('debtsModal');
+            if (modal) modal.classList.add('active');
+            updateDebtsUI();
+        }
+
+        function closeDebtsModal() {
+            const modal = document.getElementById('debtsModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function closeDebtsOnBg(e) {
+            if (e.target.id === 'debtsModal') closeDebtsModal();
+        }
+
+        function switchDebtTab(who) {
+            currentDebtTab = who;
+            const tabFer = document.getElementById('debtTabFer');
+            const tabJohel = document.getElementById('debtTabJohel');
+            if (tabFer) tabFer.classList.toggle('active', who === 'Fer');
+            if (tabJohel) tabJohel.classList.toggle('active', who === 'Johel');
+            updateDebtsUI();
+        }
+
+        function addDebt(whoOwes, text) {
+            if (!text || !text.trim()) return;
+            const list = getDebts();
+            const dateStr = new Date().toLocaleDateString('es-ES', { month: 'short', day: 'numeric' });
+            list.push({
+                id: Date.now() + Math.floor(Math.random() * 1000),
+                whoOwes,
+                text: text.trim(),
+                date: dateStr
+            });
+            saveDebts(list);
+        }
+
+        function addDebtFromInput() {
+            const input = document.getElementById('debtInput');
+            if (!input || !input.value.trim()) return;
+            addDebt(currentDebtTab, input.value.trim());
+            input.value = '';
+        }
+
+        function payDebt(id) {
+            let list = getDebts();
+            list = list.filter(d => d.id !== id);
+            saveDebts(list);
+            xmVibrate(30);
+        }
+
+        function shareDebtsWhatsApp() {
+            const list = getDebts();
+            const ferDebts = list.filter(d => d.whoOwes === 'Fer');
+            const johelDebts = list.filter(d => d.whoOwes === 'Johel');
+
+            if (list.length === 0) {
+                alert('No hay deudas registradas todavía.');
+                return;
+            }
+
+            let msg = `📒 *LIBRETA DE DEUDAS (Cobros en Persona) 🤌🏿*\n`;
+            if (ferDebts.length > 0) {
+                msg += `\n💅 *FER LE DEBE A JOHEL:*\n` + ferDebts.map((d, i) => `  ${i + 1}. ${d.text} _(${d.date})_`).join('\n');
+            }
+            if (johelDebts.length > 0) {
+                msg += `\n\n🤌🏿 *JOHEL LE DEBE A FER:*\n` + johelDebts.map((d, i) => `  ${i + 1}. ${d.text} _(${d.date})_`).join('\n');
+            }
+            msg += `\n\n⏱️ _¡A ver cuándo se pagan estas deudas en la próxima salida!_ 😉\n\n🎮 ${GAME_URL}`;
+
+            if (navigator.clipboard) navigator.clipboard.writeText(msg).catch(() => {});
+            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank');
+        }
+
         ynRenderHearts();
         scBuildGrids();
+        updateDebtsUI();
+        drawRoulette();
+        try {
+            const savedTheme = localStorage.getItem('fer_johel_theme');
+            if (savedTheme) setAppTheme(savedTheme);
+        } catch (e) {}
         try {
             const last = localStorage.getItem('fer_johel_last_game');
             if (last && GAME_META[last] && last !== 'vor') switchGame(last);
